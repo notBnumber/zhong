@@ -1,0 +1,132 @@
+.container {
+  min-height: 100vh;
+  background: #F7F8F8;
+  padding-bottom: 104rpx;
+}
+.section {
+  padding: 43rpx 17rpx 38rpx 13rpx;
+}
+.section .topContent {
+  width: 720rpx;
+  height: 205rpx;
+  background: #ffffff;
+  box-shadow: 0px 4rpx 6rpx 0px rgba(112, 121, 119, 0.06);
+  border-radius: 10rpx;
+}
+.section .topContent .withdraw {
+  height: 99rpx;
+  display: flex;
+  align-items: center;
+  padding: 0 12rpx 0 28rpx;
+  border-bottom: 1px solid #c0c0c0;
+}
+.section .topContent .withdraw .inputCash {
+  width: 100%;
+  text-align: left;
+  color: #b5b5b5;
+  font-size: 28rpx;
+}
+.section .topContent .desc {
+  padding: 0 28rpx 0 34rpx;
+  height: 105rpx;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.section .topContent .desc .left {
+  color: #999999;
+  font-size: 30rpx;
+}
+.section .topContent .desc .left > text {
+  color: #FC2E2E;
+  font-size: 34rpx;
+}
+.section .topContent .desc .right {
+  color: #05a57b;
+  font-size: 30rpx;
+}
+.most {
+  margin-top: 38rpx;
+  padding: 0 17rpx 28rpx 13rpx;
+}
+.most .items {
+  padding: 22rpx 16rpx;
+  background: #Fff;
+  box-shadow: 0px 4rpx 6rpx 0px rgba(183, 182, 182, 0.06);
+  border-radius: 10rpx;
+}
+.most .items .box {
+  height: 234rpx;
+  border-radius: 10rpx;
+  position: relative;
+}
+.most .items .box image {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+}
+.most .items .box .bank {
+  position: absolute;
+  z-index: 2;
+  padding-left: 30rpx;
+}
+.most .items .box .bank view {
+  font-size: 30rpx;
+  font-family: PingFang-SC-Medium;
+  font-weight: 500;
+  color: #fefefe;
+}
+.most .items .box .bank view:first-child {
+  margin-top: 30rpx;
+  margin-bottom: 30rpx;
+}
+.most .items .box .bank view:last-child {
+  margin-top: 10rpx;
+}
+.most .items .box .circle {
+  position: absolute;
+  top: 107rpx;
+  right: 25rpx;
+  width: 28rpx;
+  height: 28rpx;
+  background: #fff;
+  border-radius: 50%;
+  padding: 5rpx;
+}
+.most .items .box .circle .litter {
+  width: 100%;
+  height: 100%;
+  background: #3ecaa5;
+  border-radius: 50%;
+}
+.most .items .bottom-line {
+  margin-top: 28rpx;
+  width: 100%;
+  height: 1px;
+  background: #c0c0c0;
+}
+.most .items:last-of-type .bottom-line {
+  display: none;
+}
+.addBank {
+  background-color: #Fff;
+  padding: 10rpx 0;
+  position: fixed;
+  z-index: 99;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+.addBank view {
+  width: 626rpx;
+  height: 84rpx;
+  line-height: 84rpx;
+  background: linear-gradient(-90deg, #38c6a0 0%, #6de0c3 100%);
+  border-radius: 42rpx;
+  font-size: 36rpx;
+  font-family: PingFang-SC-Regular;
+  font-weight: bold;
+  color: #FFFFFF;
+  margin: 0 auto;
+  text-align: center;
+}

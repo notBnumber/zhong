@@ -1,0 +1,7 @@
+ <view class='search-box'>
+ <view>search 组件</view>
+ <view class='search-wrap'>
+   <input type='text' class='search-input' value='{{value}}' bindinput='getValue'/>
+   <button type='primary' class='search-button' bindtap='getSearchWords'>点击</button>
+ </view>
+</view>

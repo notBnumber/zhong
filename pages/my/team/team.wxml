@@ -1,0 +1,44 @@
+<view class="outer">
+  <view class="teamWork" wx:if="{{num == true}}">
+    <view class="captain">
+      <text class="topic">我的队长</text>
+      <view class="detail">
+        <view class="avatar">
+          <image class="gallary" src="{{imgUrl+caption.avatar}}"></image>
+          <text class="name font-Medium">{{caption.nick}}</text>
+        </view>
+        <text class="phone font">{{caption.mobile}}</text>
+      </view>
+    </view>
+    <view class="teamer">
+      <text class="title">我的队员（5人）</text>
+      <view class="inner" wx:for="{{teams.account}}">
+        <view class="contain">
+          <image class="icon" src="{{imgUrl+item.avatar}}"></image>
+          <view class="describe">
+            <view class="person font-Medium">{{item.nick}}</view>
+            <view class="num">{{item.mobile}}</view>
+          </view>
+        </view>
+        <text class="count font">下级：{{item.nextCount.count}}人</text>
+      </view>
+    </view>
+  </view>
+  <view class="container" wx:else>
+    <image class="icon" src="../../../images/xb01.png"></image>
+    <view class="comment font-Medium">暂无团队记录</view>
+    <view class="btn font-f1" bindtap="goInvite">前去邀请</view>
+    <!-- 隐藏的邀请框 -->
+    <view class="proup" wx:if="{{isProup}}">
+      <view class="box">
+        <view class="Exhibition">
+          <image src="../../../images/1558148062.png"></image>
+          <view class="white"></view>
+          <view class="text">邀请码：123456</view>
+          <button plain class="btn">分享</button>
+        </view>
+        <image class="errIcon" src="../../../images/gb01.png" bindtap="goInvite"></image>
+      </view>
+    </view>
+  </view>
+</view>

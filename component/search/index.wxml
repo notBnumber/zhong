@@ -1,0 +1,11 @@
+  <view class="search " hover-class="none" hover-stop-propagation="false"  >
+    <view class="searchLeft" hover-class="none" hover-stop-propagation="false" catchtap='toCity'>
+      <image class="" src="../../images/dw01.png"></image>
+      <view class="" hover-class="none" hover-stop-propagation="false">广州</view>
+    </view>
+    <!-- <input type="text"> -->
+    <view class="inp" hover-class="none" hover-stop-propagation="false" catchtap="toResult">
+      <image class="" src="../../images/ss01.png"></image>
+      <input class="" disabled="{{true}}" value="" type="text" placeholder="请输入楼盘" placeholder-class="input-placeholder"></input>
+    </view>
+  </view>

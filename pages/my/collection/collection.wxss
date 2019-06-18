@@ -1,0 +1,121 @@
+.collected {
+  background: #F7F8F8;
+}
+.section {
+  padding: 19rpx 20rpx;
+}
+.section .container {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+.section .container .total {
+  width: 345rpx;
+  margin-bottom: 19rpx;
+  background: #ffffff;
+  box-shadow: 0px 3rpx 7rpx 0px rgba(151, 155, 157, 0.15);
+  border-radius: 10rpx;
+}
+.section .container .total .logo {
+  width: 100%;
+  height: 282rpx;
+  border-radius: 10rpx 10rpx 0px 0px;
+  margin-bottom: 23rpx;
+}
+.section .container .total .name {
+  margin-left: 18rpx;
+  font-size: 34rpx;
+  font-family: PingFang-SC-Bold;
+  font-weight: bold;
+  color: #292929;
+}
+.section .container .total .area {
+  margin: 20rpx 16rpx;
+  font-size: 26rpx;
+  color: #a4a4a4;
+}
+.section .container .total .biaoqianList {
+  display: flex;
+  padding: 0 23rpx 24rpx 18rpx;
+}
+.section .container .total .biaoqianList .biaoqian {
+  width: 94rpx;
+  height: 26rpx;
+  background: #e8fef9;
+  border-radius: 2rpx;
+  font-size: 20rpx;
+  font-family: PingFang-SC-Regular;
+  font-weight: 400;
+  color: #3cc7a2;
+  margin-right: 20rpx;
+}
+.section .container .total .biaoqianList .state1 {
+  width: 94rpx;
+  height: 26rpx;
+  background: #e8eefe;
+  border-radius: 2rpx;
+  font-size: 20rpx;
+  font-family: PingFang-SC-Regular;
+  font-weight: 400;
+  color: #9bb6fb;
+}
+.section .container .total .biaoqianList .state2 {
+  width: 94rpx;
+  height: 26rpx;
+  background: #ffece8;
+  border-radius: 2rpx;
+  font-size: 20rpx;
+  font-family: PingFang-SC-Regular;
+  font-weight: 400;
+  color: #ff8c71;
+}
+.section .container .total .sum {
+  margin-left: 18rpx;
+  color: #656565;
+  font-size: 28rpx;
+}
+.section .container .total .sum > text {
+  color: #FF4C6F;
+}
+.section .container .total .price {
+  margin: 15rpx 0 15rpx 18rpx;
+  font-size: 32rpx;
+  font-family: PingFang-SC-Regular;
+  font-weight: bold;
+  color: #ff4c6f;
+}
+.nonono {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin-top: 58rpx;
+  font-size: 28rpx;
+  color: #8b8b8b;
+}
+.empty {
+  background: #fff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.empty .icon {
+  margin-top: 140rpx;
+  width: 300rpx;
+  height: 300rpx;
+}
+.empty .comment {
+  margin-top: 18rpx;
+  color: #2a2a2a;
+  font-size: 32rpx;
+}
+.empty .btn {
+  margin-top: 113rpx;
+  width: 400rpx;
+  height: 72rpx;
+  line-height: 72rpx;
+  background: linear-gradient(-90deg, #38c6a0 0%, #6de0c3 100%);
+  border-radius: 36rpx;
+  font-size: 34rpx;
+  text-align: center;
+}

@@ -1,0 +1,77 @@
+<view class="container">
+  <view class="my-details">
+    <image class="img" src="../../../images/tb04.png"></image>
+    <view class="details" bindtap="pageTo" data-url="/pages/my/myinfo/index">
+      <view class="left">
+        <image class="head" src="{{info.avatar}}"></image>
+        <view class="name">
+          <view>{{info.nick == null?'用户昵称':info.nick}} <test catchtap="Invitation">邀请</test></view>
+          <view>邀请码：{{info.invitationCode==undefined?'':info.invitationCode}}</view>
+        </view>
+      </view>
+      <image class="arrIcon" src="../../../images/xy08.png"></image>
+    </view>
+  </view>
+
+  <view class="money" bindtap="pageTo" data-url="/pages/my/withdraw/index">
+    <view>
+      <test>¥ 60.00</test>
+      <test>可提现</test>
+    </view>
+    <view></view>
+    <view>
+      <test>¥ 88.00</test>
+      <test>总佣金</test>
+    </view>
+  </view>
+
+  <view class="ul">
+    <view class="li" bindtap="myTeam">
+      <view class="left">
+        <image src="../../../images/td01.png" mode="widthFix" style="width:20px;"></image>
+        <text>我的团队</text>
+      </view>
+      <image class="arrIcon" src="../../../images/zy01.png"></image>
+    </view>
+    <view class="li" bindtap="Mycollected">
+      <view class="left">
+        <image src="../../../images/sc10.png" mode="widthFix" style="width:20px;"></image>
+        <text>我的收藏</text>
+      </view>
+      <image class="arrIcon" src="../../../images/zy01.png"></image>
+    </view>
+    <view class="li" bindtap="feedback">
+      <view class="left">
+        <image src="../../../images/yj01.png" mode="widthFix" style="width:20px;"></image>
+        <text>意见反馈</text>
+      </view>
+      <image class="arrIcon" src="../../../images/zy01.png"></image>
+    </view>
+    <view class="li" bindtap="helpCenter">
+      <view class="left">
+        <image src="../../../images/bz01.png" mode="widthFix" style="width:20px;"></image>
+        <text>帮助中心</text>
+      </view>
+      <image class="arrIcon" src="../../../images/zy01.png"></image>
+    </view>
+    <view class="li" bindtap="aboutUs">
+      <view class="left">
+        <image src="../../../images/gy01.png" mode="widthFix" style="width:20px;"></image>
+        <text>关于我们</text>
+      </view>
+      <image class="arrIcon" src="../../../images/zy01.png"></image>
+    </view>
+  </view>
+
+  <view class="proup" wx:if="{{isProup}}">
+    <view class="box">
+      <view class="Exhibition">
+        <image src="../../../images/1558148062.png"></image>
+        <view class="white"></view>
+        <view class="text">邀请码：123456</view>
+        <button plain class="btn">分享</button>
+      </view>
+      <image class="errIcon" src="../../../images/gb01.png" bindtap="Invitation"></image>
+    </view>
+  </view>
+</view>

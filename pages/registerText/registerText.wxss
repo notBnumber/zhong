@@ -1,0 +1,5 @@
+/* pages/registerText/registerText.wxss */
+.container{
+  padding: 20rpx;
+  
+}

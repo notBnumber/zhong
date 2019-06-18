@@ -1,0 +1,28 @@
+<!-- logs.wxml -->
+<view class="container log-list">
+  <view class="content" hover-class="none" hover-stop-propagation="false">
+    <button plain open-type='contact'> 
+    <view class="item" hover-class="none" hover-stop-propagation="false">
+        <image class="" src="../../images/xt01.png"></image>
+        <view class="info" hover-class="none" hover-stop-propagation="false">
+          <view class="top" hover-class="none" hover-stop-propagation="false">仲达网</view>
+          <view class="bottom" hover-class="none" hover-stop-propagation="false">
+            小子圣诞节大结局跟设计稿改数据风骨霸刀分接口搞不定共和国的
+          </view>
+        </view>
+        <view class="time" hover-class="none" hover-stop-propagation="false">2018-12-17</view>
+    </view>
+      </button>
+    <view class="item" hover-class="none" hover-stop-propagation="false" wx:for="{{list}}" data-type='{{item.type}}' data-id='{{item.id}}' bindtap='toDetail'>
+      <image wx:if="{{item.type == 0}}" class="" src="../../images/tz01.png"></image>
+      <image wx:if="{{item.type == 2}}" class="" src="../../images/qb01.png"></image>
+      <view class="info" hover-class="none" hover-stop-propagation="false">
+        <view class="top" hover-class="none" hover-stop-propagation="false">{{item.title}}</view>
+        <view class="bottom" hover-class="none" hover-stop-propagation="false">
+          {{item.content}}
+        </view>
+      </view>
+      <view class="time" hover-class="none" hover-stop-propagation="false">{{item.createTime}}</view>
+    </view>
+  </view>
+</view>

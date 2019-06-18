@@ -1,0 +1,191 @@
+<view class="container" hover-class="none" hover-stop-propagation="false">
+    <van-popup show="{{ show }}" bind:close="onClose" position="bottom">
+    <view class="box" hover-class="none" hover-stop-propagation="false">
+      <view class="title" hover-class="none" hover-stop-propagation="false">
+        <view class="dian" hover-class="none" hover-stop-propagation="false"></view>
+        <view class="name" hover-class="none" hover-stop-propagation="false" wx:if="{{currentState == 1 || currentState == 2 || currentState == 3}}">
+          {{openList[0].name}}
+        </view>
+        <view class="name" hover-class="none" hover-stop-propagation="false" wx:if="{{currentState == 0 || currentState == 4}}">
+          {{specialName}}
+        </view>
+        <view class="dian" hover-class="none" hover-stop-propagation="false"></view>
+      </view>
+      <view class="content" hover-class="none" hover-stop-propagation="false" wx:if="{{currentState == 1 || currentState == 2 || currentState == 3}}">
+        <view class="item" hover-class="none" hover-stop-propagation="false" wx:for="{{openList[0].list}}" bindtap='check' wx:key='{{index}}' data-index='{{index}}'>
+          {{item.name}}
+        </view>
+      </view>
+      <view class="content" hover-class="none" hover-stop-propagation="false" wx:if="{{currentState == 0}}">
+        <view class="contentTop" hover-class="none" hover-stop-propagation="false">
+          <scroll-view class="" scroll-y style="height: 803rpx;width:200rpx">
+            <view class="left" hover-class="none" hover-stop-propagation="false">
+              <view class="leftItem" hover-class="none" hover-stop-propagation="false" wx:for="{{specialList}}" wx:key="{{index}}" data-index='{{index}}' bindtap='checkSpecial'>
+                <view class="{{specialIndex == index ?'active' :''}} items" hover-class="none" hover-stop-propagation="false">
+                  {{item.name}}
+                </view>
+              </view>
+            </view>
+          </scroll-view>
+          <view class="right specialRight" hover-class="none" hover-stop-propagation="false">
+            <view class="rightItem df {{item.state == true ?'active' :''}}" hover-class="none" hover-stop-propagation="false" wx:for="{{specialRight}}" wx:key="{{index}}" data-index='{{index}}' bindtap='checkRight'>
+              {{item.name}}
+              <view class="{{item.state == true ?'yes' :''}} df" hover-class="none" hover-stop-propagation="false" wx:if="{{item.state == true}}">
+                √
+              </view>
+            </view>
+          </view>
+        </view>
+        <view class="contentBottom" hover-class="none" hover-stop-propagation="false">
+          <view class="left" hover-class="none" hover-stop-propagation="false">
+            <view class='as df' bindtap='reset'>重置</view>
+          </view>
+          <view class="right" hover-class="none" hover-stop-propagation="false">
+            <view class='btn df' bindtap='btn'>确定</view>
+          </view>
+        </view>
+      </view>
+      <!-- 意向区域 -->
+      <view class="content" hover-class="none" hover-stop-propagation="false" wx:if="{{currentState == 4}}">
+        <view class="contentTop" hover-class="none" hover-stop-propagation="false">
+          <scroll-view class="" scroll-y style="height: 803rpx;width:200rpx">
+            <view class="left" hover-class="none" hover-stop-propagation="false">
+              <view class="leftItem" hover-class="none" hover-stop-propagation="false" wx:for="{{quyuList}}" wx:key="{{index}}" data-index='{{index}}' bindtap='checkQuyu'>
+                <view class="{{quyuIndex == index ?'active' :''}} items" hover-class="none" hover-stop-propagation="false">
+                  {{item.name}}
+                </view>
+              </view>
+            </view>
+          </scroll-view>
+          <view style='flex:1;padding:20rpx 40rpx;overflow:hidden;padding-bottom:0;border-left: 1rpx solid #E4E4E4;' hover-class="none" hover-stop-propagation="false">
+            <view class="rightTop" hover-class="none" hover-stop-propagation="false">
+              <view class="right" hover-class="none" hover-stop-propagation="false">
+                <scroll-view class="" scroll-y style="height: 550rpx;">
+                  <view style='display: flex;justify-content: space-between;flex-wrap: wrap;' hover-class="none" hover-stop-propagation="false">
+                    <view class="rightItem df {{item.state == true ?'active' :''}}" hover-class="none" hover-stop-propagation="false" wx:for="{{quyuList[quyuIndex].list}}" wx:key="{{index}}" data-id='{{item.id}}' data-index='{{index}}' bindtap='checkQuyuRight'>
+                      {{item.name}}
+                      <view class="{{item.state == true ?'yes' :''}} df" hover-class="none" hover-stop-propagation="false" wx:if="{{item.state == true}}">
+                        √
+                      </view>
+                    </view>
+                  </view>
+                </scroll-view>
+              </view>
+            </view>
+            <view class="rightBottom" hover-class="none" hover-stop-propagation="false">  
+              <view class="titles" hover-class="none" hover-stop-propagation="false">已选：</view>
+              <view class="contents" style="padding:0" hover-class="none" hover-stop-propagation="false">
+                <scroll-view class="" scroll-y style="height: 150rpx;">
+                  <view style='display: flex;justify-content: space-between;flex-wrap: wrap;' hover-class="none" hover-stop-propagation="false">
+                    <!-- <view class=" df " hover-class="none" hover-stop-propagation="false" wx:for="{{quyuList}}"> -->
+                      <view class="rightItem df" wx:for="{{quyuCheck}}" wx:for-item="items" wx:key="{{index}}" data-index='{{index}}' data-id='{{items.id}}' bindtap='del' wx:if="{{items.state}}"> 
+                        {{items.name}}
+                      </view>
+                      <view class="{{items.state == true ?'yes' :''}} df" hover-class="none" hover-stop-propagation="false" wx:if="{{items.state == true}}">
+                        ×
+                      </view>
+                    <!-- </view> -->
+                  </view>
+                </scroll-view>
+              </view>
+            </view>
+          </view>
+        </view>
+        <view class="contentBottom" hover-class="none" hover-stop-propagation="false">
+          <view class="left" hover-class="none" hover-stop-propagation="false">
+            <view class='as df' bindtap='resetQuyu'>重置</view>
+          </view>
+          <view class="right" hover-class="none" hover-stop-propagation="false">
+            <view class='btn df' bindtap='btnQuyu'>确定</view>
+          </view>
+        </view>
+      </view>
+    </view>
+  </van-popup>
+  <view class="title" hover-class="none" hover-stop-propagation="false">
+    <view class="search" hover-class="none" hover-stop-propagation="false">
+      <view class="left" hover-class="none" hover-stop-propagation="false" bindtap ='selects'>
+        <view class="content" hover-class="none" hover-stop-propagation="false">
+                  <view class="" hover-class="none" hover-stop-propagation="false">
+          {{check}}
+        </view>
+      <image class="" src="../../images/sj.png"></image>
+        </view>
+        <view class="select" hover-class="none" hover-stop-propagation="false" wx:if="{{isSelect}}">
+          <image class="" src="../../images/dbx01.png" >
+            
+          </image>
+          <view class="selectItem" hover-class="none" hover-stop-propagation="false" >
+            <view class="iii" hover-class="none" hover-stop-propagation="false" wx:for="{{list}}" data-name="{{item.name}}" catchtap="checkSelect">
+              {{item.name}}
+            </view>
+          </view>
+        </view>
+    </view>
+    <view class="right" hover-class="none" hover-stop-propagation="false">
+      <image class="" src="../../images/ss01.png" >
+        
+      </image>
+      <input class="" value="" type="text" placeholder-class="input-placeholder" placeholder="请输入小区名称">
+        
+      </input>
+    </view>
+    </view>
+        <view class="btn df" hover-class="none" hover-stop-propagation="false" bindtap='search'>
+      搜索
+    </view>
+  </view>
+  <view class="contents" hover-class="none" hover-stop-propagation="false" wx:if="{{isSearch == false}}">
+    <view class="titles" hover-class="none" hover-stop-propagation="false">
+      <view class="lefts" hover-class="none" hover-stop-propagation="false">
+        历史搜索:
+      </view>
+      <view class="rights" hover-class="none" hover-stop-propagation="false">
+        <image class="" src="../../images/sc.png">
+          
+        </image>
+        <view class="" hover-class="none" hover-stop-propagation="false" bindtap='del'>
+          清空历史
+        </view>
+      </view>
+    </view>
+    <view class="content" hover-class="none" hover-stop-propagation="false">
+      <view class="item df" hover-class="none" hover-stop-propagation="false" wx:for="{{lists}}">
+        {{item}}
+      </view>
+    </view>
+  </view>
+    <view class="contents pad0" hover-class="none" hover-stop-propagation="false" wx:if="{{isSearch}}">
+      <view class="tab" hover-class="none" hover-stop-propagation="false">
+    <view class="item" hover-class="none" hover-stop-propagation="false" wx:for="{{tabList}}" wx:key="{{index}}" data-index='{{index}}' bindtap='filter'>
+      <view class="itemP" hover-class="none" hover-stop-propagation="false">
+        <view class="itemName" hover-class="none" hover-stop-propagation="false">
+          {{item.name}}
+        </view>
+        <image src="../../images/sj.png" />
+      </view>
+    </view>
+  </view>
+    <view class="hotContent" hover-class="none" hover-stop-propagation="false">
+      <view class="hotContentItem" hover-class="none" hover-stop-propagation="false" wx:for="{{hotList}}" wx:key="{{index}}" bindtap='toDetail' data-id='{{item.name}}'>
+        <image class="hotContentItemImg" src="{{item.img}}"></image>
+        <view class="name" hover-class="none" hover-stop-propagation="false">{{item.name}}</view>
+        <view class="address" hover-class="none" hover-stop-propagation="false">
+          {{item.address}}
+        </view>
+        <view class="biaoqianList" hover-class="none" hover-stop-propagation="false">
+          <view class="biaoqian df {{items.state==1?'state1':''}} {{items.state==2?'state2':''}}" hover-class="none" hover-stop-propagation="false" wx:for="{{item.list}}" wx:for-item="items">
+            {{items.name}}
+          </view>
+        </view>
+        <view class="yongjin" hover-class="none" hover-stop-propagation="false">
+          <view class="yongjinLeft" hover-class="none" hover-stop-propagation="false">可获佣金：</view>
+          <view class="yongjinRight" hover-class="none" hover-stop-propagation="false">
+            {{item.yongjin}}
+          </view>
+        </view>
+        <view class="price" hover-class="none" hover-stop-propagation="false">{{item.price}}</view>
+      </view>
+    </view>
+  </view>
+</view>

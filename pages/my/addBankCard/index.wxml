@@ -1,0 +1,21 @@
+<view class="container">
+  <view class="box">
+    <view class="left">
+      <view class="row">姓名</view>
+      <view class="row">银行卡号</view>
+      <view class="row">开户银行</view>
+    </view>
+    <view class="right">
+      <view class="row">
+        <input type="text" placeholder="自动获取实名认证姓名" disabled value="{{realName}}"/>
+      </view>
+      <view class="row">
+        <input type="number" placeholder="请输入银行卡号" value='' bindinput="chooseNumber"/>
+      </view>
+      <view class="row">
+        <input type="text" placeholder="请输入开户银行" value='' bindinput="chooseName"/>
+      </view>
+    </view>
+  </view>
+  <view class="button" bindtap="submit">添加</view>
+</view>

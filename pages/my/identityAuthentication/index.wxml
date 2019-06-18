@@ -1,0 +1,10 @@
+<view class="identity">
+  <view class="authen">
+    <input class="inputCode font-f2"  value='{{cardNumber}}' type="number" maxlength="4" placeholder="请获取验证码以确认身份" bindinput="chooseCode"/>
+    <text class="getCode" bindtap='getCode'>{{msg}}</text>
+  </view>
+  <view class="outer">
+    <view class="nextStep font-f1" bindtap="tapStep">下一步</view>
+  </view>
+  </view>
+  

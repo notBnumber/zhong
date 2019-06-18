@@ -1,0 +1,185 @@
+.container{
+  background:#fff;
+  display:flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  .icon{
+    margin-top:140rpx;
+    width:221rpx;
+    height:161rpx;
+  }
+  .comment{
+    margin-top:39rpx;
+    color:#a2a2a2;
+    font-size:30rpx;
+  }
+  .btn{
+    margin-top:112rpx;
+    width:400rpx;
+    height:72rpx;
+    line-height:72rpx;
+    background:linear-gradient(-90deg,rgba(56,198,160,1) 0%,rgba(109,224,195,1) 100%);
+    border-radius:36rpx;
+    font-size:34rpx;
+    text-align: center;
+  }
+  .proup{
+    z-index: 99;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+    background-color: rgba(0,0,0,.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    .box{
+      text-align: center;
+      image.errIcon{
+        width: 56rpx;
+        height: 56rpx;
+        margin-top: 30rpx;
+      }
+      .Exhibition{
+        background-color: #fff;
+        width: 590rpx;
+        height: 694rpx;
+        border-radius: 10rpx;
+        text-align: center;
+        image{
+          width: 373rpx;
+          height: 373rpx;
+          margin-top: 40rpx;
+        }
+        .white{
+          width: 407rpx;
+          height: 36rpx;
+          background-color: #EEEEEE;
+          border-radius: 50%;
+          margin: 0 auto;
+        }
+        .text{
+          font-size:36rpx;
+          font-family:PingFang-SC-Medium;
+          font-weight:500;
+          color:#383838;
+          margin-top: 30rpx;
+        }
+        .btn{
+          width:300rpx;
+          height:84rpx;
+          line-height: 84rpx;
+          background:linear-gradient(-90deg,rgba(56,198,160,1) 0%,rgba(109,224,195,1) 100%);
+          border-radius:42rpx;
+          font-size:36rpx;
+          font-family:PingFang-SC-Regular;
+          font-weight:bold;
+          color:#FFFFFF;
+          margin: 40rpx auto 0;
+          border: none;
+        }
+      }
+    }
+  }
+}
+.teamWork{
+  min-height:100vh;
+  background:#F7F8F8;
+  .captain{
+    padding:46rpx 11rpx 0 10rpx;
+    width:729rpx;
+    .topic{
+      padding-left:27rpx;
+      font-size:34rpx;
+      font-family:PingFang-SC-Regular;
+      font-weight:bold;
+      color:rgba(0,0,0,1);
+    }
+    .detail{
+      margin-top:25rpx;
+      margin-bottom:13rpx;
+      width:100%;
+      height:154rpx;
+      background:rgba(255,255,255,1);
+      box-shadow:0px 4rpx 6rpx 0px rgba(190,198,205,0.06);
+      border-radius:10rpx;
+      padding:28rpx 27rpx;
+      display:flex;
+      justify-content: space-between;
+      align-items: center;
+      .avatar{
+        width:250rpx;
+        display:flex;
+        align-items: center;
+        .gallary{
+          width:98rpx;
+          height:98rpx;
+          border-radius:49rpx;
+        }
+        .name{
+          padding-left:24rpx;
+          color:rgba(0,0,0,1);
+          font-size:32rpx;
+        }
+      }
+      .phone{
+        color:rgba(81,81,81,1);
+        font-size:28rpx;
+      }
+    }
+  }
+  .teamer{
+    padding:75rpx 11rpx 0 10rpx;
+    width:729rpx;
+    .title{
+      padding-left:27rpx;
+      font-size:34rpx;
+      font-family:PingFang-SC-Regular;
+      font-weight:bold;
+      color:rgba(0,0,0,1);
+    }
+    .inner{
+      margin-top:25rpx;
+      margin-bottom:14rpx;
+      width:100%;
+      height:154rpx;
+      background:rgba(255,255,255,1);
+      box-shadow:0px 4rpx 6rpx 0px rgba(190,198,205,0.06);
+      border-radius:10rpx;
+      padding:28rpx 27rpx;
+      display:flex;
+      justify-content: space-between;
+      align-items: center;
+      .contain{
+        width:283rpx;
+        display:flex;
+        align-items: center;
+        .icon{
+          width:98rpx;
+          height:98rpx;
+          border-radius:49rpx;
+        }
+        .describe{
+          padding-left:24rpx;
+          &>view:first-of-type{
+            color:rgba(0,0,0,1);
+            font-size:32rpx;
+          }
+          &>view:last-of-type{
+            margin-top:20rpx;
+            color:rgba(81,81,81,1);
+            font-size:28rpx;
+          }
+        }
+      }
+      .count{
+        font-size:28rpx;
+        color:rgba(81,81,81,1);
+      }
+    }
+  }
+}

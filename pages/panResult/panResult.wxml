@@ -1,0 +1,16 @@
+<!--pages/friendsResult/friendsResult.wxml-->
+<view class="container" hover-class="none" hover-stop-propagation="false">
+  <image class="" src="../../images/cg01.png">
+    
+  </image>
+  <view class="friend" hover-class="none" hover-stop-propagation="false">
+    盘源推荐成功
+  </view>
+  <view class="yes" hover-class="none" hover-stop-propagation="false">
+    成功卖出后将获得佣金奖励
+  </view>
+  <view class="next df" hover-class="none" hover-stop-propagation="false" bindtap ='home'>
+    回到首页
+  </view>
+
+</view>

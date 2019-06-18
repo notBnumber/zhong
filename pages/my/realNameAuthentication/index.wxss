@@ -1,0 +1,99 @@
+.section .box {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.section .box .left {
+  width: 214rpx;
+}
+.section .box .left .row {
+  width: 130rpx;
+  height: 120rpx;
+  line-height: 120rpx;
+  text-align-last: justify;
+  color: #626262;
+  font-size: 30rpx;
+  margin: 0 auto;
+  position: relative;
+}
+.section .box .left .row:after {
+  content: ':';
+  position: absolute;
+  right: -10rpx;
+}
+.section .box .right {
+  flex: 1;
+  margin-right: 40rpx;
+}
+.section .box .right .row {
+  height: 120rpx;
+  border-bottom: 1px solid #E4E4E4;
+  display: flex;
+  align-items: center;
+  color: #000;
+  font-size: 30rpx;
+}
+.section .box .right .row input {
+  width: 100%;
+  padding-right: 20rpx;
+}
+.section .upload {
+  padding: 38rpx 83rpx 0 37rpx;
+}
+.section .upload .title {
+  font-size: 30rpx;
+  color: #626262;
+  margin-bottom: 45rpx;
+}
+.section .upload .topic {
+  font-size: 28rpx;
+  color: #4f4f4f;
+}
+.section .upload .front {
+  display: flex;
+  margin-top: 15rpx;
+  margin-bottom: 44rpx;
+}
+.section .upload .front .picture {
+  width: 284rpx;
+  flex: 0 0 284rpx;
+}
+.section .upload .front .picture > image {
+  width: 284rpx;
+  height: 209rpx;
+}
+.section .upload .front .content {
+  flex: 1;
+  padding-left: 35rpx;
+}
+.section .upload .front .content .detail {
+  margin-top: 22rpx;
+  font-size: 24rpx;
+  color: #757575;
+  line-height: 38rpx;
+}
+.section .upload .front .content .uploader {
+  margin-top: 30rpx;
+  text-align: center;
+  color: #ffffff;
+  font-size: 28rpx;
+  width: 240rpx;
+  line-height: 69rpx;
+  height: 69rpx;
+  background: linear-gradient(-90deg, #38c6a0 0%, #6de0c3 100%);
+  border-radius: 42rpx;
+}
+.section .outer {
+  margin-top: 119rpx;
+  display: flex;
+  justify-content: center;
+}
+.section .outer .nextStep {
+  width: 626rpx;
+  height: 84rpx;
+  line-height: 84rpx;
+  text-align: center;
+  background: linear-gradient(-90deg, #38c6a0 0%, #6de0c3 100%);
+  border-radius: 42rpx;
+  font-size: 36rpx;
+}

@@ -1,0 +1,12 @@
+<view class="container">
+  <!--
+    key="{{key}}"  // 向组件传递key值
+    bind:getKey="getKey" // 获取组件内传递出来的值
+  -->
+  <search key="{{key}}" bind:getKeys="getKey"></search>
+
+  <view class='content'>
+    <view>这是search传出来的值</view>
+    {{key}}
+  </view>
+</view>

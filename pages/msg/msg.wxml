@@ -1,0 +1,14 @@
+<!-- pages/msg/msg.wxml -->
+<view class="container">
+  <image class="" src="../../images/qb01.png"></image>
+  <view class="time" hover-class="none" hover-stop-propagation="false">2018-12-12</view>
+  <view class="msg" hover-class="none" hover-stop-propagation="false">钱包通知</view>
+  <view class="success" hover-class="none" hover-stop-propagation="false">用户130****1234已成功购房</view>
+  <view class="info" hover-class="none" hover-stop-propagation="false">
+    您推荐的用户18812345678已成功交易，当前的进
+
+进度是交定金签订认购书，交易进度会及时更新通
+
+知，请注意查看
+  </view>
+</view>

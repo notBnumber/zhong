@@ -1,0 +1,20 @@
+<view class="container">
+  <view class="desc-content">
+    <textarea class="innerContent font" maxlength="100" bindinput="innerText" placeholder="请尽量详细描述问题,以便我们及时为您解决(10-100)字"></textarea>
+  </view>
+  <view class="feedback-icon">
+    <view class="list-icon">
+      <view class="add" wx:for="{{imgUrl}}">
+        <image class="special" src="{{item}}" data-index="{{index}}" bindtap="preview"></image>
+        <image class="decrease" src="../../../images/sc.png" bindtap="del" data-index="{{index}}"></image>
+      </view>
+      <view class="add" bindtap='chooseImg' wx:if="{{imgUrl.length<3}}">
+        <image class="special" src="../../../images/add.png"></image> 
+        <view class="font format">{{imgUrl.length}}/3</view>
+      </view>
+    </view>
+  </view>
+  <view class="outer">
+    <view class="loader font-f1" bindtap="submit">提交</view>
+  </view>
+</view>

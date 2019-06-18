@@ -1,0 +1,4 @@
+{
+  "usingComponents": {"van-popup": "/vant/popup/index"},
+  "navigationBarTitleText":"盘源地址"
+}

@@ -1,0 +1,6 @@
+<view class="container">
+  <view class="inp">
+    <input type="text" maxlength="10" placeholder="请编辑昵称（0/10）" value='{{nick}}' bindinput="chooseNick"/>
+  </view>
+  <view class="button" bindtap="submit">保存昵称</view>
+</view>

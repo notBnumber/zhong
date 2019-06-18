@@ -1,0 +1,58 @@
+.container .box {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.container .box .left {
+  width: 214rpx;
+}
+.container .box .left .row {
+  width: 130rpx;
+  height: 120rpx;
+  line-height: 120rpx;
+  text-align-last: justify;
+  font-size: 30rpx;
+  font-family: PingFang-SC-Medium;
+  font-weight: 500;
+  color: #626262;
+  margin: 0 auto;
+  position: relative;
+}
+.container .box .left .row:after {
+  content: ':';
+  position: absolute;
+  right: -10rpx;
+}
+.container .box .right {
+  flex: 1;
+  margin-right: 40rpx;
+}
+.container .box .right .row {
+  height: 120rpx;
+  border-bottom: 1px solid #E4E4E4;
+  display: flex;
+  align-items: center;
+  font-size: 30rpx;
+  font-family: PingFang-SC-Regular;
+  font-weight: 400;
+  color: #000;
+}
+.container .box .right .row input {
+  width: 100%;
+  padding-right: 20rpx;
+}
+.container .button {
+  position: absolute;
+  bottom: 50rpx;
+  left: calc(50% - 330rpx);
+  width: 626rpx;
+  height: 84rpx;
+  line-height: 84rpx;
+  background: linear-gradient(-90deg, #38c6a0 0%, #6de0c3 100%);
+  border-radius: 42rpx;
+  text-align: center;
+  font-size: 32rpx;
+  font-family: PingFang-SC-Medium;
+  font-weight: 500;
+  color: #FFFFFF;
+}

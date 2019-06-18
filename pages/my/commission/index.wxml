@@ -1,0 +1,55 @@
+<view class="container">
+  <view class="tabs" style="top: {{height}}px">
+    <image src="../../../images/arrIcon.png" bindtap="goback"></image>
+    <view  class='title'> 佣金明细</view>
+    <view class="white"></view>
+  </view>
+
+  <view class="detailsList" wx:if="{{detailsList.length > 0}}">
+    <view class="my-details">
+      <image class="img" src="../../../images/bg.png"></image>
+      <image class="rule" src="../../../images/gc01.png" bindtap="Invitation"></image>
+      <view class="details">
+        <view >
+          <test>总佣金</test>
+          <test>¥ 60.00</test>
+        </view>
+
+      </view>
+    </view>
+    <view class="detailed">
+      佣金明细
+    </view>
+    <scroll-view scroll-y class="scroll" bindscroll="scroll" bindscrolltolower="lower">
+    <view class="list">
+      <view class="items" wx:for="{{20}}" wx:key="{{index}}">
+        <view>
+          <test>用户130****1234已成功购房</test>
+          <test>¥60.00</test>
+        </view>
+        <view>2018-12-12</view>
+      </view>
+    </view>
+  </scroll-view>
+  </view>
+  <view class="nothing" wx:if="{{detailsList.length  == 0}}">
+    <view class="box">
+      <image src="../../../images/xb01.png"></image>
+      暂无提现记录
+    </view>
+  </view>
+  <view class="proup" wx:if="{{isProup}}">
+    <view class="box">
+      <view class="Exhibition">
+        <image src="../../../images/ts01.png"></image>
+        <view class="text">提现规则</view>
+        <view class="richtext">
+          <view>1.推荐好友或推荐盘源，绑定上下级关系，最高3级</view>
+          <view>2.交易成功后，可按照对应比例获得佣金</view>
+          <view>3.比例规则根据平台官方定义</view>
+        </view>
+      </view>
+      <image class="errIcon" src="../../../images/gb01.png" bindtap="Invitation"></image>
+    </view>
+  </view>
+</view>

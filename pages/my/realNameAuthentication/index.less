@@ -1,0 +1,101 @@
+.section{
+  .box{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    .left{
+      width: 214rpx;
+      .row{
+        width: 130rpx;
+        height: 120rpx;
+        line-height: 120rpx;
+        text-align-last: justify;
+        color:#626262;
+        font-size:30rpx;
+        margin:0 auto;
+        position: relative;
+        &:after{
+          content: ':';
+          position: absolute;
+          right: -10rpx;
+        }
+      }
+    }
+    .right{
+      flex:1;
+      margin-right: 40rpx;
+      .row{
+        height: 120rpx;
+        border-bottom: 1px solid #E4E4E4;
+        display: flex;
+        align-items: center;
+        color:#000;
+        font-size:30rpx;
+        input{
+          width: 100%;
+          padding-right: 20rpx;
+        }
+      }
+    }
+  }
+  .upload{
+    padding:38rpx 83rpx 0 37rpx;
+    .title{
+      font-size:30rpx;
+      color:rgba(98,98,98,1);
+      margin-bottom:45rpx;
+    }
+    .topic{
+      font-size:28rpx;
+      color:rgba(79,79,79,1);
+    }
+    .front{
+      display:flex;
+      margin-top:15rpx;
+      margin-bottom:44rpx;
+      .picture{
+        width:284rpx;
+        flex:0 0 284rpx;
+        &>image{
+          width:284rpx;
+          height:209rpx;
+        }
+      }
+      .content{
+        flex:1;
+        padding-left:35rpx;
+        .detail{
+          margin-top:22rpx;
+          font-size:24rpx;
+          color:rgba(117,117,117,1);
+          line-height:38rpx;
+        }
+        .uploader{
+          margin-top:30rpx;
+          text-align: center;
+          color:rgba(255,255,255,1);
+          font-size:28rpx;
+          width:240rpx;
+          line-height: 69rpx;
+          height:69rpx;
+          background:linear-gradient(-90deg,rgba(56,198,160,1) 0%,rgba(109,224,195,1) 100%);
+          border-radius: 42rpx;
+        }
+      }
+    }
+  }
+  .outer{
+    margin-top:119rpx;
+    display:flex;
+    justify-content: center;
+     .nextStep{
+      width:626rpx;
+      height:84rpx;
+      line-height: 84rpx;
+      text-align: center;
+      background:linear-gradient(-90deg,rgba(56,198,160,1) 0%,rgba(109,224,195,1) 100%);
+      border-radius:42rpx;
+      font-size:36rpx;
+    }
+  }
+}

@@ -1,0 +1,33 @@
+<view class="container">
+  <view class="section">
+    <view class="topContent">
+      <view class="withdraw">
+        <input class="inputCash font" type="digit" placeholder="请输入提现金额，最少为100" value="{{cashPrice}}" bindinput='bindinputPrice'/>
+      </view>
+      <view class="desc">
+        <view class="left font-Medium">可提现：<text class="font-Medium">¥60.00</text></view>
+        <text class="right font-Medium" bindtap="cashAll">全部提现</text>
+      </view>
+    </view>
+  </view>
+  <view class="most">
+    <view class="items" wx:for="{{5}}">
+      <view class="box">
+        <image src="../../../images/kh01.png"></image>
+        <view class="bank">
+          <view>开户银行：邮政银行（增城荔城支行)</view>
+          <view>银行账号：**** **** **** **** **** 5613</view>
+          <view>开户人：邹莉莉</view>
+        </view>
+        <view class="circle">
+          <view class="litter" wx:if="{{index==0}}"></view>
+        </view>
+      </view>
+      <view class="bottom-line"></view>
+    </view>
+    
+  </view>
+  <view class="addBank">
+    <view bindtap="getCash">立即提现</view>
+  </view>
+</view>

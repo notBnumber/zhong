@@ -1,0 +1,7 @@
+{
+  "usingComponents": {
+    "van-popup": "/vant/popup/index"
+
+  },
+  "navigationBarTitleText":"推客"
+}

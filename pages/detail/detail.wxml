@@ -1,0 +1,80 @@
+<!-- pages/detail/detail.wxml -->
+<view class="container" hover-class="none" hover-stop-propagation="false">
+    <view class="swiper" hover-class="none" hover-stop-propagation="false">
+    <swiper autoplay="{{autoplay}}" interval="{{interval}}">
+      <block wx:for="{{imgUrls}}" wx:key="{{index}}">
+        <swiper-item>
+          <image src="{{item}}" class="slide-image" bindtap="previewImg" data-url="{{item}}"/>
+          <view class="ind df" hover-class="none" hover-stop-propagation="false">
+            {{imgUrls.length}}/{{index}}
+          </view>
+        </swiper-item>
+      </block>
+    </swiper>
+  </view>
+  <view class="info" hover-class="none" hover-stop-propagation="false">
+    <view class="Collection" hover-class="none" hover-stop-propagation="false" bindtap='shoucang'>
+      <image class="" src="../../images/sc02.png" wx:if="{{isshoucang == false}}"></image>
+      <image class="" src="../../images/sc01.png" wx:elif="{{isshoucang == true}}"></image>
+      <view class="" hover-class="none" hover-stop-propagation="false">收藏</view>
+    </view>
+    <view class="name" hover-class="none" hover-stop-propagation="false">{{info.houseName}}</view>
+    <view class="title" hover-class="none" hover-stop-propagation="false">{{info.subheading}}</view>
+    <view class="number" hover-class="none" hover-stop-propagation="false" wx:if="{{info.type == 0}}">{{info.minArea}}-{{info.maxArea}}m²</view>
+    <view class="number" hover-class="none" hover-stop-propagation="false"  wx:if="{{info.type == 1}}">{{info.area}}m²</view>
+
+    <view class="number" hover-class="none" hover-stop-propagation="false"  wx:if="{{info.type == 2}}">{{info.area}}m²</view>
+
+    <view class="biaoqianList" hover-class="none" hover-stop-propagation="false">
+      <view class="biaoqian df {{item.state == 1?'state1':''}}  {{item.state == 2?'state2':''}}" hover-class="none" hover-stop-propagation="false" wx:for="{{info.tagArr}}">
+        {{item}}
+      </view>
+    </view>
+    <view class="Commission" hover-class="none" hover-stop-propagation="false">
+      <view class="p1">可获佣金：</view>
+      <view class="p2" wx:if="{{info.type ==0}}">{{info.customerMoney}}</view>
+    </view>
+    <view class="money" hover-class="none" hover-stop-propagation="false" wx:if="{{info.type ==0}}">{{info.unitPrice}}/平</view>
+    <view class="money" hover-class="none" hover-stop-propagation="false" wx:if="{{info.type ==1}}"> {{info.totalPrice}}/万元</view>
+    <view class="money" hover-class="none" hover-stop-propagation="false" wx:if="{{info.type ==2}}">{{info.totalPrice}}元/月</view>
+  </view>
+  <view class="address" hover-class="none" hover-stop-propagation="false" bindtap='getAddress'>
+    <image class="dw" src="../../images/dw02.png"></image>
+    <view class="" hover-class="none" hover-stop-propagation="false">{{info.address}}</view>
+    <image class="zy" src="../../images/zy03.png"></image>
+  </view>
+  <view class="detail" hover-class="none" hover-stop-propagation="false">
+    <view class="item" hover-class="none" hover-stop-propagation="false" wx:if="{{info.type == 0}}">面积：{{info.minArea}}-{{info.maxArea}}m²</view>
+     <view class="item" hover-class="none" hover-stop-propagation="false" wx:if="{{info.type == 1}}">面积：{{info.area}}m²</view>
+      <view class="item" hover-class="none" hover-stop-propagation="false" wx:if="{{info.type == 2}}">面积：{{info.area}}m²</view>
+    <view class="item" hover-class="none" hover-stop-propagation="false" wx:for="{{info.useName}}" wx:for-item="items">用途：{{items.name}}</view>
+    <view class="item" hover-class="none" hover-stop-propagation="false" wx:for="{{info.special}}" wx:for-item="items">特色：{{items.name}}</view>
+    <view class="word" hover-class="none" hover-stop-propagation="false">富文本</view>
+  </view>
+  <view class="comment" hover-class="none" hover-stop-propagation="false">
+    <view class="title" hover-class="none" hover-stop-propagation="false">
+      <image class="" src="../../images/xx04.png"></image>
+      <view class="" hover-class="none" hover-stop-propagation="false">房源点评</view>
+    </view>
+    <view class="content" hover-class="none" hover-stop-propagation="false">
+      <view class="item" hover-class="none" hover-stop-propagation="false" wx:for="{{list}}" wx:key="index">
+        <view class="itemTop" hover-class="none" hover-stop-propagation="false">
+          <view class="itemTopLeft" hover-class="none" hover-stop-propagation="false">
+            <image class="avatar" src="{{imgUrl+item.account[0].avatar}}"></image>
+          </view>
+          <view class="itemTopRight" hover-class="none" hover-stop-propagation="false">
+            <view class="tt" hover-class="none" hover-stop-propagation="false">{{item.account[0].mobile}}</view>
+            <view class="tb" hover-class="none" hover-stop-propagation="false">{{item.createTime}}</view>
+          </view>
+        </view>
+        <view class="itemBottom" hover-class="none" hover-stop-propagation="false">
+          {{item.content}}
+        </view>
+      </view>
+    </view>
+  </view>
+  <view class="send">
+    <input  type="text"   value='{{content}}'  bindinput='chooseContent' placeholder="请输入您对房源的评价"  placeholder-class="input-placeholder" disabled="{{false}}" maxlength="140"></input>
+    <view class="btn df" bindtap='send'>在线咨询</view>
+  </view>
+</view>

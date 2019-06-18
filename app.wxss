@@ -1,0 +1,60 @@
+/**app.wxss**/
+.font-f1 {
+  font-family: PingFang-SC-Regular;
+  font-weight: bold;
+  color:rgba(255,255,255,1);
+}
+.font-f2{
+  font-family:PingFang-SC-Regular;
+  font-weight:400;
+  color:rgba(110,110,110,1);
+}
+.font{
+  font-family:PingFang-SC-Regular;
+  font-weight:400;
+}
+.font-Medium{
+  font-family:PingFang-SC-Medium;
+  font-weight:500;
+}
+.container {
+  height: 100%;
+  /* display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  padding: 200rpx 0; */
+  box-sizing: border-box;
+} 
+.df {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+view {
+  box-sizing: border-box;
+}
+.swiper {
+  width: 100%;
+  height: 390rpx;
+  position: relative;
+
+}
+
+.swiper swiper {
+  width: 100%;
+  height: 100%;
+}
+
+swiper-item {
+  width: 100%;
+  height: 100%;
+}
+
+.slide-image {
+  width: 100%;
+  height: 100%;
+}
+.mb {
+  margin-bottom: 24rpx;
+}

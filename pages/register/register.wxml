@@ -1,0 +1,16 @@
+<view class="container">
+  <image class="bgImg" src="../../images/D1.0_02.png" ></image>
+  <view class="box">
+    <view class="row">
+      <image src="../../images/sjh01.png"></image>
+      <input type="number" maxlength="11" placeholder="请输入手机号码"/>
+    </view>
+    <view class="row">
+      <image src="../../images/yzm01.png" class="code"></image>
+      <input type="number" maxlength="6" placeholder="请输入验证码"/>
+      <button plain>发送验证码</button>
+    </view>
+
+    <view class="btn">注册</view>
+  </view>
+</view>

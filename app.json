@@ -1,0 +1,82 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/detail/detail",
+    "pages/houseDetail/houseDetail",
+    "pages/panInfo/panInfo",
+    "pages/panResult/panResult",
+    "pages/tuike/index",
+    "pages/tuipan/index",
+    "pages/friends/friends",
+    "pages/friendsResult/friendsResult",
+    "pages/find/find",
+    "pages/logs/logs",
+    "pages/ptInfo/ptInfo",
+    "pages/msg/msg",
+    "pages/result/result",
+    "pages/results/results",
+    "pages/registerText/registerText",
+    "pages/login/login",
+    "pages/chooseCity/chooseCity",
+    "pages/bindPhoe/bindPhoe",
+    "pages/my/index/index",
+    "pages/my/myinfo/index",
+    "pages/my/changeName/index",
+    "pages/my/changePhone/index",
+    "pages/my/withdraw/index",
+    "pages/my/record/index",
+    "pages/my/commission/index",
+    "pages/my/myBankCard/index",
+    "pages/my/addBankCard/index",
+    "pages/toLogin/toLogin",
+    "pages/my/identityAuthentication/index",
+    "pages/my/realNameAuthentication/index",
+    "pages/my/drawMoney/drawMoney",
+    "pages/my/aboutOurs/aboutOurs",
+    "pages/my/feedback/feedback",
+    "pages/my/help/help",
+    "pages/my/collection/collection",
+    "pages/my/team/team",
+    "pages/component/component"
+  ],
+  "window": {
+    "backgroundTextStyle": "dark",
+    "navigationBarBackgroundColor": "#fff",
+    "navigationBarTitleText": "WeChat",
+    "navigationBarTextStyle": "black",
+    "enablePullDownRefresh": true
+  },
+  "tabBar": {
+    "color": "#666",
+    "selectedColor": "#2DC59C",
+    "backgroundColor": "#fff",
+    "position": "bottom",
+    "borderStyle": "black",
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "text": "首页",
+        "iconPath": "./images/sy01.png",
+        "selectedIconPath": "./images/sy01_check.png"
+      },
+      {
+        "pagePath": "pages/logs/logs",
+        "text": "消息",
+        "iconPath": "./images/xx01.png",
+        "selectedIconPath": "./images/xx01_check.png"
+      },
+      {
+        "pagePath": "pages/my/index/index",
+        "text": "我的",
+        "iconPath": "./images/wd01.png",
+        "selectedIconPath": "./images/wd01_check.png"
+      }
+    ]
+  },
+  "permission": {
+    "scope.userLocation": {
+      "desc": "你的位置信息将用于小程序位置接口的效果展示"
+    }
+  },
+  "sitemapLocation": "sitemap.json"
+}

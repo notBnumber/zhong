@@ -1,0 +1,236 @@
+{
+	"description": "项目配置文件",
+	"packOptions": {
+		"ignore": []
+	},
+	"setting": {
+		"urlCheck": false,
+		"es6": true,
+		"postcss": true,
+		"minified": true,
+		"newFeature": true,
+		"autoAudits": false
+	},
+	"compileType": "miniprogram",
+	"libVersion": "2.7.0",
+	"appid": "wx241858760fb72bed",
+	"projectname": "zhongzheng",
+	"debugOptions": {
+		"hidedInDevtools": []
+	},
+	"isGameTourist": false,
+	"simulatorType": "wechat",
+	"simulatorPluginLibVersion": {},
+	"condition": {
+		"search": {
+			"current": -1,
+			"list": []
+		},
+		"conversation": {
+			"current": -1,
+			"list": []
+		},
+		"plugin": {
+			"current": -1,
+			"list": []
+		},
+		"game": {
+			"currentL": -1,
+			"list": []
+		},
+		"miniprogram": {
+			"current": 26,
+			"list": [
+				{
+					"id": -1,
+					"name": "w d ",
+					"pathName": "pages/my/index/index",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "个人中心",
+					"pathName": "pages/my/myinfo/index",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "提现",
+					"pathName": "pages/my/withdraw/index",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "银行卡列表",
+					"pathName": "pages/my/myBankCard/index",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "房源详情",
+					"pathName": "pages/detail/detail",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "房源类型详情",
+					"pathName": "pages/houseDetail/houseDetail",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "推盘信息",
+					"pathName": "pages/panInfo/panInfo",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "推客",
+					"pathName": "pages/tuike/index",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": 8,
+					"name": "盘源信息",
+					"pathName": "pages/friends/friends",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "消息",
+					"pathName": "pages/logs/logs",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "找房",
+					"pathName": "pages/find/find",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": 11,
+					"name": "搜索结果",
+					"pathName": "pages/result/result",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "选择城市",
+					"pathName": "pages/chooseCity/chooseCity",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "房源类型详情",
+					"pathName": "pages/chooseCity/chooseCity",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "实名认证",
+					"pathName": "pages/my/realNameAuthentication/index",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "登录",
+					"pathName": "pages/login/login",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "房源搜索结果",
+					"pathName": "pages/results/results",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "房源搜索结果",
+					"pathName": "pages/houseDetail/houseDetail",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "组件",
+					"pathName": "pages/component/component",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "登录",
+					"pathName": "pages/login/login",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "提现",
+					"pathName": "pages/my/record/index",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "银行卡",
+					"pathName": "pages/my/myBankCard/index",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "身份验证码",
+					"pathName": "pages/my/identityAuthentication/index",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "实名认证",
+					"pathName": "pages/my/realNameAuthentication/index",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "添加银行卡",
+					"pathName": "pages/my/addBankCard/index",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "组件",
+					"pathName": "pages/component/component",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": 26,
+					"name": "消息",
+					"pathName": "pages/msg/msg",
+					"query": "",
+					"scene": null
+				}
+			]
+		}
+	}
+}

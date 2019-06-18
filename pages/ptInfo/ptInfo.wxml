@@ -1,0 +1,19 @@
+<!--pages/ptInfo/ptInfo.wxml-->
+<import src="../../wxParse/wxParse.wxml"/> 
+
+<view class="container">
+  <view class="title" hover-class="none" hover-stop-propagation="false">
+    {{info.title}}
+  </view>
+  <view class="middle" hover-class="none" hover-stop-propagation="">
+    <view class="logo" hover-class="none" hover-stop-propagation="false">
+      仲达网
+    </view>
+    <view class="time" hover-class="none" hover-stop-propagation="false">
+      {{info.createTime}}
+    </view>
+  </view>
+  <view class="content" hover-class="none" hover-stop-propagation="false">
+    <template is="wxParse" data="{{wxParseData:article_content.nodes}}" />
+  </view>
+</view>

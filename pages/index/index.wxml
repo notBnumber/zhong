@@ -1,0 +1,121 @@
+<!-- index.wxml -->
+<view class="container">
+  <!-- <view class="userinfo">
+    <button wx:if="{{!hasUserInfo && canIUse}}" open-type="getUserInfo" bindgetuserinfo="getUserInfo"> 获取头像昵称 </button>
+    <block wx:else>
+      <image bindtap="bindViewTap" class="userinfo-avatar" src="{{userInfo.avatarUrl}}" mode="cover"></image>
+      <text class="userinfo-nickname">{{userInfo.nickName}}</text>
+    </block>
+  </view>
+  <view class="usermotto">
+    <text class="user-motto">{{motto}}</text>
+  </view> -->
+  <view class="search " hover-class="none" hover-stop-propagation="false">
+    <view class="searchLeft" hover-class="none" hover-stop-propagation="false" bindtap='toCity'>
+      <image class="" src="../../images/dw01.png"></image>
+      <view class="" hover-class="none" hover-stop-propagation="false">广州</view>
+    </view>
+    <!-- <input type="text"> -->
+    <view class="inp" hover-class="none" hover-stop-propagation="false" bindtap='toReault'>
+      <image class="" src="../../images/ss01.png"></image>
+      <input class="" value="" type="text" placeholder="请输入楼盘" placeholder-class="input-placeholder" disabled="{{true}}"></input>
+    </view>
+  </view>
+  <!-- 轮播图 -->
+  <view class="swiper" hover-class="none" hover-stop-propagation="false">
+    <swiper autoplay="{{autoplay}}" interval="{{interval}}" bindchange='swiperChange' circular>
+      <block wx:for="{{imgUrls}}" wx:key="{{index}}">
+        <swiper-item>
+          <image src="{{imgUrl+item.image}}" mode='widthFix' class="slide-image" />
+        </swiper-item>
+      </block>
+    </swiper>
+    <view class="ind df" hover-class="none" hover-stop-propagation="false">
+      {{imgUrls.length}}/{{current+1}}
+    </view>
+  </view>
+  <!-- 推客 推盘 -->
+  <view class="oneTab" hover-class="none" hover-stop-propagation="false">
+    <view class="oneTabItem" hover-class="none" hover-stop-propagation="false" bindtap='tk'>
+      <image class="oneTabItemImg" src="../../images/tk01.png" mode='widthFix'></image>
+    </view>
+    <view class="oneTabItem" hover-class="none" hover-stop-propagation="false" bindtap='tp'>
+      <image class="oneTabItemImg" src="../../images/tp01.png" mode='widthFix'></image>
+    </view>
+  </view>
+  <!-- tab栏 -->
+  <view class="twoTab" hover-class="none" hover-stop-propagation="false">
+    <view class="twoTabItem" hover-class="none" hover-stop-propagation="false" wx:for="{{twoTabList}}" wx:key="index" bindtap='toHouseDetail' data-index='{{index}}'>
+      <image class="twoTabItemImg" src="{{item.img}}" mode='widthFix'></image>
+      <view class="twoTabItemName" hover-class="none" hover-stop-propagation="false">
+        {{item.name}}
+      </view>
+    </view>
+  </view>
+  <!-- 文字轮播 -->
+  <swiper class='wordSwiper' indicator-dots="{{indicatorDots}}" autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}" vertical circular>
+    <block wx:for="{{list}}" wx:key="key">
+      <swiper-item>
+        <view class="word" hover-class="none" hover-stop-propagation="false">
+          <view class="wordLeft df" hover-class="none" hover-stop-propagation="false">购房</view>
+          <view class="wordRight" hover-class="none" hover-stop-propagation="false">
+            {{item.content}}
+          </view>
+        </view>
+      </swiper-item>
+    </block>
+  </swiper>
+  <!-- 分割线 -->
+  <view class="break" hover-class="none" hover-stop-propagation="false"></view>
+  <!-- 热门推荐 -->
+  <view class="hot" hover-class="none" hover-stop-propagation="false">
+    <view class="hotTitle df" hover-class="none" hover-stop-propagation="false">
+      <image class="hotTitleImg" src="../../images/hr01.png" mode='widthFix'></image>
+      <view class="hr" hover-class="none" hover-stop-propagation="false">热门推荐</view>
+    </view>
+    <view class="hotTab" hover-class="none" hover-stop-propagation="false">
+      <view class="hotTabItem  df  {{tabIndex==index?'active':''}}" hover-class="none" hover-stop-propagation="false" wx:for="{{hotTabList}}" wx:key="{{index}}" data-index="{{index}}" bindtap='tabCheck'>
+        {{item.name}}
+      </view>
+    </view>
+    <view class="hotContent" hover-class="none" hover-stop-propagation="false">
+      <view class="hotContentItem" hover-class="none" hover-stop-propagation="false" wx:for="{{hotList}}" wx:key="{{index}}" bindtap='toDetail' data-type='{{item.type}}' data-id='{{item.id}}'>
+        <image class="hotContentItemImg" src="{{imgUrl+item.image}}"></image>
+        <view class="name" hover-class="none" hover-stop-propagation="false">
+          {{item.houseName}}
+        </view>
+        <view class="address" hover-class="none" hover-stop-propagation="false" wx:if="{{tabIndex == 0}}">
+          {{item.minArea}}-{{item.maxArea}}m² / {{item.address}}
+        </view>
+                <view class="address" hover-class="none" hover-stop-propagation="false" wx:if="{{tabIndex == 1}}">
+          {{item.area}}m² / {{item.address}}
+        </view>
+                        <view class="address" hover-class="none" hover-stop-propagation="false" wx:if="{{tabIndex == 2}}">
+          {{item.area}}m² / {{item.address}}
+        </view>
+        <view class="biaoqianList" hover-class="none" hover-stop-propagation="false">
+          <view class="biaoqian df {{items.state==1?'state1':''}} {{items.state==2?'state2':''}}" hover-class="none" hover-stop-propagation="false" wx:for="{{item.tagArr}}"  wx:key="key" wx:for-item="items" wx:if="{{index<=2}}">
+            {{items}}
+          </view>
+        </view>
+        <view class="yongjin" hover-class="none" hover-stop-propagation="false" wx:if="{{tabIndex == 0}}">
+          <view class="yongjinLeft" hover-class="none" hover-stop-propagation="false">可获佣金：</view>
+          <view class="yongjinRight" hover-class="none" hover-stop-propagation="false">
+            总价*{{item.customerMoney}}%
+          </view>
+        </view>
+        <view class="price" hover-class="none" hover-stop-propagation="false" wx:if="{{tabIndex == 0}}">
+          {{item.unitPrice}}/平
+        </view>
+        <view class="price" hover-class="none" hover-stop-propagation="false" wx:if="{{tabIndex == 1}}">
+          {{item.totalPrice}}/万元
+        </view>
+                <view class="price" hover-class="none" hover-stop-propagation="false" wx:if="{{tabIndex == 2}}">
+          {{item.totalPrice}}元/月
+        </view>
+      </view>
+    </view>
+  </view>
+  <!-- 没有 -->
+  <view class="nonono" hover-class="none" hover-stop-propagation="false">没有更多啦</view>
+</view>
