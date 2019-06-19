@@ -17,7 +17,7 @@
 
       </view>
       <view class="withdrawal">
-         <test>￥100.12</test>
+         <test>￥{{info.unpayMoney}}</test>
          <!-- <button plain bindtap="cashTap">提现</button> -->
       </view>
     </view>
@@ -39,7 +39,7 @@
         <text>总佣金</text>
       </view>
       <view class="right">
-        <text>¥ 60.00</text>
+        <text>¥ {{info.totalCommission}}</text>
         <image class="arrIcon" src="../../../images/zy01.png"></image>
       </view>
     </view>
@@ -49,7 +49,7 @@
         <text>已提现</text>
       </view>
       <view class="right">
-        <text>¥ 60.00</text>
+        <text>¥ {{info.raiseMoney}}</text>
         <image class="arrIcon" src="../../../images/zy01.png"></image>
       </view>
     </view>

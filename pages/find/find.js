@@ -131,6 +131,11 @@ quyuCheck:[
       }
     ],
   },
+  chooseCity() {
+    wx.navigateTo({
+      url: '/pages/chooseCity/chooseCity'
+    })
+  },
   //关闭弹框
   onClose() {
     this.setData({

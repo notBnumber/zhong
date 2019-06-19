@@ -55,7 +55,10 @@ Page({
     address: '',
     price: '',
     relationship: '',
-    imgInfo:[]
+    imgInfo:[],
+    addressTip:'请选择地址',
+    latitude:'',
+    longitude:''
   },
   chooseName(e) {
     this.setData({
@@ -78,8 +81,21 @@ Page({
     });
   },
   chooseAddress(e) {
-    this.setData({
-      address: e.detail.value
+    // this.setData({
+    //   address: e.detail.value
+    // });
+    let that = this
+    wx.chooseLocation({
+      success: (res)=>{
+        console.log(res);
+        that.setData({
+          addressTip:res.address,
+          latitude:res.latitude,
+          longitude:res.longitude
+        })
+      },
+      fail: ()=>{},
+      complete: ()=>{}
     });
   },
   choosePrice(e) {
@@ -101,9 +117,9 @@ Page({
       sessionId: wx.getStorageSync('sessionId'),
       recommendedPerson: this.data.name,
       recommendedTele: this.data.phone,
-      address: this.data.address,
-      longitude: wx.getStorageSync('longitude'),
-      latitude: wx.getStorageSync('latitude'),
+      address: this.data.addressTip,
+      longitude: this.data.longitude,
+      latitude: this.data.latitude,
       roomNumber: this.data.number,
       area: this.data.size,
       type: this.data.typesIndex,
@@ -116,7 +132,7 @@ Page({
       img3: this.data.imgInfo[2] == undefined ? '' : this.data.imgInfo[2],
       img4: this.data.imgInfo[3] == undefined ? '' : this.data.imgInfo[3],
       img5: this.data.imgInfo[4] == undefined ? '' : this.data.imgInfo[4],
-      
+      style:1      
     }
     util._post('pushplate/submitSource', params).then(res => {
       if (res.code == 1) {
@@ -170,7 +186,7 @@ Page({
             filePath: tempFilePaths[i],
             name: "file",
             formData: {
-              folderName: 'pushplate'
+              folderName: 'pushplate',
             },
             success(res) {
               //do something              

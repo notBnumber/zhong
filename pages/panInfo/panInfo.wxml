@@ -2,7 +2,7 @@
   <view class="content" hover-class="none" hover-stop-propagation="false">
     <input class="" value="{{name}}" bindinput='chooseName' type="text" placeholder="请输入盘源联系人" placeholder-style="" placeholder-class="input-placeholder"></input>
     <input class="" value="{{phone}}"  bindinput='choosePhone' type="number" placeholder="请输入联系人电话" placeholder-style="" placeholder-class="input-placeholder"></input>
-    <input class="" value="{{address}}"  bindinput='chooseAddress' type="text" placeholder="请输入盘源具体地址" placeholder-style="" placeholder-class="input-placeholder"></input>
+    <input class="" value="{{address}}"  bindtap='chooseAddress' type="text" placeholder="{{addressTip}}" disabled="{{true}}" placeholder-style="" placeholder-class="input-placeholder"></input>
     <input class="" value="{{number}}"  bindinput='chooseNumber' type="text" placeholder="请输入盘源房号" placeholder-style="" placeholder-class="input-placeholder"></input>
     <input class="" value="{{size}}"  bindinput='chooseSize' type="number" placeholder="请输入盘源大小（m²）" placeholder-style="" placeholder-class="input-placeholder"></input>
   </view>

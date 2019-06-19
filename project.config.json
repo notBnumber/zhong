@@ -39,7 +39,7 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 26,
+			"current": 28,
 			"list": [
 				{
 					"id": -1,
@@ -227,6 +227,20 @@
 					"id": 26,
 					"name": "消息",
 					"pathName": "pages/msg/msg",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": 27,
+					"name": "盘源地址",
+					"pathName": "pages/results/results",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "佣金",
+					"pathName": "pages/my/commission/index",
 					"query": "",
 					"scene": null
 				}

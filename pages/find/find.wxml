@@ -112,7 +112,7 @@
     </view>
   </view>
   <!-- 意向区域 -->
-  <view class="select" hover-class="none" hover-stop-propagation="false" data-id='0' bindtap = 'quyu'>
+  <view class="select" hover-class="none" hover-stop-propagation="false" data-id='0' bindtap='chooseCity'>
     <view class="title" hover-class="none" hover-stop-propagation="false">
       <view class='t1'>
         意向区域：
@@ -121,7 +121,7 @@
         广州
       </view>
     </view>
-    <view class="content" hover-class="none" hover-stop-propagation="false">
+    <view class="content" hover-class="none" hover-stop-propagation="false"  bindtap = 'quyu'>
       请选择意向区域
     </view>
   </view>

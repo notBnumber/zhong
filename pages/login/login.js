@@ -123,8 +123,13 @@ Page({
           icon: "success"
         });
         setTimeout(() => {
-          wx.navigateBack({
-            delta: 1
+          wx.switchTab({
+            url: '/pages/index/index',
+            success: (result)=>{
+              
+            },
+            fail: ()=>{},
+            complete: ()=>{}
           });
         }, 2000);
       }
@@ -160,7 +165,11 @@ Page({
   /**
    * 生命周期函数--监听页面显示
    */
-  onShow: function() {},
+  onShow: function() {
+    this.setData({
+      msg:'发送验证码'
+    })
+  },
 
   /**
    * 生命周期函数--监听页面隐藏

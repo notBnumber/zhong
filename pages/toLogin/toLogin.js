@@ -90,9 +90,12 @@ Page({
               })
             }
           })
-          wx.switchTab({
-            url: "/pages/index/index"
-          });
+          // wx.switchTab({
+          //   url: "/pages/index/index"
+          // });
+          wx.navigateTo({
+            url: '/pages/login/login'
+          })
         },
         fail: function() {
           wx.showModal({

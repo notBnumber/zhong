@@ -12,7 +12,7 @@
       <view class="details">
         <view >
           <test>总佣金</test>
-          <test>¥ 60.00</test>
+          <test>¥ {{info.unpayMoney}}</test>
         </view>
 
       </view>
@@ -22,12 +22,12 @@
     </view>
     <scroll-view scroll-y class="scroll" bindscroll="scroll" bindscrolltolower="lower">
     <view class="list">
-      <view class="items" wx:for="{{20}}" wx:key="{{index}}">
+      <view class="items" wx:for="{{list}}" wx:key="{{index}}">
         <view>
-          <test>用户130****1234已成功购房</test>
-          <test>¥60.00</test>
+          <test>用户{{item.mobile}}已成功购房</test>
+          <test>¥{{item.commission}}</test>
         </view>
-        <view>2018-12-12</view>
+        <view>{{item.createTime}}</view>
       </view>
     </view>
   </scroll-view>

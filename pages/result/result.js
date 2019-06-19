@@ -1,33 +1,31 @@
-// pages/result/result.js
-Page({
+// pages/result/result.js\
+const util = require("../../utils/util.js");
+var app =  getApp();
 
+Page({
   /**
    * 页面的初始数据
    */
   data: {
-    check:null,
-    list:[
+    keyword: "",
+    check: null,
+    checkIndex: 0,
+    list: [
       {
-        name:'新房'
+        name: "新房"
       },
       {
-        name:'二手房'
+        name: "二手房"
       },
       {
-        name:'租房'
+        name: "租房"
       }
     ],
-    isSearch:false,
-    lists:[
-      '保利保利',
-      '保利保利',
-      '保利保利',
-      '保利保利',
-      '保利保利'
-
-    ],
-    isSelect :false,
-    options:{},
+    isSearch: false,
+    lists: ["保利保利", "保利保利", "保利保利", "保利保利", "保利保利"],
+    isSelect: false,
+    resultList:[],
+    options: {},
     hotList: [
       {
         name: "保利中心",
@@ -107,357 +105,216 @@ Page({
         ]
       }
     ],
-    specialList:[
+    specialList: [
       {
-        name:'其他',
-        list:[
+        name: "其他",
+        list: [
           {
-            name:'不限',
-            state:false
+            name: "不限",
+            state: false
           },
           {
-            name:'教育房产',
-            state:false
+            name: "教育房产",
+            state: false
           }
         ]
       },
       {
-        name:'用途',
-        list:[
+        name: "用途",
+        list: [
           {
-            name:'别墅',
-            state:false
+            name: "别墅",
+            state: false
           },
           {
-            name:'特价房',
-            state:false
+            name: "特价房",
+            state: false
           }
         ]
       }
     ],
     // 其他左边
-    specialIndex:0,
+    specialIndex: 0,
     // 其他右边
-    specialIndexs:0,
-    specialRight:[],
-    specialName:null
-,
-quyuIndex:0,
-quyuIndexs:0,
-quyuRight:[],
-// 选中的
-quyuCheck:[
-
-],
-    quyuList:[
+    specialIndexs: 0,
+    specialRight: [],
+    specialName: null,
+    quyuIndex: 0,
+    quyuIndexs: 0,
+    quyuRight: [],
+    // 选中的
+    quyuCheck: [],
+    quyuList: [
       {
-        name:'其他',
-        list:[
+        name: "其他",
+        list: [
           {
-            name:'不限',
-            state:false,
-            id:1
+            name: "不限",
+            state: false,
+            id: 1
           },
           {
-            name:'不限',
-            state:false,
-            id:2
+            name: "不限",
+            state: false,
+            id: 2
           },
           {
-            name:'不限',
-            state:false,
-            id:3
+            name: "不限",
+            state: false,
+            id: 3
           },
           {
-            name:'教育房产',
-            state:false,
-            id:4
+            name: "教育房产",
+            state: false,
+            id: 4
           }
         ]
       },
       {
-        name:'用途',
-        list:[
+        name: "用途",
+        list: [
           {
-            name:'别墅',
-            state:false,
-            id:5
+            name: "别墅",
+            state: false,
+            id: 5
           },
           {
-            name:'特价房',
-            state:false,
-            id:6
+            name: "特价房",
+            state: false,
+            id: 6
           }
         ]
       }
-    ],
+    ]
   },
   // 搜索
   search() {
     this.setData({
-      isSearch:!this.data.isSearch
-    })
+      isSearch: true
+    });
+    
+    if (this.data.checkIndex == 0) {
+      util
+        ._get("newhome/getNewHomePage?keyword=" + this.data.keyword)
+        .then(res => {
+          this.setData({
+            resultList: res.data.list
+          });
+        });
+    } else if (this.data.checkIndex == 1) {
+      util
+        ._get("secondhome/getSecondHome?keyword=" + this.data.keyword)
+        .then(res => {
+          this.setData({
+            resultList: res.data.list
+          });
+        });
+    } else {
+      util
+        ._get("rentinghome/getRentingHome?keyword=" + this.data.keyword)
+        .then(res => {
+          this.setData({
+            resultList: res.data.list
+          });
+        });
+    }
+  },
+  yes() {
+    wx.setStorageSync('keyword', this.data.keyword)
+    app.globalData.indexParams = this.data.checkIndex
+    setTimeout(() => {
+      wx.switchTab({
+        url: '/pages/index/index',
+        success: (result)=>{
+          
+        },
+        fail: ()=>{},
+        complete: ()=>{}
+      });
+    }, 1);
   },
   // 清空
   del() {
     this.setData({
-      lists:[]
-    })
+      lists: []
+    });
   },
   // 下拉
   selects() {
     if (this.data.options.state == 3) {
       this.setData({
-        isSelect:!this.data.isSelect
-      })
+        isSelect: !this.data.isSelect
+      });
     } else {
-      return
+      return;
     }
   },
   // 选中下拉框
   checkSelect(e) {
     this.setData({
-      isSelect:!this.data.isSelect,
-      check:e.currentTarget.dataset.name
-    })
-    
+      isSelect: !this.data.isSelect,
+      check: e.currentTarget.dataset.name,
+      checkIndex: e.currentTarget.dataset.index
+    });
   },
-  filter(e) {
-    let state = e.currentTarget.dataset.index
+  chooseName(e) {
     this.setData({
-      currentState:state
-    })
-    if (state == 1) {
-      this.setData({
-        show: !this.data.show
-      });
-      this.setData({
-        openList: this.data.priceList
-      });
-    } else if (state == 2) {
-      this.setData({
-        show: !this.data.show
-      });
-      this.setData({
-        openList: this.data.HouseList
-      });
-    }
-    else if (state == 3) {
-      this.setData({
-        show: !this.data.show
-      });
-      this.setData({
-        openList: this.data.mianjiList
-      });
-    } else if (state == 0) {
-      // 其他
-      this.setData({
-        show: !this.data.show
-      });
-      this.setData({
-        specialName:'其他'
-      });
-      this.checkSpecial(e)
-    }
-    else if (state == 4) {
-      // 区域
-      this.setData({
-        show: !this.data.show,
-        specialName:'意向区域'
-      });
-      this.checkQuyu(e,1)
-    }
-  },
-    // 其他左边选项
-    checkSpecial (e) {    
-      console.log(e,'其他');
-      
-      let state = e.currentTarget.dataset.index == undefined?0:e.currentTarget.dataset.index
-      this.setData({
-        specialIndex:state,
-        specialRight:this.data.specialList[state].list
-      })
-      console.log(this.data.specialRight);
-      
-    },
-    // 其他右边选项
-    checkRight(e) {
-      let state = e.currentTarget.dataset.index
-      console.log(this.data.specialRight[state].state);
-      // this.setData({
-      //   specialIndexs:state    
-      // })
-      this.data.specialRight[state].state = !this.data.specialRight[state].state
-      this.setData({
-        specialRight:this.data.specialRight
-      })
-    },
-    onClose() {
-      this.setData({
-        show: !this.data.show
-      });
-    },
-    check(e) {
-      console.log(e.currentTarget.dataset.index);
-      this.setData({
-        show: !this.data.show
-      });
-    },
-      // 区域左边
-  checkQuyu(e,state) {
-    console.log(e,state);
-    let index = ''
-    if (state != null) {
-      console.log('初始化');
-      
-      // index = e.currentTarget.dataset.index
-    this.setData({
-      quyuIndex:0,
-      quyuRight:this.data.quyuList[0].list
-    })
-    } else {
-      console.log('左边');
-      
-      index = e.currentTarget.dataset.index
-      this.setData({
-        quyuIndex:index,
-        // quyuRight:this.data.quyuList[index].list
-      })
-      console.log(this.data.quyuList[this.data.quyuIndex]);
-      
-    }
-  },
-  // 区域右边
-  checkQuyuRight(e) {
-    let state = e.currentTarget.dataset.index
-    
-    let arr = []
-    this.data.quyuList[this.data.quyuIndex].list[state].state= !this.data.quyuList[this.data.quyuIndex].list[state].state
-    for(let item of this.data.quyuList) {
-      for(let items of item.list) {
-        arr.push(items)
-      }
-    }
-    this.setData({
-      quyuList:this.data.quyuList,
-      quyuCheck:arr
-    })
-
-  },
-  // 区域删除
-  del(e) {
-    let state = e.currentTarget.dataset.index
-    let id = e.currentTarget.dataset.id
-    console.log(id);
-    
-    this.data.quyuCheck = this.data.quyuCheck.filter(
-      (item, index, arr) => index!=state
-    );
-    for(let item of this.data.quyuList) {
-      for(let y in item.list) {
-        console.log(item.list[y].id,"?????");
-        
-        if(id == item.list[y].id){
-          console.log(item.list[y]);
-          
-          item.list[y].state = false
-          // item.list[y].splice(y,1)
-        }
-      }
-    }
-    console.log(this.data.quyuList);
-    
-    this.setData({
-      quyuCheck:this.data.quyuCheck,
-      quyuList:this.data.quyuList
-    })
-  },
-  resetQuyu(e) {
-    for(let item of this.data.quyuList) {
-      for (let items of item.list ) {
-        console.log(items);
-        items.state = false
-      }
-    }
-    console.log(this.data.quyuList);
-    
-    this.setData({
-      quyuList:this.data.quyuList,
-      quyuCheck:[]
-    })
-    this.checkQuyu(e,2)
-  },
-  btnQuyu() {
-    this.setData({
-      show:!this.data.show
-    })
+      keyword: e.detail.value
+    });
   },
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function (options) {
+  onLoad: function(options) {
     this.setData({
-      options:options
-    })
+      options: options
+    });
     console.log(options);
-    
+
     if (options.state == 3) {
       this.setData({
-        check:this.data.list[0].name
-      })
+        check: this.data.list[0].name
+      });
     } else {
       this.setData({
-        check:this.data.list[options.state].name
-      })
+        check: this.data.list[options.state].name,
+        checkIndex:options.state
+      });
     }
   },
 
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
-  onReady: function () {
-
-  },
+  onReady: function() {},
 
   /**
    * 生命周期函数--监听页面显示
    */
-  onShow: function () {
-
-  },
+  onShow: function() {},
 
   /**
    * 生命周期函数--监听页面隐藏
    */
-  onHide: function () {
-
-  },
+  onHide: function() {},
 
   /**
    * 生命周期函数--监听页面卸载
    */
-  onUnload: function () {
-
-  },
+  onUnload: function() {},
 
   /**
    * 页面相关事件处理函数--监听用户下拉动作
    */
-  onPullDownRefresh: function () {
-
-  },
+  onPullDownRefresh: function() {},
 
   /**
    * 页面上拉触底事件的处理函数
    */
-  onReachBottom: function () {
-
-  },
+  onReachBottom: function() {},
 
   /**
    * 用户点击右上角分享
    */
-  onShareAppMessage: function () {
-
-  }
-})
+  onShareAppMessage: function() {}
+});

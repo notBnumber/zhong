@@ -7,7 +7,8 @@ Page({
    */
   data: {
     isProup: false,
-    height: app.globalData.height
+    height: app.globalData.height,
+    info:{}
   },
 
   pageTo({currentTarget: {dataset}}){
@@ -45,7 +46,9 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    this.setData({
+      info:wx.getStorageSync('money')
+    })
   },
 
   /**

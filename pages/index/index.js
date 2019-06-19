@@ -92,15 +92,39 @@ Page({
   },
   // 跳转推客
   tk() {
-    wx.navigateTo({
-      url: "../tuike/index"
-    });
+    if (wx.getStorageSync("sessionId")) {
+      wx.navigateTo({
+        url: "../tuike/index"
+      });
+    } else {
+      wx.showToast({
+        title: "请先登录",
+        icon: "none"
+      });
+      setTimeout(() => {
+        wx.navigateTo({
+          url: "../login/login"
+        });
+      }, 1500);
+    }
   },
   // 跳转推盘
   tp() {
-    wx.navigateTo({
-      url: "../tuipan/index"
-    });
+    if (wx.getStorageSync("sessionId")) {
+      wx.navigateTo({
+        url: "../tuipan/index"
+      });
+    } else {
+      wx.showToast({
+        title: "请先登录",
+        icon: "none"
+      });
+      setTimeout(() => {
+        wx.navigateTo({
+          url: "../login/login"
+        });
+      }, 1500);
+    }
   },
   // 滑动触发事件
   swiperChange(e) {
@@ -218,11 +242,20 @@ Page({
     let params = {
       pageNumber: num,
       pageSize: 20,
-      cityId: 1
+      cityId: 1,
+      keyword: wx.getStorageSync("keyword")
     };
-    return util._get("configure/getNewHome", params);
+    if (this.data.tabIndex == 0) {
+      return util._get("configure/getNewHome", params);
+    } else if (this.data.tabIndex == 1) {
+      return util._get("configure/getSecondHome", params);
+    } else {
+      return util._get("configure/getRentingHome", params);
+    }
   },
-  onLoad: function() {
+  onLoad: function(options) {
+    console.log(options, "首页参数");
+
     // if (app.globalData.userInfo) {
     //   console.log(0);
     //   this.setData({
@@ -253,12 +286,15 @@ Page({
     //   })
     // }
   },
-  onShow() {
+  onShow(options) {
     // console.log(this.data.globalData);
     // 取得全局App
+
     app.fun();
+
     this.setData({
-      num: this.data.num
+      num: this.data.num,
+      tabIndex: app.globalData.indexParams
     });
     Promise.all([
       util._get("configure/getPageImage"),
@@ -282,9 +318,8 @@ Page({
       .catch(e => {
         console.log(e);
         this.setData({
-          hotList:[],
-
-        })
+          hotList: []
+        });
       });
   },
   getUserInfo: function(e) {
@@ -310,10 +345,14 @@ Page({
   },
   // 房屋详情
   toDetail(e) {
-    console.log(e.currentTarget.dataset.id,this.data.type);
+    console.log(e.currentTarget.dataset.id, this.data.type);
     // return
     wx.navigateTo({
-      url: "../detail/detail?id=" + e.currentTarget.dataset.id+'&type='+this.data.tabIndex
+      url:
+        "../detail/detail?id=" +
+        e.currentTarget.dataset.id +
+        "&type=" +
+        this.data.tabIndex
     });
   },
   // 房屋列表
@@ -355,7 +394,8 @@ Page({
       let params = {
         pageNumber: 1,
         pageSize: 20,
-        cityId: 1
+        cityId: 1,
+        keyword: wx.getStorageSync("keyword")
       };
       util
         ._get("configure/getNewHome", params)
@@ -393,7 +433,8 @@ Page({
       let params = {
         pageNumber: 1,
         pageSize: 20,
-        cityId: 1
+        cityId: 1,
+        keyword: wx.getStorageSync("keyword")
       };
       util
         ._get("configure/getSecondHome", params)
@@ -431,7 +472,8 @@ Page({
       let params = {
         pageNumber: 1,
         pageSize: 20,
-        cityId: 1
+        cityId: 1,
+        keyword: wx.getStorageSync("keyword")
       };
       util
         ._get("configure/getRentingHome", params)
@@ -457,7 +499,8 @@ Page({
       let params = {
         pageNumber: ++this.data.num,
         pageSize: 20,
-        cityId: 1
+        cityId: 1,
+        keyword: wx.getStorageSync("keyword")
       };
       util
         ._get("configure/getNewHome", params)
@@ -488,7 +531,8 @@ Page({
       let params = {
         pageNumber: ++this.data.num,
         pageSize: 20,
-        cityId: 1
+        cityId: 1,
+        keyword: wx.getStorageSync("keyword")
       };
       util
         ._get("configure/getSecondHome", params)
@@ -519,7 +563,8 @@ Page({
       let params = {
         pageNumber: ++this.data.num,
         pageSize: 20,
-        cityId: 1
+        cityId: 1,
+        keyword: wx.getStorageSync("keyword")
       };
       util
         ._get("configure/getRentingHome", params)
@@ -547,5 +592,13 @@ Page({
           console.log(e);
         });
     }
+  },
+  onHide() {
+    console.log("隐藏");
+    wx.setStorageSync("keyword", "");
+  },
+  onUnload() {
+    console.log("隐藏");
+    wx.setStorageSync("keyword", "");
   }
 });

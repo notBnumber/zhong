@@ -1,5 +1,6 @@
 // pages/my/index/index.js
 const util = require("../../../utils/util.js");
+const app = getApp();
 
 Page({
   /**
@@ -7,7 +8,8 @@ Page({
    */
   data: {
     isProup: false,
-    info: {}
+    info: {},
+    money:{}
   },
 
   pageTo({ currentTarget: { dataset } }) {
@@ -49,8 +51,21 @@ Page({
       ._get("account/getInfo?sessionId=" + wx.getStorageSync("sessionId"))
       .then(res => {
         if (res.code == 1) {
+          wx.setStorageSync('info', res.data)
           this.setData({
             info: res.data
+          });
+        }
+      });
+  },
+  raiseMoney() {
+    util
+      ._get("account/cash/raiseMoney?sessionId=" + wx.getStorageSync("sessionId"))
+      .then(res => {
+        if (res.code == 1) {
+          wx.setStorageSync('money', res.data)
+          this.setData({
+            money: res.data
           });
         }
       });
@@ -69,9 +84,13 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function() {
+    this.setData({
+      imgUrl: app.globalData.imgUrl
+    })
     if (wx.getStorageSync("sessionId")) {
 
       this.init();
+      this.raiseMoney()
     } else {
       this.setData({
         info:wx.getStorageSync('InfoObj')

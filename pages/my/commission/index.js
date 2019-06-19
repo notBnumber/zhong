@@ -1,5 +1,6 @@
 // pages/my/commission/index.js
-const app = getApp()
+const util = require("../../../utils/util.js");
+const app = getApp();
 Page({
 
   /**
@@ -8,7 +9,9 @@ Page({
   data: {
     detailsList: [''],
     isProup: false,
-    height: app.globalData.height
+    height: app.globalData.height,
+    info:{},
+    list:[]
   },
 
   scroll(e){
@@ -49,6 +52,16 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
+    util._get('account/cash/commissionPage?sessionId='+wx.getStorageSync('sessionId')).then(res=>{
+      if(res.code == 1) {
+        this.setData({
+          info:wx.getStorageSync('money'),
+          list:res.data
+        })
+      }
+    })
+
+
 
   },
 

@@ -36,14 +36,6 @@ Page({
     }
   },
   onShow() {
-
-  },
-  onLoad: function () {    
-    // this.setData({
-    //   logs: (wx.getStorageSync('logs') || []).map(log => {
-    //     return util.formatTime(new Date(log))
-    //   })
-    // })
     if(wx.getStorageSync('sessionId')) {
       util._get('notice/page?sessionId='+wx.getStorageSync('sessionId')).then(res=>{
         if(res.code == 1) {
@@ -64,5 +56,13 @@ Page({
         })
       }, 1600);
     }
+  },
+  onLoad: function () {    
+    // this.setData({
+    //   logs: (wx.getStorageSync('logs') || []).map(log => {
+    //     return util.formatTime(new Date(log))
+    //   })
+    // })
+
   }
 })
