@@ -290,37 +290,43 @@ Page({
     // console.log(this.data.globalData);
     // 取得全局App
 
-    app.fun();
+      if(wx.getStorageSync('sessionId')) {
+        app.fun();
 
-    this.setData({
-      num: this.data.num,
-      tabIndex: app.globalData.indexParams
-    });
-    Promise.all([
-      util._get("configure/getPageImage"),
-      util._get("configure/getTransaction"),
-      this.init(this.data.num)
-    ])
-      .then(result => {
-        console.log(result);
-        for (let item of result[2].data.list) {
-          if (item.tagName != null) {
-            item.tagArr = item.tagName.split(",");
-          }
-        }
         this.setData({
-          imgUrl: app.globalData.imgUrl,
-          imgUrls: result[0].data,
-          list: result[1].data,
-          hotList: result[2].data.list
+          num: this.data.num,
+          tabIndex: app.globalData.indexParams
         });
-      })
-      .catch(e => {
-        console.log(e);
-        this.setData({
-          hotList: []
-        });
-      });
+        Promise.all([
+          util._get("configure/getPageImage"),
+          util._get("configure/getTransaction"),
+          this.init(this.data.num)
+        ])
+          .then(result => {
+            console.log(result);
+            for (let item of result[2].data.list) {
+              if (item.tagName != null) {
+                item.tagArr = item.tagName.split(",");
+              }
+            }
+            this.setData({
+              imgUrl: app.globalData.imgUrl,
+              imgUrls: result[0].data,
+              list: result[1].data,
+              hotList: result[2].data.list
+            });
+          })
+          .catch(e => {
+            console.log(e);
+            this.setData({
+              hotList: []
+            });
+          });
+      } else {
+        wx.navigateTo({
+          url: '/pages/login/login'
+        })
+      }
   },
   getUserInfo: function(e) {
     console.log(e);

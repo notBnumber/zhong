@@ -1,6 +1,4 @@
-// pages/registerText/registerText.js
-const WxParse = require('../../wxParse/wxParse.js');
-const util = require("../../utils/util.js");
+// pages/friendsResult/friendsResult.js
 Page({
 
   /**
@@ -9,14 +7,26 @@ Page({
   data: {
 
   },
-
+  nexts() {
+    wx.navigateBack({
+      delta: 1
+    });
+  },
+  home() {
+    wx.switchTab({
+      url: '../index/index',
+      success: (result)=>{
+        
+      },
+      fail: ()=>{},
+      complete: ()=>{}
+    });
+  },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    util._get('configure/getAgreement').then(res=> {
-      article_content:WxParse.wxParse('article_content', 'html', res.data.value, this, 5)
-    })
+
   },
 
   /**

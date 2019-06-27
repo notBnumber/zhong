@@ -1,0 +1,16 @@
+<!--pages/findResult/findResult.wxml-->
+<view class="container" hover-class="none" hover-stop-propagation="false">
+  <image class="" src="../../images/cg01.png">
+    
+  </image>
+  <view class="friend" hover-class="none" hover-stop-propagation="false">
+    成功提交意向房源
+  </view>
+  <view class="yes" hover-class="none" hover-stop-propagation="false">
+    稍后会与您联系，请保持手机畅通
+  </view>
+  <view class="next df" hover-class="none" hover-stop-propagation="false" bindtap ='home'>
+    回到首页
+  </view>
+
+</view>

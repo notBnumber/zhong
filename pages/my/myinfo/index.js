@@ -22,6 +22,8 @@ Page({
               wx.navigateTo({
                 url: "/pages/login/login"
               });
+              // wx.setStorageSync('sessionId', '')
+              wx.removeStorageSync('sessionId')
             });
         } else if (res.cancel) {
           console.log("用户点击取消");

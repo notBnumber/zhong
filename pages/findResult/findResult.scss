@@ -1,0 +1,56 @@
+/* pages/findResult/findResult.wxss */
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 115rpx;
+  image {
+    width: 148rpx;
+    height: 148rpx;
+  }
+
+  .friend {
+    margin-top: 81rpx;
+    font-size: 40rpx;
+    font-family: PingFang-SC-Medium;
+    font-weight: 500;
+    color: rgba(50, 50, 50, 1);
+  }
+
+  .yes {
+    margin-top: 42rpx;
+    font-size: 26rpx;
+    font-family: PingFang-SC-Medium;
+    font-weight: 500;
+    color: rgba(106, 106, 106, 1);
+  }
+
+  .next {
+    margin-top: 81rpx;
+    width: 400rpx;
+    height: 72rpx;
+    background: linear-gradient(-90deg, rgba(56, 198, 160, 1) 0%, rgba(109, 224, 195, 1) 100%);
+    border-radius: 36rpx;
+
+
+    font-size: 34rpx;
+    font-family: PingFang-SC-Regular;
+    font-weight: bold;
+    color: rgba(255, 255, 255, 1);
+  }
+
+  .back {
+    margin-top: 63rpx;
+    width: 400rpx;
+    height: 72rpx;
+    background: rgba(255, 255, 255, 1);
+    border: 1rpx solid rgba(152, 152, 152, 1);
+    border-radius: 36rpx;
+
+
+    font-size: 34rpx;
+    font-family: PingFang-SC-Regular;
+    font-weight: bold;
+    color: rgba(119, 121, 120, 1);
+  }
+}
