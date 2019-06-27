@@ -449,7 +449,38 @@ Page({
   },
   // 提交
   submit() {
+    if(this.data.name == '') {
+      wx.showToast({
+        title: '请输入姓名',
+        icon: 'none'
+      })
+      return
+    }
+    if(this.data.phone == '') {
+      wx.showToast({
+        title: '请输入联系方式',
+        icon: 'none'
+      })
+      return
 
+    }
+    var myreg = /^(((13[0-9]{1})|(15[0-9]{1})|(18[0-9]{1})|(17[0-9]{1}))+\d{8})$/;
+    if (!myreg.test(this.data.phone)) {
+      wx.showToast({
+        title: '手机号有误！',
+        icon: 'none'
+      })
+      return false;
+    }
+
+    if(this.data.relation == '') {
+      wx.showToast({
+        title: '请输入与被推荐人关系',
+        icon: 'none'
+      })
+      return
+
+    }
     let params = {
       sessionId: wx.getStorageSync("sessionId"),
       recommendedPerson: this.data.name,

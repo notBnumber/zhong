@@ -90,6 +90,15 @@ Page({
     imgUrl: "",
     num: 1
   },
+  // 轮播图广告
+  banner(e) {  
+    // e.currentTarget.dataset.url
+    console.log(e.currentTarget.dataset.url);
+    
+    wx.navigateTo({
+      url: '/pages/banner/banner?url='+e.currentTarget.dataset.url
+    })
+  },
   // 跳转推客
   tk() {
     if (wx.getStorageSync("sessionId")) {

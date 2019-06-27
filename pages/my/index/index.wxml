@@ -13,13 +13,14 @@
     </view>
   </view>
 
-  <view class="money" bindtap="pageTo" data-url="/pages/my/withdraw/index">
-    <view>
+  <view class="money" >
+    <view bindtap="pageTo" data-url="/pages/my/withdraw/index">
       <test>¥ {{money.unpayMoney}}</test>
       <test>可提现</test>
     </view>
     <view></view>
-    <view>
+
+    <view bindtap="pageTo" data-url="/pages/my/commission/index">
       <test>¥ {{money.totalCommission}}</test>
       <test>总佣金</test>
     </view>

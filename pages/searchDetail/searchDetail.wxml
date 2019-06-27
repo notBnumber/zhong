@@ -104,7 +104,7 @@
       </view>
     </view>
   </van-popup>
-  <view class="swiper" hover-class="none" hover-stop-propagation="false">
+  <!-- <view class="swiper" hover-class="none" hover-stop-propagation="false">
     <swiper autoplay="{{autoplay}}" interval="{{interval}}" bindchange='swiperChange'>
       <block wx:for="{{imgUrls}}" wx:key="{{index}}">
         <swiper-item>
@@ -115,7 +115,7 @@
     <view class="ind df" hover-class="none" hover-stop-propagation="false">
       {{imgUrls.length}}/{{current+1}}
     </view>
-  </view>
+  </view> -->
   <view class="tab" hover-class="none" hover-stop-propagation="false">
     <view class="item" hover-class="none" hover-stop-propagation="false" wx:for="{{tabList}}" wx:key="{{index}}" data-index='{{index}}' bindtap='filter' wx:if="{{optionState != 0  || index !=2}}">
       <view class="itemP" hover-class="none" hover-stop-propagation="false">

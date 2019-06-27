@@ -223,8 +223,8 @@ Page({
     wx.setStorageSync('keyword', this.data.keyword)
     app.globalData.indexParams = this.data.checkIndex
     setTimeout(() => {
-      wx.switchTab({
-        url: '/pages/index/index',
+      wx.navigateTo({
+        url: '/pages/searchDetail/searchDetail?index='+this.data.checkIndex,
         success: (result)=>{
           
         },

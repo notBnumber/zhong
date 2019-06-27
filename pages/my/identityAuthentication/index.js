@@ -19,7 +19,8 @@ Page({
   getCode() {
     if (this.data.num == 60) {
       let params = {
-        mobile: wx.getStorageSync('mobile')
+        mobile: wx.getStorageSync('mobile'),
+        type:3
       };
       let that = this;
       util

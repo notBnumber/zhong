@@ -152,7 +152,7 @@
   <view class="types" hover-class="none" hover-stop-propagation="false">
     <view class="typesTitle" hover-class="none" hover-stop-propagation="false">户型选择：</view>
     <view class="typesContent" hover-class="none" hover-stop-propagation="false">
-      <view class="typesContentItem df mb {{numberIndex == index?'active':''}} {{index == 6?'last':''}}" hover-class="none" hover-stop-propagation="false" wx:for="{{numberList}}" wx:for-index="index" data-id='{{item.id}}' bindtap='checkNumber'>
+      <view class="typesContentItem df mb {{numberIndex == index?'active':''}} {{index == 6?'last':''}}" hover-class="none" hover-stop-propagation="false" wx:for="{{numberList}}" wx:for-index="index"  data-index='{{index}}' data-id='{{item.id}}' bindtap='checkNumber'>
         {{item.value}}
       </view>
     </view>

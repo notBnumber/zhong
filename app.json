@@ -38,7 +38,9 @@
     "pages/my/collection/collection",
     "pages/my/team/team",
     "pages/component/component",
-    "pages/findResult/findResult"
+    "pages/findResult/findResult",
+    "pages/banner/banner",
+    "pages/searchDetail/searchDetail"
   ],
   "window": {
     "backgroundTextStyle": "dark",

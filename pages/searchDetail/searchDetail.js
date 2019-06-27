@@ -231,7 +231,8 @@ Page({
         budgetId: this.data.checkPrice,
         areaId: this.data.checkMianji,
         useId: this.data.specialIds,
-        characteristicId: this.data.specialIdsOther
+        characteristicId: this.data.specialIdsOther,
+        keyword:wx.getStorageSync('keyword')
       };
       util._post("newhome/getNewHomePage", params).then(res => {
         if (res.code == 1) {
@@ -256,7 +257,9 @@ Page({
         areaId: this.data.checkMianji,
         useId: this.data.specialIds,
         characteristicId: this.data.specialIdsOther,
-        room:this.data.checkFangxing
+        room:this.data.checkFangxing,
+        keyword:wx.getStorageSync('keyword')
+
       };
       util._post("secondhome/getSecondHome", params).then(res => {
         if (res.code == 1) {
@@ -281,7 +284,9 @@ Page({
         areaId: this.data.checkMianji,
         useId: this.data.specialIds,
         characteristicId: this.data.specialIdsOther,
-        room:this.data.checkFangxing
+        room:this.data.checkFangxing,
+        keyword:wx.getStorageSync('keyword')
+
       };
       util._post("rentinghome/getRentingHome", params).then(res => {
         if (res.code == 1) {
@@ -697,6 +702,8 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function() {
+    console.log(this.data.optionState,'搜索类型');
+    
     if (this.data.optionState == 0) {
       Promise.all([
         util._get("newhome/getNewHomeImage"),

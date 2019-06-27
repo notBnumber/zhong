@@ -26,7 +26,7 @@
     <swiper autoplay="{{autoplay}}" interval="{{interval}}" bindchange='swiperChange' circular>
       <block wx:for="{{imgUrls}}" wx:key="{{index}}">
         <swiper-item>
-          <image src="{{imgUrl+item.image}}" mode='widthFix' class="slide-image" />
+          <image src="{{imgUrl+item.image}}" mode='widthFix' class="slide-image" bindtap='banner' data-url='{{item.url}}'/>
         </swiper-item>
       </block>
     </swiper>

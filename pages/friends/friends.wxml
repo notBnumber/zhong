@@ -104,7 +104,7 @@
   </van-popup>
   <view class="content" hover-class="none" hover-stop-propagation="false">
     <input class=""  type="text" placeholder="请输入被推荐人姓名" placeholder-style="" placeholder-class="input-placeholder" value='' bindinput="chooseName"></input>
-    <input class=""  type="number" placeholder="请输入被推荐人手机号" placeholder-style="" placeholder-class="input-placeholder" value='' bindinput="choosePhone"></input>
+    <input class=""   maxlength="11"  type="number" placeholder="请输入被推荐人手机号" placeholder-style="" placeholder-class="input-placeholder" value='' bindinput="choosePhone"></input>
   </view>
   <view class="types" hover-class="none" hover-stop-propagation="false" style="margin-bottom:50rpx">
     <view class="typesTitle" hover-class="none" hover-stop-propagation="false">意向类型：</view>

@@ -58,6 +58,7 @@ Page({
     ],
     typesIndex: 0,
     numberIndex: 0,
+    numberId:null,
     state: 0,
     imgUrl: [],
     priceList: [
@@ -165,7 +166,8 @@ Page({
     console.log(e);
 
     this.setData({
-      numberIndex: e.currentTarget.dataset.id
+      numberIndex: e.currentTarget.dataset.index,
+      numberId:e.currentTarget.dataset.id,
     });
   },
   checkState(e) {
@@ -390,7 +392,7 @@ Page({
       intentionalRegionIds:this.data.quyuIds,
       budget:this.data.yusuanId,
       area:this.data.mianjiplaceId,
-      intentionUnit:this.data.numberIndex
+      intentionUnit:this.data.numberId
     }
     util._post('findhome/submitInfo',params).then(res=>{
       if(res.code == 1) {
