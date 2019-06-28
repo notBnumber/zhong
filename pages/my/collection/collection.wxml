@@ -2,31 +2,31 @@
   <view class="collected">
     <view class="section">
       <view class="container">
-        <view class="total" wx:for="{{sellList}}" wx:kex="index" data-type="{{item.type}}" data-id="{{item.id}}" bindtap='toDetail'>
-          <image class="logo" src="{{imgUrl+item.image}}" mode="aspectFill"></image>
-          <view class="name">{{item.houseName}}</view>
+        <view class="total" wx:for="{{sellList}}" wx:kex="index" data-type="{{item.type}}" data-id="{{item.houseId}}" bindtap='toDetail'>
+          <image class="logo" src="{{imgUrl+item.home.image}}" mode="aspectFill"></image>
+          <view class="name">{{item.home.houseName}}</view>
           <view class="area font-Medium" hover-class="none" hover-stop-propagation="false" wx:if="{{item.type == 0}}">
-            {{item.minArea}}-{{item.maxArea}}m² / {{item.address}}
+            {{item.home.minArea}}-{{item.home.maxArea}}m² / {{item.home.address}}
           </view>
           <view class="area font-Medium" hover-class="none" hover-stop-propagation="false" wx:if="{{item.type == 1}}">
-            {{item.area}}m² / {{item.address}}
+            {{item.home.area}}m² / {{item.home.address}}
           </view>
           <view class="area font-Medium" hover-class="none" hover-stop-propagation="false" wx:if="{{item.type == 2}}">
-            {{item.area}}m² / {{item.address}}
+            {{item.home.area}}m² / {{item.home.address}}
           </view>
           <!-- <view class="area font-Medium">{{item.address}}</view> -->
           <view class="biaoqianList">
-            <view class="biaoqian df {{items.state==1?'state1':''}} {{items.state==2?'state2':''}}" wx:for="{{item.tagArr}}" wx:for-item="items" wx:if="{{index<3}}">
+            <view class="biaoqian df {{items.home.state==1?'state1':''}} {{items.home.state==2?'state2':''}}" wx:for="{{item.home.tagArr}}" wx:for-item="items" wx:if="{{index<3}}">
               {{items}}
             </view>
           </view>
           <view class="sum font" wx:if="{{item.type ==0}}">
             可获佣金：
-            <text>{{item.customerMoney}}%</text>
+            <text>{{item.home.customerMoney}}%</text>
           </view>
-          <view class="price" wx:if="{{item.type ==0}}">{{item.unitPrice}}/平</view>
-          <view class="price" wx:if="{{item.type ==1}}">{{item.totalPrice}}/万元</view>
-          <view class="price" wx:if="{{item.type ==2}}">{{item.totalPrice}}元/月</view>
+          <view class="price" wx:if="{{item.type ==0}}">{{item.home.unitPrice}}/平</view>
+          <view class="price" wx:if="{{item.type ==1}}">{{item.home.totalPrice}}/万元</view>
+          <view class="price" wx:if="{{item.type ==2}}">{{item.home.totalPrice}}元/月</view>
         </view>
       </view>
       <!-- 没有 -->

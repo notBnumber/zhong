@@ -113,6 +113,55 @@ Page({
     // wx.navigateTo({
     //   url: '../panResult/panResult'
     // })
+    if(this.data.name == '') {
+      wx.showToast({
+        title: '请输入姓名',
+        icon: 'none'
+      })
+      return
+    }
+    if(this.data.phone == '') {
+      wx.showToast({
+        title: '请输入联系电话',
+        icon: 'none'
+      })
+      return
+    }
+    if(this.data.addressTip == '请选择地址') {
+      wx.showToast({
+        title: '请选择地址',
+        icon: 'none'
+      })
+      return
+    }
+    if(this.data.number == '') {
+      wx.showToast({
+        title: '请输入房号',
+        icon: 'none'
+      })
+      return
+    }
+    if(this.data.size == '') {
+      wx.showToast({
+        title: '请输入盘源大小',
+        icon: 'none'
+      })
+      return
+    }
+    if(this.data.price == '') {
+      wx.showToast({
+        title: '请输入目标价位',
+        icon: 'none'
+      })
+      return
+    }
+    if(this.data.relationship == '') {
+      wx.showToast({
+        title: '请输入与被推荐人关系',
+        icon: 'none'
+      })
+      return
+    }
     let params = {
       sessionId: wx.getStorageSync('sessionId'),
       recommendedPerson: this.data.name,

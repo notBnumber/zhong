@@ -54,6 +54,11 @@
         font-family: PingFang-SC-Regular;
         font-weight: bold;
         color: rgba(0, 0, 0, 1);
+        width: 350rpx;
+           overflow: hidden;
+             font-size: large;
+             white-space: nowrap;
+             text-overflow: ellipsis;
       }
 
       .bottom {

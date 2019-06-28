@@ -1,10 +1,19 @@
 //logs.js
 const util = require('../../utils/util.js')
+const WxParse = require('../../wxParse/wxParse.js');
 
 Page({
   data: {
     logs: [],
+    lists:[],
     list :[
+      {
+        title:'标题1',
+        content:'<p>内容sss</p>'
+      },      {
+        title:'标题3',
+        content:'<p>考虑考虑了</p>'
+      },
     ]
   },
   toDetail(e) {
@@ -36,12 +45,34 @@ Page({
     }
   },
   onShow() {
+    
     if(wx.getStorageSync('sessionId')) {
+      let that = this
+      let arr = []
       util._get('notice/page?sessionId='+wx.getStorageSync('sessionId')).then(res=>{
         if(res.code == 1) {
           console.log(res);
+          let   artilesA = res.data.list
+          for(let i =0 ; i< artilesA.length ; i++){
+
+            WxParse.wxParse('content'+i, 'html', artilesA[i]['content'], that, 5);
+            // WxParse.wxParse('title'+i, 'html', artilesA[i]['content'], that, 5);
+
+  
+            if (i === artilesA.length - 1){
+            
+                    WxParse.wxParseTemArray('artileList', 'content', artilesA.length, that)
+                    // WxParse.wxParseTemArray('artileList', 'title', artilesA.length, that)
+
+                    // console.log( artileList);
+                    // that.setData({})
+   
+            }
+          } 
+            console.log(artilesA);
+            
           this.setData({
-            list:res.data.list
+            list:artilesA
           })
         }
       })

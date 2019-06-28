@@ -67,12 +67,12 @@ Page({
     }
     util._get('configure/collectionPage',params).then(res=> {
       if(res.code == 1) {
-        console.log(res.data.newhome.list.length);
-        this.data.sellList = this.data.sellList.concat(res.data.newhome.list).concat(res.data.secondhome.list).concat(res.data.rentinghome.list)
+        console.log(res.data.list);
+        this.data.sellList = this.data.sellList.concat(res.data.list)
 
         for (let item of this.data.sellList) {
-          if (item.tagName != null) {
-            item.tagArr = item.tagName.split(",");
+          if (item.home.tagName != null) {
+            item.home.tagArr = item.home.tagName.split(",");
           }
         }
         console.log(this.data.sellList);

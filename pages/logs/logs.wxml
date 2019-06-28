@@ -1,4 +1,6 @@
 <!-- logs.wxml -->
+<import src="../../wxParse/wxParse.wxml"/> 
+
 <view class="container log-list">
   <view class="content" hover-class="none" hover-stop-propagation="false">
     <button plain open-type='contact'> 
@@ -7,10 +9,10 @@
         <view class="info" hover-class="none" hover-stop-propagation="false">
           <view class="top" hover-class="none" hover-stop-propagation="false">仲达网</view>
           <view class="bottom" hover-class="none" hover-stop-propagation="false">
-            小子圣诞节大结局跟设计稿改数据风骨霸刀分接口搞不定共和国的
+            客服
           </view>
         </view>
-        <view class="time" hover-class="none" hover-stop-propagation="false">2018-12-17</view>
+        <!-- <view class="time" hover-class="none" hover-stop-propagation="false">2018-12-17</view> -->
     </view>
       </button>
     <view class="item" hover-class="none" hover-stop-propagation="false" wx:for="{{list}}" data-type='{{item.type}}' data-id='{{item.id}}' bindtap='toDetail'>
@@ -19,7 +21,11 @@
       <view class="info" hover-class="none" hover-stop-propagation="false">
         <view class="top" hover-class="none" hover-stop-propagation="false">{{item.title}}</view>
         <view class="bottom" hover-class="none" hover-stop-propagation="false">
-          {{item.content}}
+  <!-- <template is="wxParse" data="{{wxParseData:article_content.nodes}}" /> -->
+
+  <!-- <template is="wxParse" data="{{wxParseData:item}}"/> -->
+  <rich-text nodes="{{item.content}}"></rich-text>
+          <!-- {{item.content}} -->
         </view>
       </view>
       <view class="time" hover-class="none" hover-stop-propagation="false">{{item.createTime}}</view>

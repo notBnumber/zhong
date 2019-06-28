@@ -70,10 +70,12 @@ Page({
     openList: [],
     specialName: null,
     quyuIds:[],
+    quyuName:[],
     quId: "",
     quyuIndex: 0,
     quyuIndexs: 0,
     quyuRight: [],
+    quyuInfo:'请选择意向区域',
     // 选中的
     quyuCheck: [],
     quyuList: [
@@ -231,6 +233,7 @@ Page({
 
     let index = "";
     if (state != null) {
+      
       console.log("初始化");
       util
         ._get("configure/getAllArea?areaId=" + wx.getStorageSync("cityId"))
@@ -252,6 +255,9 @@ Page({
                     quyuIndex: 0,
                     quyuList: this.data.quyuList,
                     quId: this.data.quyuList[0].id
+                    // quyuIds:[],
+                    // quyuName:[],
+                    // quyuCheck:[]
                   });
                 }
               });
@@ -324,10 +330,11 @@ Page({
     this.setData({
       quyuCheck: arr
     });
+    this.btnQuyus()
   },
   // 区域删除
   del(e) {
-    let index = e.currentTarget.dataset.index;
+    let name = e.currentTarget.dataset.name;
     let id = e.currentTarget.dataset.id;
     // console.log(id);
     // this.data.quyuCheck[index].state = false;
@@ -346,11 +353,17 @@ Page({
         }
       }
     }
+    this.data.quyuIds = this.data.quyuIds.filter((item, index, arr) => item.id != id)
+    this.data.quyuName = this.data.quyuName.filter((item, index, arr) => item.name != name)
+
     console.log(this.data.quyuList);
 
     this.setData({
       quyuCheck: this.data.quyuCheck,
-      quyuList: this.data.quyuList
+      quyuList: this.data.quyuList,
+      quyuIds:this.data.quyuIds,
+      quyuName:this.data.quyuName,
+
     });
   },
   // 重置
@@ -372,17 +385,27 @@ Page({
     });
     this.checkQuyu(e, 2);
   },
-  btnQuyu() {
+  btnQuyus() {
     let arrs = [];
+    let nameArr = []
     this.data.quyuCheck.filter((item, index, arr) => {
       if (item.state) {
         arrs.push(item.id);
+        nameArr.push(item.name)
       }
     });
-
+    console.log(this.data.quyuName);
+    
     this.setData({
       quyuIds: arrs.toString(),
-      show: !this.data.show
+      quyuName:nameArr,
+      quyuInfo:nameArr.toString()
+    });
+  },
+  btnQuyu() {
+    
+    this.setData({
+      show: !this.data.show,
     });
   },
   submit() {

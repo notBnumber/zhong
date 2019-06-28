@@ -96,19 +96,20 @@ Page({
             this.setData({
               isshoucang:res.data
             })
+            if(this.data.isshoucang) {
+              wx.showToast({
+                title: '收藏成功',
+                icon: 'success'
+              })
+            } else {
+              wx.showToast({
+                title: '取消收藏成功',
+                icon: 'success'
+              })
+            }
           }
         })
-        if(this.data.isshoucang) {
-          wx.showToast({
-            title: '收藏成功',
-            icon: 'success'
-          })
-        } else {
-          wx.showToast({
-            title: '取消收藏成功',
-            icon: 'success'
-          })
-        }
+
       }
     })
   },
