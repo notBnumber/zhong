@@ -3,7 +3,7 @@
     <view class="li">
       <test class="left">修改头像</test>
       <view class="right">
-        <image class="head" src="{{imgUrl+info.avatar}}" bindtap="chooseHead"></image>
+        <image class="head" src="{{imgUrl+info.avatar}}" bindtap="chooseHead" mode="aspectFit"></image>
         <image class="arrIcon" src="../../../images/zy01.png"></image>
       </view>
     </view>

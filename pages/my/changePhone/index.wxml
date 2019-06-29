@@ -2,12 +2,16 @@
   <view class="box">
     <view class="row">
       <image src="../../../images/sjh01.png"></image>
-      <input type="number" maxlength="11" placeholder="请输入手机号码"/>
+      <input type="number" maxlength="11" placeholder="请输入手机号码"  bindinput="choosePhone" value="{{phone}}"/>
     </view>
     <view class="row">
       <image src="../../../images/yzm01.png" class="code"></image>
-      <input type="number" maxlength="6" placeholder="请输入验证码"/>
-      <button plain>发送验证码</button>
+      <input type="number" maxlength="6" placeholder="请输入验证码"    bindinput="chooseCode"  value="{{code}}"/>
+      <button plain  bindtap='send'>{{msg}}</button>
+    </view>
+        <view class="row">
+      <image src="../../../images/sjh01.png"></image>
+      <input type="number" maxlength="11" placeholder="请输入新的手机号码"  bindinput="choosePhones" value="{{phones}}"/>
     </view>
   </view>
   <view class="button" bindtap="submit">修改手机号</view>

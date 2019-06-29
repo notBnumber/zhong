@@ -9,10 +9,10 @@
   <view class="scroll">
     <scroll-view  scroll-y style="height: 100%;" scroll-into-view="{{position}}" scroll-with-animation>
 
-      <view class="box" wx:for="{{cityList}}" wx:key="{{index}}" id="{{item.title}}">
-        <view class="title">{{item.title}}</view>
+      <view class="box" wx:for="{{cityList}}" wx:key="{{index}}" id="{{item.keyword}}">
+        <view class="title">{{item.keyword}}</view>
         <view class="itemBox">
-          <view class="items" wx:for="{{item.valList}}" wx:key="{{index1}}" wx:for-item="items">{{items}}</view>
+          <view class="items" wx:for="{{item.citys}}" wx:key="{{index1}}" wx:for-item="items">{{items}}</view>
         </view>
       </view>
 
@@ -20,7 +20,7 @@
     <!-- bindtouchmove="mytouchmove" -->
     <!-- catchtouchmove -->
     <view class="right" >
-      <view  wx:for="{{cityList}}" wx:key="{{index}}" catchtouchstart="touchCk" data-id="{{item.title}}">{{item.title}}</view>
+      <view  wx:for="{{cityList}}" wx:key="{{index}}" catchtouchstart="touchCk" data-id="{{item.keyword}}">{{item.keyword}}</view>
     </view>
   </view>
 
