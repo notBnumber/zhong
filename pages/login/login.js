@@ -167,7 +167,8 @@ Page({
    */
   onShow: function() {
     this.setData({
-      msg:'发送验证码'
+      msg:'发送验证码',
+      phone:wx.getStorageSync('mobile')
     })
   },
 

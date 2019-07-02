@@ -18,7 +18,10 @@
 .button{
   position: absolute;
   bottom: 50rpx;
-  left: calc(50% - 330rpx);
+  /* left: calc(50% - 313rpx); */
+  left: 0;
+  right: 0;
+  margin:  auto;
   width: 626rpx;
   height: 84rpx;
   line-height: 84rpx;

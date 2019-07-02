@@ -12,7 +12,7 @@
       <view class="box" wx:for="{{cityList}}" wx:key="{{index}}" id="{{item.keyword}}">
         <view class="title">{{item.keyword}}</view>
         <view class="itemBox">
-          <view class="items" wx:for="{{item.citys}}" wx:key="{{index1}}" wx:for-item="items">{{items}}</view>
+          <view class="items" wx:for="{{item.arr}}" wx:key="{{index1}}" wx:for-item="items"   data-item="{{items}}"  bindtap='checks'>{{items.name}}</view>
         </view>
       </view>
 

@@ -125,7 +125,7 @@
       </view>
     </view>
     <view class="content" hover-class="none" hover-stop-propagation="false">
-      请选择意向区域
+      {{quyuInfo}}
     </view>
   </view>
   <!-- 预算 -->

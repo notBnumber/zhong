@@ -118,7 +118,7 @@
         意向区域：
       </view>
       <view class="t2">
-        广州
+        {{city}}
       </view>
     </view>
     <view class="content" hover-class="none" hover-stop-propagation="false"  catchtap = 'quyu'>

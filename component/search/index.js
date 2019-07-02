@@ -8,14 +8,16 @@ Component({
   },
   data: {
     // 这里是一些组件内部数据
-    someData: {}
+    someData: {},
+    city:''
   },
   attached: function() {
     // 将外部传入的值复制给value，当然也可以直接使用key值
     console.log("eeee", this.data.optionState, 9099989);
 
     this.setData({
-      optionState: this.data.optionState
+      optionState: this.data.optionState,
+      city:wx.getStorageSync('city')
     });
   },
   methods: {

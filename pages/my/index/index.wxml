@@ -67,10 +67,10 @@
   <view class="proup" wx:if="{{isProup}}">
     <view class="box">
       <view class="Exhibition">
-        <image src="../../../images/1558148062.png"></image>
+        <image src="{{imgUrl+code}}"></image>
         <view class="white"></view>
-        <view class="text">邀请码：123456</view>
-        <button plain class="btn">分享</button>
+        <view class="text">邀请码：{{info.invitationCode==undefined?'':info.invitationCode}}</view>
+        <button plain class="btn" open-type="share">分享</button>
       </view>
       <image class="errIcon" src="../../../images/gb01.png" bindtap="Invitation"></image>
     </view>

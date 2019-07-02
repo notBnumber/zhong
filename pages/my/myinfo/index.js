@@ -63,6 +63,18 @@ Page({
       }
     });
   },
+  init() {
+    util
+    ._get("account/getInfo?sessionId=" + wx.getStorageSync("sessionId"))
+    .then(res => {
+      if (res.code == 1) {
+        wx.setStorageSync('info', res.data)
+        this.setData({
+          info: res.data
+        });
+      }
+    });
+  },
   pageTo({ currentTarget: { dataset } }) {
     // console.log(dataset);
     wx.navigateTo({
@@ -83,8 +95,8 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function() {
+    this.init()
     this.setData({
-      info:wx.getStorageSync('info'),
       imgUrl: app.globalData.imgUrl,
     })
   },

@@ -1,7 +1,7 @@
   <view class="search " hover-class="none" hover-stop-propagation="false"  >
     <view class="searchLeft" hover-class="none" hover-stop-propagation="false" catchtap='toCity'>
       <image class="" src="../../images/dw01.png"></image>
-      <view class="" hover-class="none" hover-stop-propagation="false">广州</view>
+      <view class="" hover-class="none" hover-stop-propagation="false">{{city}}</view>
     </view>
     <!-- <input type="text"> -->
     <view class="inp" hover-class="none" hover-stop-propagation="false" catchtap="toResult">

@@ -32,7 +32,7 @@ Page({
     let params = {
       sessionId: wx.getStorageSync("sessionId"),
       code: this.data.code,
-      newMobile: this.data.phones
+      newMobile: this.data.phone
     };
     util._post("account/modifyMobile", params).then(res => {
       if (res.code == 1) {

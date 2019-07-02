@@ -9,7 +9,8 @@ Page({
   data: {
     isProup: false,
     info: {},
-    money:{}
+    money:{},
+    code:''
   },
 
   pageTo({ currentTarget: { dataset } }) {
@@ -70,6 +71,18 @@ Page({
         }
       });
   },
+  getCode() {
+    util
+      ._get("account/getqrCode?sessionId=" + wx.getStorageSync("sessionId"))
+      .then(res => {
+        if (res.code == 1) {
+          // wx.setStorageSync('money', res.data)
+          this.setData({
+            code: res.data
+          });
+        }
+      });
+  },
   /**
    * 生命周期函数--监听页面加载
    */
@@ -91,6 +104,7 @@ Page({
 
       this.init();
       this.raiseMoney()
+      this.getCode()
     } else {
       this.setData({
         info:wx.getStorageSync('InfoObj')
@@ -121,5 +135,10 @@ Page({
   /**
    * 用户点击右上角分享
    */
-  onShareAppMessage: function() {}
+  onShareAppMessage: function() {
+    return {
+      title:'邀请二维码',
+      imageUrl:this.data.imgUrl+this.data.code
+    }
+  }
 });

@@ -5,6 +5,7 @@ const util = require("../../utils/util.js");
 
 Page({
   data: {
+    city:'',
     current: null,
     motto: "Hello World",
     userInfo: {},
@@ -298,13 +299,14 @@ Page({
   onShow(options) {
     // console.log(this.data.globalData);
     // 取得全局App
-
+      
       if(wx.getStorageSync('sessionId')) {
         app.fun();
 
         this.setData({
           num: this.data.num,
-          tabIndex: app.globalData.indexParams
+          tabIndex: app.globalData.indexParams,
+          city:wx.getStorageSync('city')
         });
         Promise.all([
           util._get("configure/getPageImage"),

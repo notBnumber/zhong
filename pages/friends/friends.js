@@ -6,6 +6,7 @@ Page({
    * 页面的初始数据
    */
   data: {
+    city:"",
     code: "",
     codeId: "",
     ids: "",
@@ -104,7 +105,7 @@ Page({
     quId: "",
     quyuIds: [],
     quyuIndex: 0,
-
+    quyuInfo:'请选择意向区域',
     // 选中的
     quyuCheck: [],
     quyuList: [
@@ -335,7 +336,7 @@ Page({
   // 区域右边
   checkQuyuRight(e) {
     let index = e.currentTarget.dataset.index;
-    let quyuIndex = this.data.quyuIndex;
+    let quyuIndex = this.data.quyuIndex
     // let arr = [];
     // this.data.quyuList[this.data.quyuIndex].list[state].state = !this.data
     //   .quyuList[this.data.quyuIndex].list[state].state;
@@ -350,9 +351,7 @@ Page({
     // });
     // console.log(this.data.quyuRight[index]);
     // this.data.quyuCheck.push(this.data.quyuRight[index])
-    this.data.quyuList[quyuIndex].list[index].state = !this.data.quyuList[
-      quyuIndex
-    ].list[index].state;
+    this.data.quyuList[quyuIndex].list[index].state = !this.data.quyuList[quyuIndex].list[index].state
     // let arr = this.data.quyuList[quyuIndex].list.filter(
     //   (item, index, arr) => {
     //     if(item.state ) {
@@ -360,24 +359,25 @@ Page({
     //     }
     //   }
     // );
-    let arrays = this.data.quyuList;
-    let arr = [];
-    for (let item of arrays) {
+    let arrays = this.data.quyuList
+    let arr=[]
+    for(let item of arrays) {
       if (item.list) {
-        for (let items of item.list) {
-          if (items.state) {
-            arr.push(items);
+        for(let items of item.list) {
+          if(items.state) {
+            arr.push(items)
           }
         }
       }
     }
-    console.log(arr, "888888");
-
+    console.log(arr,'888888');
+    
     // this.data.quyuCheck = this.data.quyuCheck.concat(arr)
 
     this.setData({
       quyuCheck: arr
     });
+    this.btnQuyus()
   },
   // 区域删除
   del(e) {
@@ -428,19 +428,42 @@ Page({
     });
     this.checkQuyu(e, 2);
   },
-  btnQuyu() {
+  // btnQuyu() {
+  //   let arrs = [];
+  //   this.data.quyuCheck.filter((item, index, arr) => {
+  //     if (item.state) {
+  //       arrs.push(item.id);
+  //     }
+  //   });
+
+  //   this.setData({
+  //     quyuIds: arrs.toString(),
+  //     show: !this.data.show
+  //   });
+  //   // this.screen()
+  // },
+  btnQuyus() {
     let arrs = [];
+    let nameArr = []
     this.data.quyuCheck.filter((item, index, arr) => {
       if (item.state) {
         arrs.push(item.id);
+        nameArr.push(item.name)
       }
     });
-
+    console.log(this.data.quyuName);
+    
     this.setData({
       quyuIds: arrs.toString(),
-      show: !this.data.show
+      quyuName:nameArr,
+      quyuInfo:nameArr.toString()
     });
-    // this.screen()
+  },
+  btnQuyu() {
+    
+    this.setData({
+      show: !this.data.show,
+    });
   },
   chooseRelation(e) {
     this.setData({
@@ -528,7 +551,8 @@ Page({
       if (res.code == 1) {
         this.setData({
           city: res.data.regeocode.addressComponent.city,
-          cityId: res.data.regeocode.addressComponent.citycode
+          cityId: res.data.regeocode.addressComponent.citycode,
+          city:wx.getStorageSync('city')
         });
       }
     });
@@ -536,7 +560,8 @@ Page({
     util._get("configure/getRoomType").then(res => {
       if (res.code == 1) {
         this.setData({
-          numberList: res.data
+          numberList: res.data,
+          numberIndexId:res.data[this.data.numberIndex].id
         });
       }
     });

@@ -6,6 +6,7 @@ Page({
    * 页面的初始数据
    */
   data: {
+    city:'',
     relationship:'',
     title:"",
     yusuan: "请选择设置预算",
@@ -452,7 +453,9 @@ Page({
           priceList: result[0].data,
           mianjiList: result[1].data,
           numberList:result[2].data,
-          relationship:wx.getStorageSync('mobile')
+          relationship:wx.getStorageSync('mobile'),
+          city:wx.getStorageSync('city'),
+          numberId:result[2].data[this.data.numberIndex].id
         });
       })
       .catch(e => {});

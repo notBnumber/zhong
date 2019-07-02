@@ -66,7 +66,32 @@ Page({
       if(res.code == 1) {
         for(let item of res.data) {
           item.citys = item.cityName.split(',')
-          item.cityIds = item.cityId.split('.')
+          item.cityIds = item.cityId.split(',')
+          
+          // item.citys = [
+          //   '111',
+          //   '111',
+          //   '111',
+          //   '111',
+          //   '111',
+          //   '111',
+          //   '111',
+          //   '111',
+          //   '111',
+          //   '111',
+          //   '111',
+            
+          // ]
+        }
+        for(let i in res.data) {
+          res.data[i].arr = []
+          for(let y in res.data[i].citys) {
+            let obj = {}
+            obj.name = res.data[i].citys[y]
+            obj.id = res.data[i].cityIds[y]
+          res.data[i].arr.push(obj)
+          }
+
         }
         this.setData({
           cityList:res.data
@@ -74,7 +99,26 @@ Page({
       }
     })
   },
+  checks(e) {
+    console.log(  
 
+
+    e.currentTarget.dataset.item
+
+    );
+    wx.setStorageSync('city', e.currentTarget.dataset.item.name)
+    wx.setStorageSync('cityId', e.currentTarget.dataset.item.id)
+    wx.showToast({
+      title: '已选择'+e.currentTarget.dataset.item.name,
+      icon: 'none'
+    })
+    setTimeout(() => {
+      wx.navigateBack({
+        delta: 1
+      })
+    }, 1500);
+
+  },
   /**
    * 生命周期函数--监听页面隐藏
    */
