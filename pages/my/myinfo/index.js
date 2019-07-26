@@ -68,7 +68,7 @@ Page({
     ._get("account/getInfo?sessionId=" + wx.getStorageSync("sessionId"))
     .then(res => {
       if (res.code == 1) {
-        wx.setStorageSync('info', res.data)
+        // wx.setStorageSync('info', res.data)
         this.setData({
           info: res.data
         });

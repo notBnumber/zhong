@@ -39,7 +39,7 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 30,
+			"current": 33,
 			"list": [
 				{
 					"id": -1,
@@ -256,6 +256,26 @@
 					"name": "结果 ",
 					"pathName": "pages/findResult/findResult",
 					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "地图",
+					"pathName": "pages/map/map",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "ss",
+					"pathName": "pages/ptInfo/ptInfo",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "团队",
+					"pathName": "pages/my/team/team",
 					"scene": null
 				}
 			]

@@ -41,6 +41,17 @@ const http = ({ url = '', param = {}, ...other ,state} = {}) => {
             title: res.data.desc,
             icon: 'loading'
           })
+
+          if(res.desc == '被挤号下线') {
+            wx.reLaunch({
+              url: '/pages/login/login',
+              success: (result)=>{
+                
+              },
+              fail: ()=>{},
+              complete: ()=>{}
+            });
+          }
         }
       }
     })
@@ -55,6 +66,8 @@ const getUrl = (url) => {
  
 // get方法
 const _get = (url, param = {}) => {
+    param.sessionId = wx.getStorageSync('sessionId') ||''
+
   return http({
     url,
     param,
@@ -64,6 +77,8 @@ const _get = (url, param = {}) => {
 }
  
 const _post = (url, param = {}) => {
+    param.sessionId = wx.getStorageSync('sessionId') ||''
+
   return http({
     url,
     param,

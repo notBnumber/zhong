@@ -36,7 +36,7 @@ Page({
         // result[0].data[2].isPass = 2
         for( let item of result[0].data) {
           item.createTime = item.createTime.split(' ')[0]
-          item.number = item.card.bankNumber[0]+item.card.bankNumber[1]+item.card.bankNumber[2]+item.card.bankNumber[3]+'********'+item.card.bankNumber[item.card.bankNumber.length-4]+item.card.bankNumber[item.card.bankNumber.length-2]+item.card.bankNumber[item.card.bankNumber.length-2]+item.card.bankNumber[item.card.bankNumber.length-1]
+          item.number = item.bankNumber[0]+item.bankNumber[1]+item.bankNumber[2]+item.bankNumber[3]+'********'+item.bankNumber[item.bankNumber.length-4]+item.bankNumber[item.bankNumber.length-2]+item.bankNumber[item.bankNumber.length-2]+item.bankNumber[item.bankNumber.length-1]
         }
 
         this.setData({

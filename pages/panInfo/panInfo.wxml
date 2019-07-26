@@ -12,7 +12,9 @@
       <view class="typesContentItem df {{typesIndex == index?'active':''}} " hover-class="none" hover-stop-propagation="false" wx:for="{{typesList}}" wx:for-index="index" data-index='{{index}}' bindtap='checkTypes'>
         {{item.name}}
       </view>
-      <input class="" value="{{price}}"  bindinput='choosePrice' type="number" placeholder="请输入目标租价（元）" placeholder-style="" placeholder-class="input-placeholder"></input>
+      <input class="" value="{{price}}"  bindinput='choosePrice' type="number"  wx:if="{{typesIndex == 0}}" placeholder="请输入目标售价（万元）" placeholder-style="" placeholder-class="input-placeholder"></input>
+      <input class="" value="{{prices}}"  bindinput='choosePrices' type="number"  wx:if="{{typesIndex == 1}}" placeholder="请输入目标租价（每月）" placeholder-style="" placeholder-class="input-placeholder"></input>
+
     </view>
   </view>
   <view class="types" hover-class="none" hover-stop-propagation="false">
@@ -46,7 +48,7 @@
       </view>
     </view>
   </view>
-  <view class="btn df" hover-class="none" hover-stop-propagation="false" catchtap='submit'>
+  <view class="btns df" hover-class="none" hover-stop-propagation="false" catchtap='submit'>
     提交盘源
   </view>
 </view>

@@ -16,7 +16,7 @@
             推荐好友买房
           </text>
           <view class="" hover-class="none" hover-stop-propagation="false">
-            {{info.friendNumber}} 人
+            {{info.sourceNumber}} 人
           </view>
         </view>
         <view class="right" hover-class="none" hover-stop-propagation="false">
@@ -31,10 +31,10 @@
     </view>
   </view>
   <view class="ul" style="height: calc(100vh-400rpx);">
-    <!-- <view class="view" hover-class="none" hover-stop-propagation="false">
+    <view class="view" hover-class="none" hover-stop-propagation="false">
       推荐买房规则：
     </view>
-    <view class="text">
+    <!-- <view class="text">
       1.输入好友手机号；
     </view>
     <view  class="text">

@@ -12,13 +12,34 @@ Page({
     time: null,
     num: 60,
     code: null,
-    Invitation: null,
-    fun:''
+    Invitation: '',
+    fun:'',
+    isPhone:true
   },
   getPhone(e) {
     this.setData({
       phone: e.detail.value
     });
+    // 18402022849
+    util._post('account/selectMobile',{mobile:this.data.phone}).then(res=>{
+      if(res.code == 1) {
+        // this.setData({
+        //   Invitation:res.data,
+          
+        // })
+        if(res.data != '-1') {
+          this.setData({
+            Invitation:res.data,
+            isPhone:true
+          })
+        } else {
+          this.setData({
+            isPhone:false,
+            Invitation:''
+          })
+        }
+      } 
+    })
   },
   //
   changeCode(e) {
@@ -55,12 +76,14 @@ Page({
                 that.data.num--;
 
                 that.setData({
-                  msg: "重新发送" + that.data.num + "s"
+                  msg: "重新发送" + that.data.num + "s",
+                  num:that.data.num
                 });
               }
             }, 1000);
             that.setData({
-              time: timer
+              time: timer,
+              
             });
           }
         })
@@ -85,7 +108,7 @@ Page({
     }
     if(this.data.code == '') {
       wx.showToast({
-        title: "验证码",
+        title: "请输入验证码",
         icon: "none"
       });
       return false
@@ -170,6 +193,27 @@ Page({
       msg:'发送验证码',
       phone:wx.getStorageSync('mobile')
     })
+    if(wx.getStorageSync('mobile')) {
+      util._post('account/selectMobile',{mobile:wx.getStorageSync('mobile')}).then(res=>{
+        if(res.code == 1) {
+          // this.setData({
+          //   Invitation:res.data,
+            
+          // })
+          if(res.data != '-1') {
+            this.setData({
+              Invitation:res.data,
+              isPhone:true
+            })
+          } else {
+            this.setData({
+              isPhone:false,
+              Invitation:''
+            })
+          }
+        } 
+      })
+    } 
   },
 
   /**

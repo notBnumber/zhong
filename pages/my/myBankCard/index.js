@@ -85,9 +85,19 @@ Page({
   },
   pageTo({ currentTarget: { dataset } }) {
     // console.log(dataset);
-    wx.navigateTo({
+    util._get('account/cash/judgeBank?sessionId='+wx.getStorageSync('sessionId')).then(res=>{
+      if(res.code == 1) {
+        wx.navigateTo({ url: "../addBankCard/index" });
+
+      } else {
+            wx.navigateTo({
       url: dataset.url
     });
+      }
+    })
+    // wx.navigateTo({
+    //   url: dataset.url
+    // });
   },
   /**
    * 生命周期函数--监听页面加载

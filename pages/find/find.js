@@ -36,29 +36,12 @@ Page({
     ],
     numberList: [
       {
-        name: "不限"
-      },
-      {
-        name: "一室"
-      },
-      {
-        name: "二室"
-      },
-      {
-        name: "三室"
-      },
-      {
-        name: "四室"
-      },
-      {
-        name: "五室"
-      },
-      {
-        name: "六室及以上"
+        value: "不限",
+        id:''
       }
     ],
-    typesIndex: 0,
-    numberIndex: 0,
+    typesIndex: null,
+    numberIndex: null,
     numberId:null,
     state: 0,
     imgUrl: [],
@@ -68,7 +51,10 @@ Page({
     mianjiList: [
       
     ],
-    openList: [],
+    openList: [{
+      value:"不限",
+      id:''
+    }],
     specialName: null,
     quyuIds:[],
     quyuName:[],
@@ -200,19 +186,46 @@ Page({
   // 预算
   money(e) {
     console.log(e.currentTarget.dataset.id);
+    if(this.data.typesIndex ==null) {
+      wx.showToast({
+        title: '请先选择房屋类型',
+        icon: 'none'
+      })
+      return
+    }
+    util._get("configure/getbudget?type="+this.data.typesIndex).then(res=>{
+      this.setData({
+        priceList: res.data,
+
+      })
+    })
+
     this.setData({
       show: !this.data.show,
-      openList: this.data.priceList,
+      openList:  this.data.openList.concat(this.data.priceList),
       currentState: e.currentTarget.dataset.id,
       title:"设置预算"
     });
   },
   // 面积
   mianji(e) {
+    if(this.data.typesIndex ==null) {
+      wx.showToast({
+        title: '请先选择房屋类型',
+        icon: 'none'
+      })
+      return
+    }
+    util._get("configure/getArea?type="+this.data.typesIndex).then(res=>{
+      this.setData({
+        mianjiList: res.data,
+
+      })
+    })
     console.log(e.currentTarget.dataset.id);
     this.setData({
       show: !this.data.show,
-      openList: this.data.mianjiList,
+      openList: this.data.openList.concat(this.data.mianjiList),
       currentState: e.currentTarget.dataset.id,
       title:"面积"
     });
@@ -234,7 +247,9 @@ Page({
 
     let index = "";
     if (state != null) {
-      
+      this.setData({
+        quyuCheck:[]
+      })
       console.log("初始化");
       util
         ._get("configure/getAllArea?areaId=" + wx.getStorageSync("cityId"))
@@ -313,8 +328,11 @@ Page({
     //     }
     //   }
     // );
+    console.log(this.data.quyuCheck,this.data.quyuList,'数组');
+    // return
     let arrays = this.data.quyuList
     let arr=[]
+    arr = arr.concat(arrays)
     for(let item of arrays) {
       if (item.list) {
         for(let items of item.list) {
@@ -398,9 +416,9 @@ Page({
     console.log(this.data.quyuName);
     
     this.setData({
-      quyuIds: arrs.toString(),
+      quyuIds: arrs,
       quyuName:nameArr,
-      quyuInfo:nameArr.toString()
+      quyuInfo:nameArr
     });
   },
   btnQuyu() {
@@ -413,7 +431,7 @@ Page({
     let params = {
       sessionId:wx.getStorageSync('sessionId'),
       intentionType:this.data.typesIndex,
-      intentionalRegionIds:this.data.quyuIds,
+      intentionalRegionIds:this.data.quyuIds.toString(),
       budget:this.data.yusuanId,
       area:this.data.mianjiplaceId,
       intentionUnit:this.data.numberId
@@ -452,10 +470,10 @@ Page({
           imgUrl: app.globalData.imgUrl,
           priceList: result[0].data,
           mianjiList: result[1].data,
-          numberList:result[2].data,
+          numberList:this.data.numberList.concat(result[2].data),
           relationship:wx.getStorageSync('mobile'),
           city:wx.getStorageSync('city'),
-          numberId:result[2].data[this.data.numberIndex].id
+          numberId:null
         });
       })
       .catch(e => {});

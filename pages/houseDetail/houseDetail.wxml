@@ -1,6 +1,6 @@
 <!-- pages/houseDetail/houseDetail.wxml -->
 <view class="container {{show == true?'container-ban':''}}" hover-class="none" hover-stop-propagation="false">
-  <searchs id='singList' optionState='{{optionState}}' data-state='{{optionState}}' bind:myevent='toReault'></searchs>
+  <searchs id='singList' optionState='{{optionState}}' data-state='{{optionState}}'   city='{{city}}' bind:myevent='toReault'></searchs>
   <van-popup show="{{ show }}" bind:close="onClose" position="bottom">
     <view class="box" hover-class="none" hover-stop-propagation="false">
       <view class="title" hover-class="none" hover-stop-propagation="false">

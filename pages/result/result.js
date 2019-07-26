@@ -22,7 +22,7 @@ Page({
       }
     ],
     isSearch: false,
-    lists: ["保利保利", "保利保利", "保利保利", "保利保利", "保利保利"],
+    lists: [],
     isSelect: false,
     resultList:[],
     options: {},
@@ -187,6 +187,10 @@ Page({
       }
     ]
   },
+  searchList() {
+    this.data.lists.push(this.data.keyword)
+    wx.setStorageSync('searchList', this.data.lists)
+  },
   // 搜索
   search() {
     this.setData({
@@ -198,24 +202,51 @@ Page({
         ._get("newhome/getNewHomePage?keyword=" + this.data.keyword)
         .then(res => {
           this.setData({
-            resultList: res.data.list
+            resultList: res.data.list,
           });
+          this.searchList()
+          if(res.data.list.length == 0) {
+            wx.showToast({
+              title: '暂无数据',
+              icon: 'none'
+            })
+          }
         });
     } else if (this.data.checkIndex == 1) {
       util
         ._get("secondhome/getSecondHome?keyword=" + this.data.keyword)
         .then(res => {
+
           this.setData({
-            resultList: res.data.list
+            resultList: res.data.list,
+
           });
+          this.searchList()
+
+          if(res.data.list.length == 0) {
+            wx.showToast({
+              title: '暂无数据',
+              icon: 'none'
+            })
+          }
         });
     } else {
       util
         ._get("rentinghome/getRentingHome?keyword=" + this.data.keyword)
         .then(res => {
+
           this.setData({
-            resultList: res.data.list
+            resultList: res.data.list.keyword,
+
           });
+          this.searchList()
+
+          if(res.data.list.length == 0) {
+            wx.showToast({
+              title: '暂无数据',
+              icon: 'none'
+            })
+          }
         });
     }
   },
@@ -266,8 +297,12 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
+    if(wx.getStorageSync('searchList').length!=0) {
+       this.data.lists =  wx.getStorageSync('searchList')
+    }
     this.setData({
-      options: options
+      options: options,
+      lists:this.data.lists
     });
     console.log(options);
 

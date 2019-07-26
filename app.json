@@ -40,7 +40,8 @@
     "pages/component/component",
     "pages/findResult/findResult",
     "pages/banner/banner",
-    "pages/searchDetail/searchDetail"
+    "pages/searchDetail/searchDetail",
+    "pages/map/map"
   ],
   "window": {
     "backgroundTextStyle": "dark",

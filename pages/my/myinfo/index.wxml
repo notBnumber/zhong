@@ -3,14 +3,16 @@
     <view class="li">
       <test class="left">修改头像</test>
       <view class="right">
-        <image class="head" src="{{imgUrl+info.avatar}}" bindtap="chooseHead" mode="widthFix"></image>
+        <image class="head" src="{{imgUrl+info.avatar}}" bindtap="chooseHead" mode="aspectFill"></image>
         <image class="arrIcon" src="../../../images/zy01.png"></image>
       </view>
     </view>
     <view class="li" bindtap="pageTo" data-url="/pages/my/changeName/index">
       <test class="left">个人昵称</test>
       <view class="right">
-        <test>请编辑昵称</test>
+        <test wx:if="{{info.nick !=null}}">{{info.nick}}</test>
+        <test wx:else='{{info.nick == null}}'>请编辑昵称</test>
+
         <image class="arrIcon" src="../../../images/zy01.png"></image>
       </view>
     </view>

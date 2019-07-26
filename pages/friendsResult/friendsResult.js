@@ -8,9 +8,12 @@ Page({
 
   },
   nexts() {
-    wx.navigateBack({
-      delta: 1
-    });
+    // wx.navigateBack({
+    //   delta: 1
+    // });
+    wx.navigateTo({
+      url: '/pages/friends/friends'
+    })
   },
   home() {
     wx.switchTab({

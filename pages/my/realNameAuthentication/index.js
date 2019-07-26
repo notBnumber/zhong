@@ -29,9 +29,8 @@ Page({
   upImg(path, name, state) {
     let that = this;
     wx.showLoading({
-      title: '上传图片中',
-      mask: true,
-
+      title: "上传图片中",
+      mask: true
     });
     wx.uploadFile({
       url: app.globalData.baseUrl + "configure/saveImg", //仅为示例，非真实的接口地址
@@ -44,7 +43,7 @@ Page({
         const data = res.data;
         //do something
         console.log(JSON.parse(data));
-        
+
         wx.hideLoading();
         if (state == 1) {
           that.setData({
@@ -164,7 +163,13 @@ Page({
     };
     util._get("bank/card/realNameRoutine", params).then(res => {
       if (res.code == 1) {
-        wx.navigateTo({ url: "../addBankCard/index" });
+        wx.showToast({
+          title: res.desc,
+          icon: "success"
+        });
+        setTimeout(() => {
+          wx.navigateTo({ url: "../myBankCard/index" });
+        }, 1600);
       }
     });
   },

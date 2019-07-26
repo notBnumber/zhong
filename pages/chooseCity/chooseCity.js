@@ -35,7 +35,9 @@ Page({
       {keyword: 'Y',valList:['压他','亚沙','呀','亚商所']},
       {keyword: 'Z',valList:['咋收费','早','造','炸天']},
     ],
-    position: 'A'
+    position: 'A',
+    city:'',
+    type:null
   },
 
   touchCk(e){
@@ -48,7 +50,9 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    
+    this.setData({
+      type:options.type
+    })
   },
 
   /**
@@ -98,25 +102,37 @@ Page({
         })
       }
     })
+    this.setData({
+      city:wx.getStorageSync('city') || '定位失败'
+    })
   },
   checks(e) {
-    console.log(  
 
-
-    e.currentTarget.dataset.item
-
-    );
-    wx.setStorageSync('city', e.currentTarget.dataset.item.name)
-    wx.setStorageSync('cityId', e.currentTarget.dataset.item.id)
-    wx.showToast({
-      title: '已选择'+e.currentTarget.dataset.item.name,
-      icon: 'none'
-    })
-    setTimeout(() => {
-      wx.navigateBack({
-        delta: 1
+    if(this.data.type!=5) {
+      wx.setStorageSync('city', e.currentTarget.dataset.item.name)
+      wx.setStorageSync('cityId', e.currentTarget.dataset.item.id)
+      wx.showToast({
+        title: '已选择'+e.currentTarget.dataset.item.name,
+        icon: 'none'
       })
-    }, 1500);
+      setTimeout(() => {
+        wx.navigateBack({
+          delta: 1
+        })
+      }, 1500);
+    } else {
+      wx.setStorageSync('citys', e.currentTarget.dataset.item.name)
+      wx.setStorageSync('cityIds', e.currentTarget.dataset.item.id)
+      wx.showToast({
+        title: '已选择'+e.currentTarget.dataset.item.name,
+        icon: 'none'
+      })
+      setTimeout(() => {
+        wx.navigateBack({
+          delta: 1
+        })
+      }, 1500);
+    }
 
   },
   /**

@@ -11,7 +11,8 @@ Page({
     isProup: false,
     height: app.globalData.height,
     info:{},
-    list:[]
+    list:[],
+    rule:null
   },
 
   scroll(e){
@@ -60,7 +61,13 @@ Page({
         })
       }
     })
-
+    util._get('account/cash/commissionRule?sessionId='+wx.getStorageSync('sessionId')).then(res=>{
+      if(res.code == 1) {
+        this.setData({
+          rule:res.data
+        })
+      }
+    })
 
 
   },

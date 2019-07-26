@@ -11,7 +11,7 @@
       </view>
     </view>
     <view class="teamer">
-      <text class="title">我的队员（5人）</text>
+      <text class="title">我的队员（{{teams.account.length}}人）</text>
       <view class="inner" wx:for="{{teams.account}}">
         <view class="contain">
           <image class="icon" src="{{imgUrl+item.avatar}}"></image>

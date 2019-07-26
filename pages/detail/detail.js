@@ -125,6 +125,11 @@ Page({
       }
     });
   },
+  toAddress() {
+    wx.navigateTo({
+      url: '/pages/map/map?lat='+this.data.info.latitude+'&lon='+this.data.info.longitude+'&title='+this.data.info.houseName+'&content='+this.data.info.subheading
+    })
+  },
   getAddress() {
     let latitude = wx.getStorageSync("latitude");
     let longitude = wx.getStorageSync("longitude");
@@ -245,6 +250,12 @@ Page({
       this.setData({
         params: options
       });
+      let params = {
+        type:options.type,
+        homeId:options.id,
+        pageNumber:1,
+        pageSize:999
+      }
       Promise.all([
         util._post(
           "newhome/houseDetail?type=" + options.type + "&homeId=" + options.id
@@ -257,24 +268,28 @@ Page({
             "&sessionId=" +
             wx.getStorageSync("sessionId")
         ),
+        
         util._post(
-          "discuss/page?type=" +
-            options.type +
-            "&homeId=" +
-            options.id +
-            "&pageNumber=1&pageSize=999"
+          "discuss/page",params
         )
       ])
         .then(result => {
           console.log(app.globalData.imgUrl);
-          let arr = result[0].data.imageName.split(",");
+          // if(let arr = result[0].data.imageName.split(",");)
+          let arr =[]
+          if(result[0].data.imageName!=null) {
+           arr = result[0].data.imageName.split(",");
+          }
+          if(result[0].data.tagName!=null) {
+            result[0].data.tagArr = result[0].data.tagName.split(",");
+           }
           // for(let item of arr ) {
           //   item = app.globalData.imgUrl+item
           //   console.log(item,'???');
 
           // }
 
-          console.log(arr, "轮播图数组");
+          // console.log(this.result[0], "轮播图数组");
 
           this.setData({
             info: result[0].data,
@@ -299,7 +314,7 @@ Page({
         // wx({
         //   url: '/pages/login/login'
         // })
-        wx.redirectTo({
+        wx.navigateTo({
           url: "/pages/login/login"
         });
       }, 1600);

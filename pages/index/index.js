@@ -297,10 +297,12 @@ Page({
     // }
   },
   onShow(options) {
+    console.log(wx.getStorageSync('city'));
+    
     // console.log(this.data.globalData);
     // 取得全局App
       
-      if(wx.getStorageSync('sessionId')) {
+      // if(wx.getStorageSync('sessionId')) {
         app.fun();
 
         this.setData({
@@ -333,11 +335,11 @@ Page({
               hotList: []
             });
           });
-      } else {
-        wx.navigateTo({
-          url: '/pages/login/login'
-        })
-      }
+      // } else {
+      //   wx.navigateTo({
+      //     url: '/pages/login/login'
+      //   })
+      // }
   },
   getUserInfo: function(e) {
     console.log(e);
@@ -350,7 +352,8 @@ Page({
   // 切换图标
   tabCheck(e) {
     this.setData({
-      tabIndex: e.currentTarget.dataset.index
+      tabIndex: e.currentTarget.dataset.index,
+      hotList:[]
     });
     if (this.data.tabIndex == 0) {
       this.getNewHouse();
@@ -531,7 +534,7 @@ Page({
             }
             this.data.list = this.data.hotList.concat(res.data.list);
             this.setData({
-              hotList: res.data.list
+              hotList: this.data.hotList.concat(res.data.list)
             });
             console.log(this.data.hotList);
 
@@ -563,7 +566,7 @@ Page({
             }
             this.data.list = this.data.hotList.concat(res.data.list);
             this.setData({
-              hotList: res.data.list
+              hotList: this.data.hotList.concat(res.data.list)
             });
             console.log(this.data.hotList);
 
@@ -595,7 +598,7 @@ Page({
             }
             this.data.list = this.data.hotList.concat(res.data.list);
             this.setData({
-              hotList: res.data.list
+              hotList: this.data.hotList.concat(res.data.list)
             });
             console.log(this.data.hotList);
 

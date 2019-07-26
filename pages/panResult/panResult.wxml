@@ -12,5 +12,8 @@
   <view class="next df" hover-class="none" hover-stop-propagation="false" bindtap ='home'>
     回到首页
   </view>
+    <view class="next df" hover-class="none" hover-stop-propagation="false" bindtap ='next'>
+    继续推荐
+  </view>
 
 </view>

@@ -54,6 +54,11 @@
       </view>
     </view>
   </view>
+  <!-- <view class="" hover-class="none" hover-stop-propagation="false" wx:for="{{1}}">
+    <view class="" hover-class="none" hover-stop-propagation="false">
+      {{index}}
+    </view>
+  </view> -->
 
   <view class="proup" wx:if="{{isProup}}">
     <view class="box">

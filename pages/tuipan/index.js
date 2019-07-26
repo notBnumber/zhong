@@ -31,7 +31,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    util._get('pusher/set/page?sessionId='+wx.getStorageSync('sessionId')).then(res=>{
+    util._get('pushplate/set/page?sessionId='+wx.getStorageSync('sessionId')).then(res=>{
       if(res.code ==1) {
         article_content:WxParse.wxParse('article_content', 'html', res.data.rule, this, 5)
         this.setData({

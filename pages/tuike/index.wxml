@@ -30,10 +30,10 @@
     </view>
   </view>
   <view class="ul" style="height: calc(100vh-400rpx);">
-  
-    <!-- <view class="view" hover-class="none" hover-stop-propagation="false">
+  <view class="view" hover-class="none" hover-stop-propagation="false">
       推荐买房规则：
     </view>
+    <!-- 
     <view class="text">
       1.输入好友手机号；
     </view>
@@ -47,6 +47,6 @@
     <template is="wxParse" data="{{wxParseData:article_content.nodes}}" />
   </view>
   <view class="btn df" hover-class="" hover-stop-propagation="false" bindtap='pageTo' data-url='../../pages/friends/friends'>
-  推荐朋友
+  推荐客源
   </view>
 </view>

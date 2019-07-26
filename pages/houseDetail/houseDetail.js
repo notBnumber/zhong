@@ -6,6 +6,7 @@ Page({
    * 页面的初始数据
    */
   data: {
+    city:'',
     checkNum: null,
     checkPrice: '',
     checkMianji: '',
@@ -164,7 +165,7 @@ Page({
     // 区Id
     quId: "",
     // 区域id字符串
-    quyuIds: [],
+    quyuIds: '',
     // 其他用途id字符串
     specialIds: "",
     // 其他特色id字符串
@@ -240,9 +241,16 @@ Page({
               item.tagArr = item.tagName.split(",");
             }
           }
+
           this.setData({
             hotList: res.data.list
           });
+          if(res.data.list.length == 0) {
+            wx.showToast({
+              title: '暂无数据',
+              icon: 'none'
+            })
+          }
         }
       });
     } else if(optionState == 1){
@@ -268,6 +276,12 @@ Page({
           this.setData({
             hotList: res.data.list
           });
+          if(res.data.listlength == 0) {
+            wx.showToast({
+              title: '暂无数据',
+              icon: 'none'
+            })
+          }
         }
       });
     } else {
@@ -329,6 +343,9 @@ Page({
 
     let index = "";
     if (state != null) {
+      this.setData({
+        quyuCheck:[]
+      })
       console.log("初始化");
       util
         ._get("configure/getAllArea?areaId=" + wx.getStorageSync("cityId"))
@@ -697,10 +714,13 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function() {
+    this.setData({
+      city:wx.getStorageSync('city')
+    })
     if (this.data.optionState == 0) {
       Promise.all([
         util._get("newhome/getNewHomeImage"),
-        util._get("newhome/getNewHomePage?keyword="+wx.getStorageSync('keyword')),
+        util._get("newhome/getNewHomePage?keyword="+wx.getStorageSync('keyword')+'&cityId='+wx.getStorageSync('cityId')),
         util._get("configure/getbudget?type=0"),
         util._get("configure/getArea?type=0")
       ])
@@ -710,6 +730,12 @@ Page({
             if (item.tagName != null) {
               item.tagArr = item.tagName.split(",");
             }
+          }
+          if(result[1].data.list.length == 0) {
+            wx.showToast({
+              title: '暂无数据',
+              icon: 'none'
+            })
           }
           this.setData({
             imgUrl: app.globalData.imgUrl,
@@ -728,7 +754,7 @@ Page({
     } else if (this.data.optionState == 1) {
       Promise.all([
         util._get("secondhome/getSecondHomeImage"),
-        util._get("secondhome/getSecondHome?keyword="+wx.getStorageSync('keyword')),
+        util._get("secondhome/getSecondHome?keyword="+wx.getStorageSync('keyword')+'&cityId='+wx.getStorageSync('cityId')),
         util._get("configure/getbudget?type=1"),
         util._get("configure/getArea?type=1"),
         util._get("configure/getRoomType")
@@ -739,6 +765,12 @@ Page({
             if (item.tagName != null) {
               item.tagArr = item.tagName.split(",");
             }
+          }
+          if(result[1].data.list.length == 0) {
+            wx.showToast({
+              title: '暂无数据',
+              icon: 'none'
+            })
           }
           this.setData({
             imgUrl: app.globalData.imgUrl,
@@ -758,7 +790,7 @@ Page({
     } else {
       Promise.all([
         util._get("rentinghome/getRentingHomeImage"),
-        util._get("rentinghome/getRentingHome?keyword="+wx.getStorageSync('keyword')),
+        util._get("rentinghome/getRentingHome?keyword="+wx.getStorageSync('keyword')+'&cityId='+wx.getStorageSync('cityId')),
         util._get("configure/getbudget?type=2"),
         util._get("configure/getArea?type=2"),
         util._get("configure/getRoomType")
@@ -770,6 +802,12 @@ Page({
               item.tagArr = item.tagName.split(",");
             }
           }
+          if(result[1].data.list.length == 0) {
+            wx.showToast({
+              title: '暂无数据',
+              icon: 'none'
+            })
+          }
           this.setData({
             imgUrl: app.globalData.imgUrl,
             imgUrls: result[0].data,
@@ -779,6 +817,7 @@ Page({
             HouseList: result[4].data
           });
         })
+        
         .catch(e => {
           console.log(e);
           this.setData({
@@ -829,12 +868,14 @@ Page({
       //     wx.stopPullDownRefresh();
       //   }
       // })
+      // let arr = []
+      // if()
       let params = {
         pageNumber: 1,
         pageSize: 20,
         cityId: wx.getStorageSync("cityId"),
         stateId: this.data.quId,
-        countyId: this.quyuIds.toString(),
+        countyId: this.data.quyuIds,
         budgetId: this.data.checkPrice,
         areaId: this.data.checkMianji,
         useId: this.data.specialIds,

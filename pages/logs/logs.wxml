@@ -25,7 +25,7 @@
 
   <!-- <template is="wxParse" data="{{wxParseData:item}}"/> -->
   <!-- <rich-text nodes="{{item.content}}"></rich-text> -->
-          {{item.subtitle}}
+          {{ item.type==0?item.subtitle:item.content}}
         </view>
       </view>
       <view class="time" hover-class="none" hover-stop-propagation="false">{{item.createTime}}</view>

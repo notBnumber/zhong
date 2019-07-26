@@ -115,8 +115,8 @@
     </view>
   </view>
   <!-- 意向区域 -->
-  <view class="select" hover-class="none" hover-stop-propagation="false" data-id='0' bindtap = 'quyu'>
-    <view class="title" hover-class="none" hover-stop-propagation="false">
+  <view class="select" hover-class="none" hover-stop-propagation="false" >
+    <view class="title" hover-class="none" hover-stop-propagation="false" bindtap = 'chooseCity'>
       <view class='t1'>
         意向区域：
       </view>
@@ -124,7 +124,7 @@
         {{city}}
       </view>
     </view>
-    <view class="content" hover-class="none" hover-stop-propagation="false">
+    <view class="content" hover-class="none" hover-stop-propagation="false" data-id='0' bindtap = 'quyu'>
       {{quyuInfo}}
     </view>
   </view>
@@ -169,7 +169,7 @@
     </view>
   </view>
   <input class="inp" value="" type="text" placeholder="请输入与被推荐人关系" placeholder-style="" placeholder-class="input-placeholders" bindinput="chooseRelation"></input>
-  <view class="btn df" hover-class="none" hover-stop-propagation="false" bindtap='submit'>
+  <view class="btns df" hover-class="none" hover-stop-propagation="false" bindtap='submit'>
     提交客源
   </view>
 </view>

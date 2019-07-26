@@ -1,5 +1,5 @@
 <view class="outer">
-  <view class="collected">
+  <view class="collected" wx:if="{{sellList.length!=0}}">
     <view class="section">
       <view class="container">
         <view class="total" wx:for="{{sellList}}" wx:kex="index" data-type="{{item.type}}" data-id="{{item.houseId}}" bindtap='toDetail'>
@@ -33,7 +33,7 @@
     </view>
     <view class="nonono font-Medium">没有更多啦</view>
   </view>
-  <view class="empty" wx:if="{{hidden}}">
+  <view class="empty" wx:if="{{sellList.length == 0}}">
     <image class="icon" src="../../../images/sousuo-kong.png"></image>
     <view class="comment font-Medium">暂无收藏的房源</view>
     <view class="btn font-f1" bindtap="goIndex">去首页逛逛</view>

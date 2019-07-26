@@ -1,18 +1,28 @@
 // pages/msg/msg.js
+const util = require('../../utils/util.js')
+const WxParse = require('../../wxParse/wxParse.js');
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-
+    info:{}
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    util._get('notice/noticeDetail?id='+options.id).then(res=>{
+        if(res.data.createTime) {
+          res.data.createTime = res.data.createTime.split(' ')[0]
+        }
+      
+      this.setData({
+        info:res.data
+      })
+    })
   },
 
   /**

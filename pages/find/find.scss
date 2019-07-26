@@ -1,7 +1,8 @@
 .container {
   padding: 27rpx 20rpx;
   width: 100%;
-
+  position: relative;
+  padding-bottom: 200rpx;
   .phone {
     font-size: 30rpx;
     font-family: PingFang-SC-Medium;
@@ -203,8 +204,12 @@
   }
 }
 
-.btn {
-  margin: 83rpx auto;
+.btns {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 10rpx;
+  margin: 30rpx auto;
   width: 626rpx;
   height: 84rpx;
   background: linear-gradient(-90deg, rgba(56, 198, 160, 1) 0%, rgba(109, 224, 195, 1) 100%);

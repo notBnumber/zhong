@@ -4,16 +4,16 @@
     <view class="title">登录</view>
     <view class="row">
       <image src="../../images/sjh01.png"></image>
-      <input type="number" maxlength="11" value='{{phone}}' placeholder="请输入手机号码" bindinput='getPhone'/>
+      <input type="number" maxlength="11" value='{{phone}}' placeholder="请输入手机号码" bindblur='getPhone'/>
     </view>
     <view class="row">
       <image src="../../images/yzm01.png" class="code"></image>
       <input type="number" maxlength="6" placeholder="请输入验证码" bindinput='changeCode'/>
-      <button plain  bindtap='getCode'    >{{msg}}</button>
+      <button plain  bindtap='getCode'  class="{{num!=60?'times':''}}" >{{msg}}</button>
     </view>
-    <view class="row">
+    <view class="row" wx:if="{{!isPhone}}">
       <image src="../../images/yqm01.png" style="width: 42rpx;height:42rpx;"></image>
-      <input type="number" placeholder="请输入邀请码（必填）"  bindinput='changeInvitation'/>
+      <input type="number" placeholder="请输入邀请码（必填）"    value='{{Invitation}}' bindinput='changeInvitation'/>
     </view>
 
     <view class="btn" bindtap="pageToIndex"  data-url="/pages/index/index" bindtap='toLogin'>登录</view>

@@ -48,7 +48,7 @@
       {{info.totalPrice}}元/月
     </view>
   </view>
-  <view class="address" hover-class="none" hover-stop-propagation="false" bindtap='getAddress'>
+  <view class="address" hover-class="none" hover-stop-propagation="false" bindtap='toAddress'>
     <image class="dw" src="../../images/dw02.png"></image>
     <view class="" hover-class="none" hover-stop-propagation="false">{{info.address}}</view>
     <image class="zy" src="../../images/zy03.png"></image>
@@ -63,6 +63,40 @@
     <view class="item" hover-class="none" hover-stop-propagation="false" wx:if="{{options.type == 2}}">
       面积：{{info.area}}m²
     </view>
+        <view class="item" hover-class="none" hover-stop-propagation="false" wx:if="{{options.type == 1}}">
+      总楼层：{{info.totalFloor}}
+    </view>
+            <view class="item" hover-class="none" hover-stop-propagation="false" wx:if="{{options.type == 1}}">
+      朝向：{{info.orientation}}
+    </view>
+            <view class="item" hover-class="none" hover-stop-propagation="false" wx:if="{{options.type == 1}}">
+      装修：{{info.renovation}}
+    </view>
+            <view class="item" hover-class="none" hover-stop-propagation="false" wx:if="{{options.type == 1}}">
+      家私：{{info.property}}
+    </view>
+            <view class="item" hover-class="none" hover-stop-propagation="false" wx:if="{{options.type == 1}}">
+      家电：{{info.electrical}}
+    </view>
+    
+
+          <view class="item" hover-class="none" hover-stop-propagation="false" wx:if="{{options.type == 2}}">
+      总楼层：{{info.totalFloor}}
+    </view>
+            <view class="item" hover-class="none" hover-stop-propagation="false" wx:if="{{options.type == 2}}">
+      朝向：{{info.orientation}}
+    </view>
+            <view class="item" hover-class="none" hover-stop-propagation="false" wx:if="{{options.type == 2}}">
+      装修：{{info.renovation}}
+    </view>
+            <view class="item" hover-class="none" hover-stop-propagation="false" wx:if="{{options.type == 2}}">
+      家私：{{info.property}}
+    </view>
+            <view class="item" hover-class="none" hover-stop-propagation="false" wx:if="{{options.type == 2}}">
+      家电：{{info.electrical}}
+    </view>
+
+
     <view class="item" hover-class="none" hover-stop-propagation="false" wx:for="{{info.useName}}" wx:for-item="items">
       用途：{{items.name}}
     </view>

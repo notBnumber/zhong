@@ -42,9 +42,9 @@ Page({
         name: "六室及以上"
       }
     ],
-    typesIndex: 0,
-    numberIndex: 0,
-    state: 0,
+    typesIndex: null,
+    numberIndex: null,
+    state: null,
     imgUrl: [
 
     ],
@@ -54,6 +54,7 @@ Page({
     number: '',
     address: '',
     price: '',
+    prices: '',
     relationship: '',
     imgInfo:[],
     addressTip:'请选择地址',
@@ -103,6 +104,11 @@ Page({
       price: e.detail.value
     })
   },
+  choosePrices(e) {
+    this.setData({
+      prices: e.detail.value
+    })
+  },
   chooseRelationship(e) {
     this.setData({
       relationship: e.detail.value
@@ -127,6 +133,15 @@ Page({
       })
       return
     }
+    var myreg = /^(((13[0-9]{1})|(15[0-9]{1})|(18[0-9]{1})|(17[0-9]{1}))+\d{8})$/;
+    if (!myreg.test(this.data.phone)) {
+      wx.showToast({
+        title: '手机号有误！',
+        icon: 'none'
+      })
+      return false;
+    }
+
     if(this.data.addressTip == '请选择地址') {
       wx.showToast({
         title: '请选择地址',
@@ -134,33 +149,46 @@ Page({
       })
       return
     }
-    if(this.data.number == '') {
-      wx.showToast({
-        title: '请输入房号',
-        icon: 'none'
-      })
-      return
-    }
-    if(this.data.size == '') {
-      wx.showToast({
-        title: '请输入盘源大小',
-        icon: 'none'
-      })
-      return
-    }
-    if(this.data.price == '') {
-      wx.showToast({
-        title: '请输入目标价位',
-        icon: 'none'
-      })
-      return
-    }
-    if(this.data.relationship == '') {
-      wx.showToast({
-        title: '请输入与被推荐人关系',
-        icon: 'none'
-      })
-      return
+    // if(this.data.number == '') {
+    //   wx.showToast({
+    //     title: '请输入房号',
+    //     icon: 'none'
+    //   })
+    //   return
+    // }
+    // if(this.data.size == '') {
+    //   wx.showToast({
+    //     title: '请输入盘源大小',
+    //     icon: 'none'
+    //   })
+    //   return
+    // }
+    // if(this.data.price == '' && this.data.typesIndex == 0) {
+    //   wx.showToast({
+    //     title: '请输入目标价位',
+    //     icon: 'none'
+    //   })
+    //   return
+    // }
+    // if(this.data.prices == '' && this.data.typesIndex == 1) {
+    //   wx.showToast({
+    //     title: '请输入目标价位',
+    //     icon: 'none'
+    //   })
+    //   return
+    // }
+    // if(this.data.relationship == '') {
+    //   wx.showToast({
+    //     title: '请输入与被推荐人关系',
+    //     icon: 'none'
+    //   })
+    //   return
+    // }
+    let price = ''
+    if(this.data.typesIndex == 0) {
+      price = this.data.price
+    } else {
+      price = this.data.prices
     }
     let params = {
       sessionId: wx.getStorageSync('sessionId'),
@@ -171,10 +199,10 @@ Page({
       latitude: this.data.latitude,
       roomNumber: this.data.number,
       area: this.data.size,
-      type: this.data.typesIndex,
-      room: this.data.numberIndex,
-      state: this.data.state,
-      price: this.data.price,
+      type: this.data.typesIndex == null?"":this.data.typesIndex,
+      room: this.data.numberIndex == null?'':this.data.numberIndex,
+      state: this.data.state == null?'':this.data.state,
+      price: price,
       relation: this.data.relationship,
       img1: this.data.imgInfo[0] == undefined ? '' : this.data.imgInfo[0],
       img2: this.data.imgInfo[1] == undefined ? '' : this.data.imgInfo[1],
@@ -186,7 +214,15 @@ Page({
     util._post('pushplate/submitSource', params).then(res => {
       if (res.code == 1) {
         console.log(1);
+        // panResult
 
+        wx.showToast({
+          title: '提交成功',
+          icon: 'success'
+        })
+        wx.redirectTo({
+          url: "../panResult/panResult"
+        });
       }
     })
   },

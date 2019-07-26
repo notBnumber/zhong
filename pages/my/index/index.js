@@ -15,9 +15,15 @@ Page({
 
   pageTo({ currentTarget: { dataset } }) {
     // console.log(dataset);
-    wx.navigateTo({
-      url: dataset.url
-    });
+
+
+    if (wx.getStorageSync("sessionId")) {
+      wx.navigateTo({
+        url: dataset.url
+      });
+    } else {
+      wx.navigateTo({ url: "../../login/login" });
+    }
   },
   Invitation() {
     this.setData({
@@ -52,7 +58,9 @@ Page({
       ._get("account/getInfo?sessionId=" + wx.getStorageSync("sessionId"))
       .then(res => {
         if (res.code == 1) {
-          wx.setStorageSync('info', res.data)
+          // wx.setStorageSync('info', res.data)
+          console.log('用户信息',res.data);
+          
           this.setData({
             info: res.data
           });
@@ -86,7 +94,21 @@ Page({
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function(options) {},
+  onLoad: function(options) {
+    if(wx.getStorageSync('sessionId')) {
+
+    } else {
+      wx.showToast({
+        title: '请先登录',
+        icon: 'none'
+      })
+      setTimeout(() => {
+        wx.navigateTo({
+          url: '/pages/login/login'
+        })
+      }, 1600);
+    }
+  },
 
   /**
    * 生命周期函数--监听页面初次渲染完成

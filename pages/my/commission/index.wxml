@@ -42,11 +42,14 @@
     <view class="box">
       <view class="Exhibition">
         <image src="../../../images/ts01.png"></image>
-        <view class="text">提现规则</view>
+        <view class="text">佣金规则</view>
         <view class="richtext">
-          <view>1.推荐好友或推荐盘源，绑定上下级关系，最高3级</view>
+          <!-- <view>1.推荐好友或推荐盘源，绑定上下级关系，最高3级</view>
           <view>2.交易成功后，可按照对应比例获得佣金</view>
-          <view>3.比例规则根据平台官方定义</view>
+          <view>3.比例规则根据平台官方定义</view> -->
+          <rich-text class="" nodes="{{rule}}">
+            
+          </rich-text>
         </view>
       </view>
       <image class="errIcon" src="../../../images/gb01.png" bindtap="Invitation"></image>

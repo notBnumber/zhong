@@ -7,14 +7,10 @@ Page({
     logs: [],
     lists:[],
     list :[
-      {
-        title:'标题1',
-        content:'<p>内容sss</p>'
-      },      {
-        title:'标题3',
-        content:'<p>考虑考虑了</p>'
-      },
-    ]
+
+    ],
+    pageNumber:1,
+    end:false
   },
   toDetail(e) {
     let state = e.currentTarget.dataset.type
@@ -44,48 +40,36 @@ Page({
       });
     }
   },
-  onShow() {
-    
-    if(wx.getStorageSync('sessionId')) {
-      let that = this
-      let arr = []
-      util._get('notice/page?sessionId='+wx.getStorageSync('sessionId')).then(res=>{
-        if(res.code == 1) {
-          console.log(res);
-          let   artilesA = res.data.list
-          for(let i =0 ; i< artilesA.length ; i++){
-
-            WxParse.wxParse('content'+i, 'html', artilesA[i]['content'], that, 5);
-            // WxParse.wxParse('title'+i, 'html', artilesA[i]['content'], that, 5);
-
-  
-            if (i === artilesA.length - 1){
-            
-                    WxParse.wxParseTemArray('artileList', 'content', artilesA.length, that)
-                    // WxParse.wxParseTemArray('artileList', 'title', artilesA.length, that)
-
-                    // console.log( artileList);
-                    // that.setData({})
-   
-            }
-          } 
-            console.log(artilesA);
-            
+  init(num) {
+    util._get('notice/page?sessionId='+wx.getStorageSync('sessionId')+'&pageNumber='+num+'&pageSize=20').then(res=>{
+      if(res.code == 1) {
+        console.log(res);
+        // let   artilesA = res.data.list
+        if(res.data.totalPage == num || res.data.totalPage == 0) {
           this.setData({
-            list:artilesA
+            end:true
+          })
+        } else {
+          this.setData({
+            end:false
           })
         }
-      })
-    } else {
-      wx.showToast({
-        title: '请先登录',
-        icon: 'none'
-      })
-      setTimeout(() => {
-        wx.navigateTo({
-          url: '/pages/login/login'
+        this.setData({
+          list:this.data.list.concat(res.data.list)
         })
-      }, 1600);
+      }
+    })
+  },
+  onShow() {
+    this.setData({
+      end:false,
+      pageNumber:1,
+      list:[]
+    })
+    if(wx.getStorageSync('sessionId')) {
+      this.init(1)
+    } else {
+
     }
   },
   onLoad: function () {    
@@ -94,6 +78,25 @@ Page({
     //     return util.formatTime(new Date(log))
     //   })
     // })
+      if(wx.getStorageSync('sessionId')) {
 
-  }
+      } else {
+        wx.showToast({
+          title: '请先登录',
+          icon: 'none'
+        })
+        setTimeout(() => {
+          wx.navigateTo({
+            url: '/pages/login/login'
+          })
+        }, 1600);
+      }
+  },
+  onReachBottom: function() {
+    console.log(this.data.end,'???????????????');
+    
+    if(!this.data.end)  {
+      this.init(++this.data.pageNumber)
+    }
+  },
 })

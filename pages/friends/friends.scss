@@ -1,6 +1,8 @@
 .container {
   padding: 27rpx 20rpx;
   width: 100%;
+  position: relative;
+  padding-bottom: 200rpx;
 }
 
 .content {
@@ -194,8 +196,12 @@
   }
 }
 
-.btn {
-  margin: 83rpx auto;
+.btns {
+  position: fixed;
+  bottom: 10rpx;
+  right: 0;
+  left: 0;
+  margin: 30rpx auto;
   width: 626rpx;
   height: 84rpx;
   background: linear-gradient(-90deg, rgba(56, 198, 160, 1) 0%, rgba(109, 224, 195, 1) 100%);
@@ -410,7 +416,7 @@ van-popup {
         .btn {
           width: 521rpx;
           height: 84rpx;
-
+          
           background: linear-gradient(-90deg, rgba(56, 198, 160, 1) 0%, rgba(109, 224, 195, 1) 100%);
           border-radius: 0rpx 42rpx 42rpx 0rpx;
 

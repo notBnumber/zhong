@@ -1,4 +1,6 @@
 // pages/my/withdraw/index.js
+const util = require("../../../utils/util.js");
+
 const app = getApp()
 Page({
 
@@ -48,6 +50,11 @@ Page({
   onShow: function () {
     this.setData({
       info:wx.getStorageSync('money')
+    })
+    util._get('bank/card/rule').then(res=>{
+      this.setData({
+        rule:res.data
+      })
     })
   },
 

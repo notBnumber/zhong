@@ -162,7 +162,7 @@
   </view>
   <input class="inp" value="{{relationship}}" disabled="{{true}}" type="text" placeholder="请输入联系方式" placeholder-style="" placeholder-class="input-placeholders"></input>
 
-  <view class="btn df" hover-class="none" hover-stop-propagation="false" bindtap='submit'>
+  <view class="btns df" hover-class="none" hover-stop-propagation="false" bindtap='submit'>
     提交客源
   </view>
 </view>

@@ -102,7 +102,7 @@ App({
     // baseUrl: "http://10.0.0.158:8085/zhongda/api/",
     // imgUrl: "http://10.0.0.158:8085/zhongda/"
     baseUrl: "http://47.107.81.81:8080/zhongda/api/",
-    imgUrl: "http://47.107.81.81:8080/zhongda/"
+    imgUrl: "http://47.107.81.81:8080/zhongda"
   },
   fun() {
     console.log("函数");

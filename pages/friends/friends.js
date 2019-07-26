@@ -6,7 +6,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-    city:"",
+    city: "",
     code: "",
     codeId: "",
     ids: "",
@@ -43,37 +43,13 @@ Page({
     ],
     numberList: [
       {
-        id: 0,
+        id: '',
         value: "不限"
       },
-      {
-        id: 1,
-        value: "一室"
-      },
-      {
-        id: 2,
-        value: "一室"
-      },
-      {
-        id: 3,
-        value: "一室"
-      },
-      {
-        id: 4,
-        value: "四室"
-      },
-      {
-        id: 5,
-        value: "五室"
-      },
-      {
-        id: 6,
-        value: "六室"
-      }
     ],
-    typesIndex: 0,
-    numberIndex: 0,
-    state: 0,
+    typesIndex: null,
+    numberIndex: null,
+    state: null,
     imgUrl: [],
     priceList: [
       {
@@ -97,7 +73,10 @@ Page({
         ]
       }
     ],
-    openList: [],
+    openList: [{
+      value:'不限',
+      id:''
+    }],
     specialName: null,
     quyuIndex: 0,
     quyuIndexs: 0,
@@ -105,7 +84,7 @@ Page({
     quId: "",
     quyuIds: [],
     quyuIndex: 0,
-    quyuInfo:'请选择意向区域',
+    quyuInfo: "请选择意向区域",
     // 选中的
     quyuCheck: [],
     quyuList: [
@@ -151,6 +130,11 @@ Page({
       }
     ]
   },
+  chooseCity() {
+    wx.navigateTo({
+      url: "/pages/chooseCity/chooseCity?type=5"
+    });
+  },
   chooseName(e) {
     this.setData({
       name: e.detail.value
@@ -179,11 +163,10 @@ Page({
       });
     } else if (this.data.currentState == 2) {
       console.log(this.data.openList);
-      
+
       console.log(this.data.openList[index].value);
       console.log(this.data.openList[index].id);
-      
-      
+
       this.setData({
         mianjiplace: this.data.openList[index].value,
         mainjiId: this.data.openList[index].id
@@ -236,11 +219,18 @@ Page({
   money(e) {
     // 新 二 租
     console.log(e.currentTarget.dataset.id);
+    if(this.data.typesIndex ==null) {
+      wx.showToast({
+        title: '请先选择房屋类型',
+        icon: 'none'
+      })
+      return
+    }
     util._get("configure/getbudget?type=" + this.data.typesIndex).then(res => {
       if (res.code == 1) {
         this.setData({
           show: !this.data.show,
-          openList: res.data,
+          openList: this.data.openList.concat(res.data),
           currentState: e.currentTarget.dataset.id,
           title: "设置预算"
         });
@@ -255,12 +245,18 @@ Page({
     //   openList: this.data.mianjiList,
     //   currentState: e.currentTarget.dataset.id
     // });
-
+    if(this.data.typesIndex ==null) {
+      wx.showToast({
+        title: '请先选择房屋类型',
+        icon: 'none'
+      })
+      return
+    }
     util._get("configure/getArea?type=" + this.data.typesIndex).then(res => {
       if (res.code == 1) {
         this.setData({
           show: !this.data.show,
-          openList: res.data,
+          openList: this.data.openList.concat(res.data),
           currentState: e.currentTarget.dataset.id,
           title: "面积"
         });
@@ -284,32 +280,43 @@ Page({
 
     let index = "";
     if (state != null) {
+      this.setData({
+        quyuCheck: []
+      });
+      let fuckId = "";
+      if (
+        wx.getStorageSync("cityIds") != "" &&
+        wx.getStorageSync("citys") != ""
+      ) {
+        fuckId = wx.getStorageSync("cityIds");
+      } else {
+        fuckId = wx.getStorageSync("cityId");
+      }
+
       console.log("初始化");
-      util
-        ._get("configure/getAllArea?areaId=" + wx.getStorageSync("cityId"))
-        .then(res => {
-          if (res.code == 1) {
-            this.setData({
-              quyuIndex: 0,
-              quyuList: res.data
+      util._get("configure/getAllArea?areaId=" + fuckId).then(res => {
+        if (res.code == 1) {
+          this.setData({
+            quyuIndex: 0,
+            quyuList: res.data
+          });
+          util
+            ._get("configure/getAllArea?areaId=" + res.data[0].id)
+            .then(res => {
+              if (res.code == 1) {
+                // for (let item of this.data.quyuRight) {
+                //   item.state = false;
+                // }
+                this.data.quyuList[0].list = res.data;
+                this.setData({
+                  quyuIndex: 0,
+                  quyuList: this.data.quyuList,
+                  quId: this.data.quyuList[0].id
+                });
+              }
             });
-            util
-              ._get("configure/getAllArea?areaId=" + res.data[0].id)
-              .then(res => {
-                if (res.code == 1) {
-                  // for (let item of this.data.quyuRight) {
-                  //   item.state = false;
-                  // }
-                  this.data.quyuList[0].list = res.data;
-                  this.setData({
-                    quyuIndex: 0,
-                    quyuList: this.data.quyuList,
-                    quId: this.data.quyuList[0].id
-                  });
-                }
-              });
-          }
-        });
+        }
+      });
 
       // index = e.currentTarget.dataset.index
     } else {
@@ -336,7 +343,7 @@ Page({
   // 区域右边
   checkQuyuRight(e) {
     let index = e.currentTarget.dataset.index;
-    let quyuIndex = this.data.quyuIndex
+    let quyuIndex = this.data.quyuIndex;
     // let arr = [];
     // this.data.quyuList[this.data.quyuIndex].list[state].state = !this.data
     //   .quyuList[this.data.quyuIndex].list[state].state;
@@ -351,7 +358,9 @@ Page({
     // });
     // console.log(this.data.quyuRight[index]);
     // this.data.quyuCheck.push(this.data.quyuRight[index])
-    this.data.quyuList[quyuIndex].list[index].state = !this.data.quyuList[quyuIndex].list[index].state
+    this.data.quyuList[quyuIndex].list[index].state = !this.data.quyuList[
+      quyuIndex
+    ].list[index].state;
     // let arr = this.data.quyuList[quyuIndex].list.filter(
     //   (item, index, arr) => {
     //     if(item.state ) {
@@ -359,25 +368,25 @@ Page({
     //     }
     //   }
     // );
-    let arrays = this.data.quyuList
-    let arr=[]
-    for(let item of arrays) {
+    let arrays = this.data.quyuList;
+    let arr = [];
+    for (let item of arrays) {
       if (item.list) {
-        for(let items of item.list) {
-          if(items.state) {
-            arr.push(items)
+        for (let items of item.list) {
+          if (items.state) {
+            arr.push(items);
           }
         }
       }
     }
-    console.log(arr,'888888');
-    
+    console.log(arr, "888888");
+
     // this.data.quyuCheck = this.data.quyuCheck.concat(arr)
 
     this.setData({
       quyuCheck: arr
     });
-    this.btnQuyus()
+    this.btnQuyus();
   },
   // 区域删除
   del(e) {
@@ -410,9 +419,9 @@ Page({
   // 重置
   resetQuyu(e) {
     for (let item of this.data.quyuList) {
-      if(item.list) {
+      if (item.list) {
         console.log(99909090);
-        
+
         // for (let items of item.list) {
         //   console.log(items);
         //   items.state = false;
@@ -444,25 +453,24 @@ Page({
   // },
   btnQuyus() {
     let arrs = [];
-    let nameArr = []
+    let nameArr = [];
     this.data.quyuCheck.filter((item, index, arr) => {
       if (item.state) {
         arrs.push(item.id);
-        nameArr.push(item.name)
+        nameArr.push(item.name);
       }
     });
     console.log(this.data.quyuName);
-    
+
     this.setData({
       quyuIds: arrs.toString(),
-      quyuName:nameArr,
-      quyuInfo:nameArr.toString()
+      quyuName: nameArr,
+      quyuInfo: nameArr.toString()
     });
   },
   btnQuyu() {
-    
     this.setData({
-      show: !this.data.show,
+      show: !this.data.show
     });
   },
   chooseRelation(e) {
@@ -472,38 +480,37 @@ Page({
   },
   // 提交
   submit() {
-    if(this.data.name == '') {
+    if (this.data.name == "") {
       wx.showToast({
-        title: '请输入姓名',
-        icon: 'none'
-      })
-      return
+        title: "请输入姓名",
+        icon: "none"
+      });
+      return;
     }
-    if(this.data.phone == '') {
+    if (this.data.phone == "") {
       wx.showToast({
-        title: '请输入联系方式',
-        icon: 'none'
-      })
-      return
-
+        title: "请输入联系方式",
+        icon: "none"
+      });
+      return;
     }
     var myreg = /^(((13[0-9]{1})|(15[0-9]{1})|(18[0-9]{1})|(17[0-9]{1}))+\d{8})$/;
     if (!myreg.test(this.data.phone)) {
       wx.showToast({
-        title: '手机号有误！',
-        icon: 'none'
-      })
+        title: "手机号有误！",
+        icon: "none"
+      });
       return false;
     }
 
-    if(this.data.relation == '') {
-      wx.showToast({
-        title: '请输入与被推荐人关系',
-        icon: 'none'
-      })
-      return
+    // if(this.data.relation == '') {
+    //   wx.showToast({
+    //     title: '请输入与被推荐人关系',
+    //     icon: 'none'
+    //   })
+    //   return
 
-    }
+    // }
     let params = {
       sessionId: wx.getStorageSync("sessionId"),
       recommendedPerson: this.data.name,
@@ -517,15 +524,14 @@ Page({
       intentionalRegionIds: this.data.quyuIds
     };
     util._get("pusher/submitSource", params).then(res => {
-      if(res.code == 1) {
+      if (res.code == 1) {
         wx.showToast({
-          title: '提交成功',
-          icon: 'success'
-        })
+          title: "提交成功",
+          icon: "success"
+        });
         wx.redirectTo({
           url: "../friendsResult/friendsResult"
         });
-        
       }
     });
   },
@@ -543,25 +549,39 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function() {
-    let params = {
-      lat: wx.getStorageSync("latitude"),
-      log: wx.getStorageSync("longitude")
-    };
-    util._get("newhome/checkCity", params).then(res => {
-      if (res.code == 1) {
-        this.setData({
-          city: res.data.regeocode.addressComponent.city,
-          cityId: res.data.regeocode.addressComponent.citycode,
-          city:wx.getStorageSync('city')
-        });
-      }
-    });
+    console.log( wx.getStorageSync("citys"),wx.getStorageSync("cityIds"))   ;
+    
+    if (
+      wx.getStorageSync("citys") == "" &&
+      wx.getStorageSync("cityIds") == ""
+    ) {
+      let params = {
+        lat: wx.getStorageSync("latitude"),
+        log: wx.getStorageSync("longitude")
+      };
+      util._get("newhome/checkCity", params).then(res => {
+        if (res.code == 1) {
+          this.setData({
+            city: res.data.regeocode.addressComponent.city,
+            cityId: res.data.regeocode.addressComponent.citycode,
+            city: wx.getStorageSync("city")
+          });
+        }
+      });
+      console.log("jjjjj", wx.getStorageSync("city"));
+    } else {
+      console.log("999999999999");
+
+      this.setData({
+        city: wx.getStorageSync("citys")
+      });
+    }
 
     util._get("configure/getRoomType").then(res => {
       if (res.code == 1) {
         this.setData({
-          numberList: res.data,
-          numberIndexId:res.data[this.data.numberIndex].id
+          numberList:   this.data.numberList.concat(res.data) ,
+          numberIndexId: null
         });
       }
     });
@@ -570,12 +590,18 @@ Page({
   /**
    * 生命周期函数--监听页面隐藏
    */
-  onHide: function() {},
+  onHide: function() {
+    wx.setStorageSync("cityIds", "");
+    wx.setStorageSync("citys", "");
+  },
 
   /**
    * 生命周期函数--监听页面卸载
    */
-  onUnload: function() {},
+  onUnload: function() {
+    wx.setStorageSync("cityIds", "");
+    wx.setStorageSync("citys", "");
+  },
 
   /**
    * 页面相关事件处理函数--监听用户下拉动作

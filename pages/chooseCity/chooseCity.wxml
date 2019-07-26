@@ -3,7 +3,7 @@
     <view class="title">当前定位城市</view>
     <view class="position">
       <image src="../../images/dw02.png"></image>
-      定位失败
+      {{city}}
     </view>
   </view>
   <view class="scroll">

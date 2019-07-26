@@ -1,4 +1,7 @@
 .container{
+  .times {
+    color: #666 !important;
+  }
   .bgImg{
     width: 100%;
     position: relative;
@@ -53,6 +56,7 @@
         font-weight:500;
         color:#16B388;
       }
+
     }
     .btn{
       height: 80rpx;

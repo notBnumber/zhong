@@ -1,4 +1,4 @@
-  <view class="search " hover-class="none" hover-stop-propagation="false"  >
+  <view class="search " hover-class="none" hover-stop-propagation="false"  wx:if="{{showCom}}"  id="test">
     <view class="searchLeft" hover-class="none" hover-stop-propagation="false" catchtap='toCity'>
       <image class="" src="../../images/dw01.png"></image>
       <view class="" hover-class="none" hover-stop-propagation="false">{{city}}</view>

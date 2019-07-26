@@ -22,6 +22,11 @@ Page({
       complete: ()=>{}
     });
   },
+  next() {
+    wx.navigateTo({
+      url: '/pages/panInfo/panInfo'
+    })
+  },
   /**
    * 生命周期函数--监听页面加载
    */

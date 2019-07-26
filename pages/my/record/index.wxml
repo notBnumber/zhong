@@ -2,7 +2,7 @@
   <view class="recordList" wx:if="{{recordList.length > 0}}">
     <view class="items" wx:for="{{recordList}}">
       <view class="left">
-        <view>{{item.card.cardName}}（{{item.number}}）</view>
+        <view>{{item.bank}}（{{item.number}}）</view>
         <view>{{item.createTime}}</view>
       </view>
       <view class="right {{item.isPass == 2 ? 'red' : item.isPass == 1 ? 'green': '' }}" >
