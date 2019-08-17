@@ -33,6 +33,9 @@ Page({
   onLoad: function (options) {
     util._get('pushplate/set/page?sessionId='+wx.getStorageSync('sessionId')).then(res=>{
       if(res.code ==1) {
+        res.data.rule = res.data.rule.replace(/\<img/gi,   '<img class="rich-img" ' );
+        console.log(res.data.rule);
+        // return
         article_content:WxParse.wxParse('article_content', 'html', res.data.rule, this, 5)
         this.setData({
           info:res.data

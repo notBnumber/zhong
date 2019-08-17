@@ -10,7 +10,13 @@ Page({
 
     ],
     pageNumber:1,
-    end:false
+    end:false,
+    is:false
+  },
+  toLogin() {
+    wx.navigateTo({
+      url: '/pages/login/login'
+    })
   },
   toDetail(e) {
     let state = e.currentTarget.dataset.type
@@ -68,8 +74,13 @@ Page({
     })
     if(wx.getStorageSync('sessionId')) {
       this.init(1)
+      this.setData({
+        is:true
+      })
     } else {
-
+      this.setData({
+        is:false
+      })
     }
   },
   onLoad: function () {    

@@ -378,13 +378,14 @@ van-popup {
             color: rgba(56, 198, 160, 1);
             position: relative;
             margin-bottom: 20rpx;
+              position: relative;
 
             .yes {
               font-size: 15rpx;
               color: #fff;
               position: absolute;
               right: 0;
-              bottom: 0;
+              bottom: -1px;
               width: 48rpx;
               height: 20rpx;
               background: #FF8D8D;

@@ -31,13 +31,36 @@ Page({
     });
   },
   aboutUs() {
-    wx.navigateTo({ url: "../aboutOurs/aboutOurs" });
+    
+    if(wx.getStorageSync('sessionId')) {
+      wx.navigateTo({ url: "../aboutOurs/aboutOurs" });
+
+    } else {
+      wx.navigateTo({ url: "../../login/login" });
+
+    }
   },
   feedback() {
-    wx.navigateTo({ url: "../feedback/feedback" });
+    
+
+    if(wx.getStorageSync('sessionId')) {
+      wx.navigateTo({ url: "../feedback/feedback" });
+
+    } else {
+      wx.navigateTo({ url: "../../login/login" });
+
+    }
   },
   helpCenter() {
-    wx.navigateTo({ url: "../help/help" });
+    
+
+    if(wx.getStorageSync('sessionId')) {
+      wx.navigateTo({ url: "../help/help" });
+
+    } else {
+      wx.navigateTo({ url: "../../login/login" });
+
+    }
   },
   Mycollected() {
     if (wx.getStorageSync("sessionId")) {

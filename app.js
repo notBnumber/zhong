@@ -101,8 +101,12 @@ App({
     indexParams: 0,
     // baseUrl: "http://10.0.0.158:8085/zhongda/api/",
     // imgUrl: "http://10.0.0.158:8085/zhongda/"
-    baseUrl: "http://47.107.81.81:8080/zhongda/api/",
-    imgUrl: "http://47.107.81.81:8080/zhongda"
+    // baseUrl: "http://47.107.81.81:8080/zhongda/api/",
+    // imgUrl: "http://47.107.81.81:8080/zhongda",
+    baseUrl: "http://47.97.158.166/zhongda/api/",
+    imgUrl: "http://47.97.158.166/zhongda"
+
+
   },
   fun() {
     console.log("函数");

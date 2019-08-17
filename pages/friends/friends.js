@@ -217,6 +217,12 @@ Page({
   },
   // 预算
   money(e) {
+    let arr = [
+      {value:'不限',id:''}
+    ]
+    this.setData({
+      openList:arr
+    })
     // 新 二 租
     console.log(e.currentTarget.dataset.id);
     if(this.data.typesIndex ==null) {
@@ -239,6 +245,12 @@ Page({
   },
   // 面积
   mianji(e) {
+    let arr = [
+      {value:'不限',id:''}
+    ]
+    this.setData({
+      openList:arr
+    })
     console.log(e.currentTarget.dataset.id);
     // this.setData({
     //   show: !this.data.show,
@@ -275,7 +287,20 @@ Page({
   // 区域左边
   checkQuyu(e, state) {
     console.log(e, state);
-
+    let arrs = [{lng	:	'',
+		
+    name	:	'不限',
+        
+    leveltype	:	'',
+        
+    id	:	'',
+        
+    keyword	:	'',
+        
+    parentid	:	'1',
+        
+    lat	:	''
+    }]
     // index = e.currentTarget.dataset.index
 
     let index = "";
@@ -307,7 +332,7 @@ Page({
                 // for (let item of this.data.quyuRight) {
                 //   item.state = false;
                 // }
-                this.data.quyuList[0].list = res.data;
+                this.data.quyuList[0].list =arrs.concat(res.data)
                 this.setData({
                   quyuIndex: 0,
                   quyuList: this.data.quyuList,
@@ -330,7 +355,7 @@ Page({
           // for (let item of this.data.quyuRight) {
           //   item.state = false;
           // }
-          this.data.quyuList[index].list = res.data;
+          this.data.quyuList[index].list = arrs.concat(res.data)
           this.setData({
             quyuIndex: index,
             quyuList: this.data.quyuList
@@ -368,6 +393,9 @@ Page({
     //     }
     //   }
     // );
+    this.setData({
+      quyuList:this.data.quyuList
+    })
     let arrays = this.data.quyuList;
     let arr = [];
     for (let item of arrays) {
@@ -515,13 +543,13 @@ Page({
       sessionId: wx.getStorageSync("sessionId"),
       recommendedPerson: this.data.name,
       recommendedTele: this.data.phone,
-      intentionType: this.data.typesIndex,
-      budget: this.data.yusuanId,
-      area: this.data.mainjiId,
-      intentionUnit: this.data.numberIndexId,
-      State: this.data.state,
+      intentionType: this.data.typesIndex == null?'':this.data.typesIndex,
+      budget: this.data.yusuanId == null?'':this.data.yusuanId,
+      area: this.data.mainjiId == null?'':this.data.mainjiId,
+      intentionUnit: this.data.numberIndexId == null?'':this.data.numberIndexId,
+      State: this.data.state == null?'':this.data.state,
       relation: this.data.relation,
-      intentionalRegionIds: this.data.quyuIds
+      intentionalRegionIds: this.data.quyuIds.length==0?'':this.data.quyuIds
     };
     util._get("pusher/submitSource", params).then(res => {
       if (res.code == 1) {

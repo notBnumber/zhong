@@ -136,6 +136,10 @@
       font-family: PingFang-SC-Medium;
       font-weight: bold;
       color: rgba(45, 45, 45, 1);
+      image {
+        width: 100%;
+
+      }
     }
 
     .text {
@@ -163,4 +167,9 @@ font-family:PingFang-SC-Regular;
 font-weight:bold;
 color:rgba(255,255,255,1);
   }
+}
+.rich-img {
+  width: 100% !important;
+  // height: auto !important;
+
 }

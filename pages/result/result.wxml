@@ -33,7 +33,7 @@
       </view>
     </view>
     <view class="content" hover-class="none" hover-stop-propagation="false">
-      <view class="item df" hover-class="none" hover-stop-propagation="false" wx:for="{{lists}}">
+      <view class="item df" hover-class="none" hover-stop-propagation="false" wx:for="{{lists}}" data-item='{{item}}' bindtap='hisSearch'>
         {{item}}
       </view>
     </view>

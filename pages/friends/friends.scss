@@ -329,7 +329,7 @@ van-popup {
               color: #fff;
               position: absolute;
               right: 0;
-              bottom: 0;
+              bottom: -1px;
               width: 48rpx;
               height: 20rpx;
               background: rgba(56, 198, 160, 1);
@@ -372,7 +372,7 @@ van-popup {
               color: #fff;
               position: absolute;
               right: 0;
-              bottom: 0;
+              bottom: -1px;
               width: 48rpx;
               height: 20rpx;
               background: #FF8D8D;

@@ -6,17 +6,17 @@
           <image class="logo" src="{{imgUrl+item.home.image}}" mode="aspectFill"></image>
           <view class="name">{{item.home.houseName}}</view>
           <view class="area font-Medium" hover-class="none" hover-stop-propagation="false" wx:if="{{item.type == 0}}">
-            {{item.home.minArea}}-{{item.home.maxArea}}m² / {{item.home.address}}
+            {{item.home.minArea}}-{{item.home.maxArea}}m² / {{item.home.cityName.name}}{{item.home.stateName.name}}
           </view>
           <view class="area font-Medium" hover-class="none" hover-stop-propagation="false" wx:if="{{item.type == 1}}">
-            {{item.home.area}}m² / {{item.home.address}}
+            {{item.home.area}}m² / {{item.home.cityName.name}}{{item.home.stateName.name}}
           </view>
           <view class="area font-Medium" hover-class="none" hover-stop-propagation="false" wx:if="{{item.type == 2}}">
-            {{item.home.area}}m² / {{item.home.address}}
+            {{item.home.area}}m² / {{item.home.cityName.name}}{{item.home.stateName.name}}
           </view>
           <!-- <view class="area font-Medium">{{item.address}}</view> -->
           <view class="biaoqianList">
-            <view class="biaoqian df {{items.home.state==1?'state1':''}} {{items.home.state==2?'state2':''}}" wx:for="{{item.home.tagArr}}" wx:for-item="items" wx:if="{{index<3}}">
+            <view class="biaoqian df {{index==1?'state1':''}} {{index==2?'state2':''}}" wx:for="{{item.home.tagArr}}" wx:for-item="items" wx:if="{{index<3}}">
               {{items}}
             </view>
           </view>

@@ -3,7 +3,19 @@
 
 <view class="container log-list">
   <view class="content" hover-class="none" hover-stop-propagation="false">
-    <button plain open-type='contact'> 
+    <button plain open-type='contact' wx:if="{{is}}">  
+    <view class="item" hover-class="none" hover-stop-propagation="false">
+        <image class="" src="../../images/xt01.png"></image>
+        <view class="info" hover-class="none" hover-stop-propagation="false">
+          <view class="top" hover-class="none" hover-stop-propagation="false">仲达网</view>
+          <view class="bottom" hover-class="none" hover-stop-propagation="false">
+            客服
+          </view>
+        </view>
+        <!-- <view class="time" hover-class="none" hover-stop-propagation="false">2018-12-17</view> -->
+    </view>
+      </button>
+          <button plain  wx:if="{{!is}}" bindtap='toLogin'>  
     <view class="item" hover-class="none" hover-stop-propagation="false">
         <image class="" src="../../images/xt01.png"></image>
         <view class="info" hover-class="none" hover-stop-propagation="false">
@@ -25,7 +37,7 @@
 
   <!-- <template is="wxParse" data="{{wxParseData:item}}"/> -->
   <!-- <rich-text nodes="{{item.content}}"></rich-text> -->
-          {{ item.type==0?item.subtitle:item.content}}
+          {{ item.type==0?(item.subtitle?item.subtitle:''):item.content}}
         </view>
       </view>
       <view class="time" hover-class="none" hover-stop-propagation="false">{{item.createTime}}</view>

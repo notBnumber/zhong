@@ -1,0 +1,21 @@
+/* pages/answer/answer.wxss */
+view {
+  box-sizing: border-box;
+}
+.box {
+  padding: 20rpx;
+
+}
+.title {
+font-size:30rpx;
+font-family:PingFang-SC-Medium;
+font-weight:500;
+color:rgba(54,54,54,1);
+}
+.content {
+  margin-top: 10rpx;
+  font-size:30rpx;
+  font-family:PingFang-SC-Medium;
+  font-weight:500;
+  color:rgba(54,54,54,1);
+  }

@@ -21,26 +21,10 @@ Page({
       }
     ],
     numberList: [{
-        name: "不限"
+        value: "不限",
+        id:''
       },
-      {
-        name: "一室"
-      },
-      {
-        name: "二室"
-      },
-      {
-        name: "三室"
-      },
-      {
-        name: "四室"
-      },
-      {
-        name: "五室"
-      },
-      {
-        name: "六室及以上"
-      }
+      
     ],
     typesIndex: null,
     numberIndex: null,
@@ -142,13 +126,13 @@ Page({
       return false;
     }
 
-    if(this.data.addressTip == '请选择地址') {
-      wx.showToast({
-        title: '请选择地址',
-        icon: 'none'
-      })
-      return
-    }
+    // if(this.data.addressTip == '请选择地址') {
+    //   wx.showToast({
+    //     title: '请选择地址',
+    //     icon: 'none'
+    //   })
+    //   return
+    // }
     // if(this.data.number == '') {
     //   wx.showToast({
     //     title: '请输入房号',
@@ -299,7 +283,15 @@ Page({
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function (options) {},
+  onLoad: function (options) {
+    util._get('configure/getRoomType').then(res => {
+      if (res.code == 1) {
+        this.setData({
+          numberList: this.data.numberList.concat(res.data)
+        })
+      }
+    })
+  },
 
   /**
    * 生命周期函数--监听页面初次渲染完成
@@ -311,13 +303,7 @@ Page({
    */
   onShow: function () {
 
-    util._get('configure/getRoomType').then(res => {
-      if (res.code == 1) {
-        this.setData({
-          numberList: res.data
-        })
-      }
-    })
+
   },
 
   /**

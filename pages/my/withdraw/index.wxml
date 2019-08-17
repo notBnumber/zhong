@@ -66,9 +66,12 @@
         <image src="../../../images/ts01.png"></image>
         <view class="text">提现规则</view>
         <view class="richtext">
-          <view>1.可提现金额最少为100元</view>
+          <!-- <view>1.可提现金额最少为100元</view>
           <view>2.提现时间：每月10/20/30号；</view>
-          <view> 3.提现前提必须实名认证并绑定银行卡</view>
+          <view> 3.提现前提必须实名认证并绑定银行卡</view> -->
+          <rich-text class="" nodes="{{rule}}">
+            
+          </rich-text>
         </view>
       </view>
       <image class="errIcon" src="../../../images/gb01.png" bindtap="Invitation"></image>

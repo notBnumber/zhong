@@ -9,9 +9,6 @@ Page({
     params: {},
     imgUrl: "",
     imgUrls: [
-      "https://images.unsplash.com/photo-1551334787-21e6bd3ab135?w=640",
-      "https://images.unsplash.com/photo-1551214012-84f95e060dee?w=640",
-      "https://images.unsplash.com/photo-1551446591-142875a901a1?w=640"
     ],
     isshoucang: false,
     info: {
@@ -31,54 +28,105 @@ Page({
     },
     list: [],
     options: "",
-    content: ""
+    content: "",
+    yes:false,
+    show:false
+  },
+  toLogin() {
+      wx.navigateTo({
+        url: '/pages/login/login'
+      })
+  },
+  toMessage() {
+    if(wx.getStorageSync('sessionId')) {
+      wx.switchTab({
+        url: '/pages/logs/logs',
+        success: (result)=>{
+          
+        },
+        fail: ()=>{},
+        complete: ()=>{}
+      });
+    } else {
+      wx.navigateTo({
+        url: '/pages/login/login'
+      })
+    }
+  },
+  getInput(e) {
+    this.setData({
+      show:true
+    });
   },
   chooseContent(e) {
     this.setData({
-      content: e.detail.value
+      content: e.detail.value,
     });
   },
+  onClose() {
+    this.setData({ show: false });
+  },
   send(e) {
-    if (this.data.content == "") {
+
+    if (wx.getStorageSync("sessionId")) {
+      if (this.data.content == "") {
+        wx.showToast({
+          title: "请输入评论内容",
+          icon: "none"
+        });
+      } else {
+        let params = {
+          sessionId: wx.getStorageSync("sessionId"),
+          content: this.data.content,
+          type: this.options.type,
+          homeId: this.options.id
+        };
+        util._post("discuss/submitDiscuss", params).then(res => {
+          if (res.code == 1) {
+            wx.showToast({
+              title: "评论成功",
+              icon: "success"
+            });
+            this.setData({
+              content: "",
+              show:false
+            });
+            this.chooseContent(e);
+            util
+              ._post(
+                "discuss/page?type=" +
+                  this.data.options.type +
+                  "&homeId=" +
+                  this.data.options.id +
+                  "&pageNumber=1&pageSize=999"
+              )
+              .then(res => {
+                if (res.code == 1) {
+                  this.setData({
+                    list: res.data.list
+                  });
+                }
+              });
+          }
+        });
+      }
+    } else {
       wx.showToast({
-        title: "请输入评论内容",
+        title: "请先登录",
         icon: "none"
       });
-    } else {
-      let params = {
-        sessionId: wx.getStorageSync("sessionId"),
-        content: this.data.content,
-        type: this.options.type,
-        homeId: this.options.id
-      };
-      util._post("discuss/submitDiscuss", params).then(res => {
-        if (res.code == 1) {
-          wx.showToast({
-            title: "评论成功",
-            icon: "success"
-          });
-          this.setData({
-            content: ""
-          });
-          this.chooseContent(e);
-          util
-            ._post(
-              "discuss/page?type=" +
-                this.data.options.type +
-                "&homeId=" +
-                this.data.options.id +
-                "&pageNumber=1&pageSize=999"
-            )
-            .then(res => {
-              if (res.code == 1) {
-                this.setData({
-                  list: res.data.list
-                });
-              }
-            });
-        }
-      });
+      setTimeout(() => {
+        // wx({
+        //   url: '/pages/login/login'
+        // })
+        wx.navigateTo({
+          url: "/pages/login/login"
+        });
+      }, 1600);
     }
+
+
+
   },
   shoucang() {
     // this.setData({
@@ -227,6 +275,25 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
+
+    if(wx.getStorageSync('sessionId')) {
+      util._post(
+        "newhome/getIsCollection?type=" +
+          options.type +
+          "&homeId=" +
+          options.id 
+      ).then(res=>{
+        this.setData({
+          isshoucang: res.data,
+          yes:true
+        })
+      })
+    } else {
+      this.setData({
+        yes:false
+      })
+    }
+
     console.log(options);
     this.setData({
       options: options
@@ -246,79 +313,66 @@ Page({
     //     })
     //   }
     // })
-    if (wx.getStorageSync("sessionId")) {
-      this.setData({
-        params: options
-      });
-      let params = {
-        type:options.type,
-        homeId:options.id,
-        pageNumber:1,
-        pageSize:999
-      }
-      Promise.all([
-        util._post(
-          "newhome/houseDetail?type=" + options.type + "&homeId=" + options.id
-        ),
-        util._post(
-          "newhome/getIsCollection?type=" +
-            options.type +
-            "&homeId=" +
-            options.id +
-            "&sessionId=" +
-            wx.getStorageSync("sessionId")
-        ),
-        
-        util._post(
-          "discuss/page",params
-        )
-      ])
-        .then(result => {
-          console.log(app.globalData.imgUrl);
-          // if(let arr = result[0].data.imageName.split(",");)
-          let arr =[]
-          if(result[0].data.imageName!=null) {
-           arr = result[0].data.imageName.split(",");
-          }
-          if(result[0].data.tagName!=null) {
-            result[0].data.tagArr = result[0].data.tagName.split(",");
-           }
-          // for(let item of arr ) {
-          //   item = app.globalData.imgUrl+item
-          //   console.log(item,'???');
-
-          // }
-
-          // console.log(this.result[0], "轮播图数组");
-
-          this.setData({
-            info: result[0].data,
-            isshoucang: result[1].data,
-            list: result[2].data.list,
-            imgUrl: app.globalData.imgUrl,
-            imgUrls: arr
-          });
-        })
-        .catch(e => {
-          console.log(e);
-          this.setData({
-            info: {}
-          });
-        });
-    } else {
-      wx.showToast({
-        title: "请先登录",
-        icon: "none"
-      });
-      setTimeout(() => {
-        // wx({
-        //   url: '/pages/login/login'
-        // })
-        wx.navigateTo({
-          url: "/pages/login/login"
-        });
-      }, 1600);
+    this.setData({
+      params: options
+    });
+    let params = {
+      type:options.type,
+      homeId:options.id,
+      pageNumber:1,
+      pageSize:999
     }
+    Promise.all([
+      util._post(
+        "newhome/qianDetail?type=" + options.type + "&homeId=" + options.id
+      ),
+
+      
+      util._post(
+        "discuss/page",params
+      )
+    ])
+      .then(result => {
+        console.log(app.globalData.imgUrl);
+        // if(let arr = result[0].data.imageName.split(",");)
+        let arr =[]
+        if(result[0].data.imageName!=null) {
+         arr = result[0].data.imageName.split(",");
+        }
+        if(result[0].data.tagName!=null) {
+          result[0].data.tagArr = result[0].data.tagName.split(",");
+         }
+         if(result[0].data.clientIntroduction) {
+
+           result[0].data.clientIntroduction = result[0].data.clientIntroduction.replace(/\<img/gi,   '<img class="rich-img" ' );
+         }
+         if(result[0].data.Introduction) {
+           result[0].data.Introduction = result[0].data.Introduction.replace(/\<img/gi,   '<img class="rich-img" ' );
+
+         }
+
+        // for(let item of arr ) {
+        //   item = app.globalData.imgUrl+item
+        //   console.log(item,'???');
+
+        // }
+
+        // console.log(this.result[0], "轮播图数组");
+
+        this.setData({
+          info: result[0].data,
+          list: result[1].data.list,
+          imgUrl: app.globalData.imgUrl,
+          imgUrls: arr
+        });
+      })
+      .catch(e => {
+        console.log(e);
+        this.setData({
+          info: {}
+        });
+      });
+
   },
 
   /**

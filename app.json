@@ -41,7 +41,8 @@
     "pages/findResult/findResult",
     "pages/banner/banner",
     "pages/searchDetail/searchDetail",
-    "pages/map/map"
+    "pages/map/map",
+    "pages/answer/answer"
   ],
   "window": {
     "backgroundTextStyle": "dark",

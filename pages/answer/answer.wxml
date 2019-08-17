@@ -1,0 +1,9 @@
+<!--pages/answer/answer.wxml-->
+<view class="box">
+  <view class="title" hover-class="none" hover-stop-propagation="false">
+    {{question}}
+</view>
+<view class="content" hover-class="none" hover-stop-propagation="false">
+  {{answer}}
+</view>
+</view>

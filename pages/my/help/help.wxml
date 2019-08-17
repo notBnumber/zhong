@@ -3,9 +3,9 @@
   <view class="list">
     <view wx:for="{{dataList}}" wx:key="{{index}}" bindtap="solveTap" data-index="{{index}}">
       <view class="question font-Medium">{{index+1}}.{{item.question}}</view>
-      <view class="answer font-Medium" wx:if="{{currentIndex==index}}">
+      <!-- <view class="answer font-Medium" wx:if="{{currentIndex==index}}">
         {{item.answer}}
-      </view>
+      </view> -->
     </view>
     <view class="found font-Medium">没有您想要的问题？<text class="font-Medium" bindtap="goFeedBack">去反馈</text></view>
   </view>

@@ -18,6 +18,10 @@ Page({
     this.setData({
       currentIndex: e.currentTarget.dataset.index
     })
+    let obj = this.data.dataList[e.currentTarget.dataset.index]
+    wx.navigateTo({
+      url: '/pages/answer/answer?question='+obj.question+'&answer='+obj.answer
+    })
   },
   goFeedBack(){
     wx.navigateTo({ url: '../feedback/feedback' });

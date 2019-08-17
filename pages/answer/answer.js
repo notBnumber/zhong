@@ -1,41 +1,22 @@
-// pages/my/withdraw/index.js
-const util = require("../../../utils/util.js");
-
-const app = getApp()
+// pages/answer/answer.js
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    isProup: false,
-    height: app.globalData.height,
-    info:{},
-    rule:null
+    question:'',
+    answer:''
   },
 
-  pageTo({currentTarget: {dataset}}){
-    // console.log(dataset);
-    wx.navigateTo({
-      url: dataset.url
-    })
-  },
-  Invitation(){
-    this.setData({
-      isProup: !this.data.isProup
-    })
-  },
-  goback(){
-    wx.navigateBack()
-  },
-  cashTap(){
-    wx.navigateTo({ url: '../drawMoney/drawMoney' });
-  },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    this.setData({
+      question:options.question,
+      answer:options.answer
+    })
   },
 
   /**
@@ -49,16 +30,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    this.setData({
-      info:wx.getStorageSync('money')
-    })
-    
-    util._get('bank/card/rule').then(res=>{
-      res.data[2].value = res.data[2].value.replace(/\<img/gi,   '<img class="rich-img" ' );
-      this.setData({
-        rule:res.data[2].value
-      })
-    })
+
   },
 
   /**

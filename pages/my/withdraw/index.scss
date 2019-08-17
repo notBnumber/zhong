@@ -1,4 +1,7 @@
 .container{
+  .rich-img {
+    width: 100%;
+  }
   min-height: 100vh;
   background-color: #F7F8F8;
   .tabs{
@@ -168,7 +171,6 @@
       .Exhibition{
         background-color: #fff;
         width: 550rpx;
-        height: 531rpx;
         border-radius: 10rpx;
         text-align: center;
         image{

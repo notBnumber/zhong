@@ -106,6 +106,15 @@ Page({
       });
       return false
     }
+    var myreg = /^(((13[0-9]{1})|(15[0-9]{1})|(18[0-9]{1})|(17[0-9]{1}))+\d{8})$/;
+    if (!myreg.test(this.data.phone)) {
+      wx.showToast({
+        title: "手机号有误！",
+        icon: "none"
+      });
+      return false;
+    }
+
     if(this.data.code == '') {
       wx.showToast({
         title: "请输入验证码",

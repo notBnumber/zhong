@@ -1,16 +1,25 @@
 <view class="box" hover-class="none" hover-stop-propagation="false">
-  <map id="map" longitude="113.324520" latitude="23.099994" scale="14" bindcontroltap="controltap" markers="{{markers}}" bindmarkertap="markertap" polyline="{{polyline}}" bindregionchange="regionchange" show-location style="width: 100%; height: 100vh;"></map>
-  <view class="share" hover-class="none" hover-stop-propagation="false">
-    <image class="" src="../../images/share22.png" mode="aspectFit" lazy-load="false" binderror="" bindload="">
-      <button open-type="share"></button>
-    </image>
-  </view>
-  <view class="address" hover-class="none" hover-stop-propagation="false">
-    <view class="title" hover-class="none" hover-stop-propagation="false">
+
+  <map id="map" longitude="113.324520" latitude="23.099994" scale="14" bindcontroltap="controltap" markers="{{markers}}" bindmarkertap="markertap"  bindregionchange="regionchange" show-location style="width: 100%; height: 100vh;">
+  
+          <button open-type="share" plain='true' > 分享
+    </button>
+  
+  <!-- <cover-view class="share" hover-class="none" hover-stop-propagation="false">
+        <view class="" hover-class="none" hover-stop-propagation="false" style="background-image:url(http://47.97.158.166/zhongda/upload/qrcode/share22.png);">
+          
+        </view>
+           <cover-image class="" src="http://47.97.158.166/zhongda/upload/qrcode/share22.png" mode="aspectFit" lazy-load="false" binderror="" bindload="">
+
+    </cover-image>
+  </cover-view> -->
+  <cover-view class="address" hover-class="none" hover-stop-propagation="false">
+    <cover-view class="title" hover-class="none" hover-stop-propagation="false">
       {{title}}
-    </view>
-    <view class="content" hover-class="none" hover-stop-propagation="false">
+    </cover-view>
+    <cover-view class="content" hover-class="none" hover-stop-propagation="false">
       {{content}}
-    </view>
-  </view>
+    </cover-view>
+  </cover-view>
+  </map>
 </view>

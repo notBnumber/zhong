@@ -85,23 +85,23 @@
           {{item.houseName}}
         </view>
         <view class="address" hover-class="none" hover-stop-propagation="false" wx:if="{{tabIndex == 0}}">
-          {{item.minArea}}-{{item.maxArea}}m² / {{item.address}}
+          {{item.minArea}}-{{item.maxArea}}m² / {{item.cityName.name}}{{item.stateName.name}}
         </view>
                 <view class="address" hover-class="none" hover-stop-propagation="false" wx:if="{{tabIndex == 1}}">
-          {{item.area}}m² / {{item.address}}
+          {{item.area}}m² / {{item.cityName.name}}{{item.stateName.name}}
         </view>
                         <view class="address" hover-class="none" hover-stop-propagation="false" wx:if="{{tabIndex == 2}}">
-          {{item.area}}m² / {{item.address}}
+          {{item.area}}m² / {{item.cityName.name}}{{item.stateName.name}}
         </view>
         <view class="biaoqianList" hover-class="none" hover-stop-propagation="false">
-          <view class="biaoqian df {{items.state==1?'state1':''}} {{items.state==2?'state2':''}}" hover-class="none" hover-stop-propagation="false" wx:for="{{item.tagArr}}"  wx:key="key" wx:for-item="items" wx:if="{{index<=2}}">
+          <view class="biaoqian df {{index==1?'state1':''}} {{index==2?'state2':''}}" hover-class="none" hover-stop-propagation="false" wx:for="{{item.tagArr}}"  wx:key="key" wx:for-item="items" wx:if="{{index<=2}}">
             {{items}}
           </view>
         </view>
         <view class="yongjin" hover-class="none" hover-stop-propagation="false" wx:if="{{tabIndex == 0}}">
           <view class="yongjinLeft" hover-class="none" hover-stop-propagation="false">可获佣金：</view>
           <view class="yongjinRight" hover-class="none" hover-stop-propagation="false">
-            总价*{{item.customerMoney}}%
+            {{item.customerMoney}}
           </view>
         </view>
         <view class="price" hover-class="none" hover-stop-propagation="false" wx:if="{{tabIndex == 0}}">

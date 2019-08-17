@@ -80,9 +80,9 @@
                     <!-- <view class=" df " hover-class="none" hover-stop-propagation="false" wx:for="{{quyuList}}"> -->
                       <view class="rightItem df yes" wx:for="{{quyuCheck}}" wx:for-item="items" wx:key="{{index}}" data-index='{{index}}' data-name='{{items.name}}'  data-id='{{items.id}}' bindtap='del' wx:if="{{items.state}}"> 
                         {{items.name}}
-                      </view>
                       <view class="{{items.state == true ?'yes' :''}} df  " hover-class="none" hover-stop-propagation="false" wx:if="{{items.state == true}}">
                         ×
+                      </view>
                       </view>
                     <!-- </view> -->
                   </view>

@@ -5,7 +5,7 @@ const util = require("../../utils/util.js");
 
 Page({
   data: {
-    city:'',
+    city: "",
     current: null,
     motto: "Hello World",
     userInfo: {},
@@ -92,13 +92,13 @@ Page({
     num: 1
   },
   // 轮播图广告
-  banner(e) {  
+  banner(e) {
     // e.currentTarget.dataset.url
     console.log(e.currentTarget.dataset.url);
-    
+
     wx.navigateTo({
-      url: '/pages/banner/banner?url='+e.currentTarget.dataset.url
-    })
+      url: "/pages/banner/banner?url=" + e.currentTarget.dataset.url
+    });
   },
   // 跳转推客
   tk() {
@@ -166,7 +166,7 @@ Page({
     let params = {
       pageNumber: 1,
       pageSize: 20,
-      cityId: 1
+      cityId: wx.getStorageSync("cityId")
     };
     util
       ._get("configure/getNewHome", params)
@@ -193,7 +193,7 @@ Page({
     let params = {
       pageNumber: 1,
       pageSize: 20,
-      cityId: 1
+      cityId: wx.getStorageSync("cityId")
     };
     util
       ._get("configure/getSecondHome", params)
@@ -220,7 +220,7 @@ Page({
     let params = {
       pageNumber: 1,
       pageSize: 20,
-      cityId: 1
+      cityId: wx.getStorageSync("cityId")
     };
     util
       ._get("configure/getRentingHome", params)
@@ -252,7 +252,7 @@ Page({
     let params = {
       pageNumber: num,
       pageSize: 20,
-      cityId: 1,
+      cityId: wx.getStorageSync("cityId"),
       keyword: wx.getStorageSync("keyword")
     };
     if (this.data.tabIndex == 0) {
@@ -297,49 +297,90 @@ Page({
     // }
   },
   onShow(options) {
-    console.log(wx.getStorageSync('city'));
-    
+    let arr = [222,333]
+    var array = [
+      {
+        id: 1,
+        name: "小明"
+      }
+    ];
+    // let y = 0;
+    // for (;arr[y];){
+    //   console.log(arr[y],'///');
+      
+    // }
+    // //旧key到新key的映射
+    var keyMap = {
+      id: "value",
+      name: "label"
+    };
+
+    for (var i = 0; i < array.length; i++) {
+      var obj = array[i];
+      for (var key in obj) {
+
+        var newKey = keyMap[key];
+
+        if (newKey) {
+          obj[newKey] = obj[key];
+          delete obj[key];
+        }
+      }
+    }
+    // console.log(array, 1);
+    var result = array.map(item => {
+      console.log(item,'map');
+      
+      return { value: item.id, label: item.name };
+    });
+    console.log(result);
+
+    console.log(this.data.tabIndex, "???");
+    this.setData({
+      tabIndex: 0
+    });
+    // this.init(1)
     // console.log(this.data.globalData);
     // 取得全局App
-      
-      // if(wx.getStorageSync('sessionId')) {
-        app.fun();
 
+    // if(wx.getStorageSync('sessionId')) {
+    app.fun();
+
+    this.setData({
+      num: 1,
+      tabIndex: app.globalData.indexParams,
+      city: wx.getStorageSync("city"),
+    });
+    Promise.all([
+      util._get("configure/getPageImage"),
+      util._get("configure/getTransaction"),
+      this.init(this.data.num)
+    ])
+      .then(result => {
+        console.log(result);
+        for (let item of result[2].data.list) {
+          if (item.tagName != null) {
+            item.tagArr = item.tagName.split(",");
+          }
+        }
         this.setData({
-          num: this.data.num,
-          tabIndex: app.globalData.indexParams,
-          city:wx.getStorageSync('city')
+          imgUrl: app.globalData.imgUrl,
+          imgUrls: result[0].data,
+          list: result[1].data,
+          hotList: result[2].data.list
         });
-        Promise.all([
-          util._get("configure/getPageImage"),
-          util._get("configure/getTransaction"),
-          this.init(this.data.num)
-        ])
-          .then(result => {
-            console.log(result);
-            for (let item of result[2].data.list) {
-              if (item.tagName != null) {
-                item.tagArr = item.tagName.split(",");
-              }
-            }
-            this.setData({
-              imgUrl: app.globalData.imgUrl,
-              imgUrls: result[0].data,
-              list: result[1].data,
-              hotList: result[2].data.list
-            });
-          })
-          .catch(e => {
-            console.log(e);
-            this.setData({
-              hotList: []
-            });
-          });
-      // } else {
-      //   wx.navigateTo({
-      //     url: '/pages/login/login'
-      //   })
-      // }
+      })
+      .catch(e => {
+        console.log(e);
+        this.setData({
+          hotList: []
+        });
+      });
+    // } else {
+    //   wx.navigateTo({
+    //     url: '/pages/login/login'
+    //   })
+    // }
   },
   getUserInfo: function(e) {
     console.log(e);
@@ -353,7 +394,7 @@ Page({
   tabCheck(e) {
     this.setData({
       tabIndex: e.currentTarget.dataset.index,
-      hotList:[]
+      hotList: []
     });
     if (this.data.tabIndex == 0) {
       this.getNewHouse();

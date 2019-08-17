@@ -338,7 +338,20 @@ Page({
   // 区域左边
   checkQuyu(e, state) {
     console.log(e, state);
-
+    let arrs = [{lng	:	'',
+		
+    name	:	'不限',
+        
+    leveltype	:	'',
+        
+    id	:	'',
+        
+    keyword	:	'',
+        
+    parentid	:	'1',
+        
+    lat	:	''
+    }]
     // index = e.currentTarget.dataset.index
 
     let index = "";
@@ -362,7 +375,8 @@ Page({
                   // for (let item of this.data.quyuRight) {
                   //   item.state = false;
                   // }
-                  this.data.quyuList[0].list = res.data
+
+                  this.data.quyuList[0].list = arrs.concat(res.data)
                   this.setData({
                     quyuIndex: 0,
                     quyuList: this.data.quyuList,
@@ -385,7 +399,7 @@ Page({
           // for (let item of this.data.quyuRight) {
           //   item.state = false;
           // }
-          this.data.quyuList[index].list = res.data
+          this.data.quyuList[index].list = arrs.concat(res.data)
           this.setData({
             quyuIndex: index,
             quyuList: this.data.quyuList
@@ -414,6 +428,28 @@ Page({
     // console.log(this.data.quyuRight[index]);
     // this.data.quyuCheck.push(this.data.quyuRight[index])
     this.data.quyuList[quyuIndex].list[index].state = !this.data.quyuList[quyuIndex].list[index].state
+    let arrs = [{lng	:	'',
+		
+      name	:	'不限',
+          
+      leveltype	:	'',
+          
+      id	:	'',
+          
+      keyword	:	'',
+          
+      parentid	:	'1',
+          
+      lat	:	''
+      }]
+      // for(let item of this.data.quyuList) {
+      //   item.list = arrs.concat(item.list)
+      // }
+      console.log(this.data.quyuList,'叽叽叽叽hh');
+      
+    this.setData({
+      quyuList:this.data.quyuList
+    })
     // let arr = this.data.quyuList[quyuIndex].list.filter(
     //   (item, index, arr) => {
     //     if(item.state ) {
@@ -425,6 +461,7 @@ Page({
     let arr=[]
     for(let item of arrays) {
       if (item.list) {
+
         for(let items of item.list) {
           if(items.state) {
             arr.push(items)
@@ -510,9 +547,11 @@ Page({
         : e.currentTarget.dataset.index;
     console.log(this.data.specialList[state]);
     util._get("configure/getType?type=" + state).then(res => {
+      let arr = [{name:'不限',id:'',type:true}]
+      // return
       this.setData({
         specialIndex: state,
-        specialRight: res.data,
+        specialRight: arr.concat(res.data),
         specialIndex:state
       });
     });
@@ -630,14 +669,17 @@ Page({
       });
       // this.checkSpecial(e)
       util._get("configure/getType?type=0").then(res => {
-        this.data.specialList[0].list = res.data
+        let arr = [{name:'不限',id:'',type:true}]
+        this.data.specialList[0].list = arr.concat(res.data)
         this.setData({
           specialList: this.data.specialList,
           specialIndex:0
         });
       });
       util._get("configure/getType?type=1").then(res => {
-        this.data.specialList[1].list = res.data
+        let arr = [{name:'不限',id:'',type:true}]
+
+        this.data.specialList[1].list = arr.concat(res.data)
         this.setData({
           specialList: this.data.specialList,
           specialIndex:0

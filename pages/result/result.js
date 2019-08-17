@@ -187,6 +187,64 @@ Page({
       }
     ]
   },
+  hisSearch(e) {
+    
+    if (this.data.checkIndex == 0) {
+      util
+        ._get("newhome/getNewHomePage?keyword=" + e.currentTarget.dataset.item+'&cityId='+wx.getStorageSync('cityId'))
+        .then(res => {
+          this.setData({
+            resultList: res.data.list,
+            isSearch:true
+          });
+          this.searchList()
+          if(res.data.list.length == 0) {
+            wx.showToast({
+              title: '暂无数据',
+              icon: 'none'
+            })
+          }
+        });
+    } else if (this.data.checkIndex == 1) {
+      util
+        ._get("secondhome/getSecondHome?keyword=" + e.currentTarget.dataset.item+'&cityId='+wx.getStorageSync('cityId'))
+        .then(res => {
+
+          this.setData({
+            resultList: res.data.list,
+            isSearch:true
+
+          });
+          this.searchList()
+
+          if(res.data.list.length == 0) {
+            wx.showToast({
+              title: '暂无数据',
+              icon: 'none'
+            })
+          }
+        });
+    } else {
+      util
+        ._get("rentinghome/getRentingHome?keyword=" + e.currentTarget.dataset.item+'&cityId='+wx.getStorageSync('cityId'))
+        .then(res => {
+
+          this.setData({
+            resultList: res.data.list.keyword,
+            isSearch:true
+
+          });
+          this.searchList()
+
+          if(res.data.list.length == 0) {
+            wx.showToast({
+              title: '暂无数据',
+              icon: 'none'
+            })
+          }
+        });
+    }
+  },
   searchList() {
     this.data.lists.push(this.data.keyword)
     wx.setStorageSync('searchList', this.data.lists)
@@ -199,7 +257,7 @@ Page({
     
     if (this.data.checkIndex == 0) {
       util
-        ._get("newhome/getNewHomePage?keyword=" + this.data.keyword)
+        ._get("newhome/getNewHomePage?keyword=" + this.data.keyword+'&cityId='+wx.getStorageSync('cityId'))
         .then(res => {
           this.setData({
             resultList: res.data.list,
@@ -214,7 +272,7 @@ Page({
         });
     } else if (this.data.checkIndex == 1) {
       util
-        ._get("secondhome/getSecondHome?keyword=" + this.data.keyword)
+        ._get("secondhome/getSecondHome?keyword=" + this.data.keyword+'&cityId='+wx.getStorageSync('cityId'))
         .then(res => {
 
           this.setData({
@@ -232,7 +290,7 @@ Page({
         });
     } else {
       util
-        ._get("rentinghome/getRentingHome?keyword=" + this.data.keyword)
+        ._get("rentinghome/getRentingHome?keyword=" + this.data.keyword+'&cityId='+wx.getStorageSync('cityId'))
         .then(res => {
 
           this.setData({

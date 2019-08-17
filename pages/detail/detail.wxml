@@ -30,12 +30,12 @@
       {{info.area}}m²
     </view>
     <view class="biaoqianList" hover-class="none" hover-stop-propagation="false">
-      <view class="biaoqian df {{item.state == 1?'state1':''}}  {{item.state == 2?'state2':''}}" hover-class="none" hover-stop-propagation="false" wx:for="{{info.tagArr}}">
+      <view class="biaoqian df {{index == 1?'state1':''}}  {{index == 2?'state2':''}}" hover-class="none" hover-stop-propagation="false" wx:for="{{info.tagArr}}">
         {{item}}
       </view>
     </view>
     <view class="Commission" hover-class="none" hover-stop-propagation="false">
-      <view class="p1">可获佣金：</view>
+      <view class="p1" wx:if="{{options.type ==0}}">可获佣金：</view>
       <view class="p2" wx:if="{{options.type ==0}}">{{info.customerMoney}}</view>
     </view>
     <view class="money" hover-class="none" hover-stop-propagation="false" wx:if="{{options.type ==0}}">
@@ -63,49 +63,55 @@
     <view class="item" hover-class="none" hover-stop-propagation="false" wx:if="{{options.type == 2}}">
       面积：{{info.area}}m²
     </view>
-        <view class="item" hover-class="none" hover-stop-propagation="false" wx:if="{{options.type == 1}}">
+    <view class="item" hover-class="none" hover-stop-propagation="false" wx:if="{{options.type == 1}}">
       总楼层：{{info.totalFloor}}
     </view>
-            <view class="item" hover-class="none" hover-stop-propagation="false" wx:if="{{options.type == 1}}">
+    <view class="item" hover-class="none" hover-stop-propagation="false" wx:if="{{options.type == 1}}">
+      户型：{{info.room}}房{{info.office}}厅{{info.wei}}卫{{info.balcony}}阳台
+    </view>
+    <view class="item" hover-class="none" hover-stop-propagation="false" wx:if="{{options.type == 1}}">
       朝向：{{info.orientation}}
     </view>
-            <view class="item" hover-class="none" hover-stop-propagation="false" wx:if="{{options.type == 1}}">
+    <view class="item" hover-class="none" hover-stop-propagation="false" wx:if="{{options.type == 1}}">
       装修：{{info.renovation}}
     </view>
-            <view class="item" hover-class="none" hover-stop-propagation="false" wx:if="{{options.type == 1}}">
+    <view class="item" hover-class="none" hover-stop-propagation="false" wx:if="{{options.type == 1}}">
       家私：{{info.property}}
     </view>
-            <view class="item" hover-class="none" hover-stop-propagation="false" wx:if="{{options.type == 1}}">
+    <view class="item" hover-class="none" hover-stop-propagation="false" wx:if="{{options.type == 1}}">
       家电：{{info.electrical}}
     </view>
-    
-
-          <view class="item" hover-class="none" hover-stop-propagation="false" wx:if="{{options.type == 2}}">
+    <view class="item" hover-class="none" hover-stop-propagation="false" wx:if="{{options.type == 2}}">
       总楼层：{{info.totalFloor}}
     </view>
-            <view class="item" hover-class="none" hover-stop-propagation="false" wx:if="{{options.type == 2}}">
+    <view class="item" hover-class="none" hover-stop-propagation="false" wx:if="{{options.type == 2}}">
+      户型：{{info.room}}房{{info.office}}厅{{info.wei}}卫{{info.balcony}}阳台
+    </view>
+    <view class="item" hover-class="none" hover-stop-propagation="false" wx:if="{{options.type == 2}}">
       朝向：{{info.orientation}}
     </view>
-            <view class="item" hover-class="none" hover-stop-propagation="false" wx:if="{{options.type == 2}}">
+    <view class="item" hover-class="none" hover-stop-propagation="false" wx:if="{{options.type == 2}}">
       装修：{{info.renovation}}
     </view>
-            <view class="item" hover-class="none" hover-stop-propagation="false" wx:if="{{options.type == 2}}">
+    <view class="item" hover-class="none" hover-stop-propagation="false" wx:if="{{options.type == 2}}">
       家私：{{info.property}}
     </view>
-            <view class="item" hover-class="none" hover-stop-propagation="false" wx:if="{{options.type == 2}}">
+    <view class="item" hover-class="none" hover-stop-propagation="false" wx:if="{{options.type == 2}}">
       家电：{{info.electrical}}
     </view>
-
-
     <view class="item" hover-class="none" hover-stop-propagation="false" wx:for="{{info.useName}}" wx:for-item="items">
       用途：{{items.name}}
     </view>
     <view class="item" hover-class="none" hover-stop-propagation="false" wx:for="{{info.special}}" wx:for-item="items">
       特色：{{items.name}}
     </view>
-    <view class="word" hover-class="none" hover-stop-propagation="false">
+    <view class="word" hover-class="none" hover-stop-propagation="false" wx:if="{{options.type == 0}}">
       <rich-text class="" nodes="{{info.clientIntroduction}}"></rich-text>
     </view>
+    <view class="word" hover-class="none" hover-stop-propagation="false" wx:else>
+      <rich-text class="" nodes="{{info.Introduction}}"></rich-text>
+    </view>
+    <!-- Introductio -->
   </view>
   <view class="comment" hover-class="none" hover-stop-propagation="false">
     <view class="title" hover-class="none" hover-stop-propagation="false">
@@ -120,7 +126,7 @@
           </view>
           <view class="itemTopRight" hover-class="none" hover-stop-propagation="false">
             <view class="tt" hover-class="none" hover-stop-propagation="false">
-              {{item.account[0].mobile}}
+              {{item.account[0].nick}}
             </view>
             <view class="tb" hover-class="none" hover-stop-propagation="false">
               {{item.createTime}}
@@ -135,14 +141,26 @@
   </view>
   <view class="send">
     <view class="left" hover-class="none" hover-stop-propagation="false">
-      <image class="" src="../../images/comment_ic01.png" mode="widthFix" lazy-load="false" binderror="" bindload="">
-        <button open-type="contact"></button>
-      </image>
-      <image class="" src="../../images/fexing__ic2.png" mode="widthFix" lazy-load="false" binderror="" bindload="">
+      <image class="" src="../../images/comment_ic01.png" mode="widthFix" lazy-load="false" bindtap='toMessage'></image>
+      <image class="yes" src="../../images/fexing__ic2.png" mode="widthFix" lazy-load="false" binderror="" bindload="" wx:if="{{yes}}">
         <button open-type='share'></button>
       </image>
+      <image class="" src="../../images/fexing__ic2.png" mode="widthFix" lazy-load="false" binderror="" bindload="" wx:else bindtap='toLogin'></image>
     </view>
-    <input type="text" value='{{content}}' bindinput='chooseContent' placeholder="请输入您对房源的评价" placeholder-class="input-placeholder" disabled="{{false}}" maxlength="140"></input>
-    <view class="btn df" bindtap='send'>在线咨询</view>
+    <input type="text" bindtap='getInput' placeholder="请输入您对房源的评价" placeholder-class="input-placeholder" disabled maxlength="140" wx:if="{{!show}}"></input>
+    <view class="btn df">
+      <button open-type="contact"></button>
+      在线咨询
+    </view>
   </view>
+  <van-popup show="{{ show }}" bind:close="onClose" position="bottom" >
+    <view class="popup" hover-class="none" hover-stop-propagation="false" >
+      <textarea id="textarea"   cursor-spacing='2000' adjust-position="{{true}}" type='text' placeholder="说出您对房源的评价" value="{{content}}" maxlength='50' fixed="{{true}}"   bindinput='chooseContent' focus="{{show}}"   placeholder-class="{{show?'text-placeholder':''}}"/>
+      <view class="box" hover-class="none" hover-stop-propagation="false">
+        <text class="" selectable="false" space="false" decode="false">{{content.length}}/50</text>
+        <view class="submit df" hover-class="none" hover-stop-propagation="false" bindtap='send'>发送</view>
+      </view>
+    </view>
+    <!-- <input type="text" placeholder-style="input-placeholders" disabled maxlength="140" value="{{content}}"  focus="{{show}}"></input> -->
+  </van-popup>
 </view>
