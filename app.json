@@ -1,6 +1,7 @@
 {
   "pages": [
     "pages/index/index",
+    "pages/my/index/index",
     "pages/detail/detail",
     "pages/houseDetail/houseDetail",
     "pages/panInfo/panInfo",
@@ -19,7 +20,6 @@
     "pages/login/login",
     "pages/chooseCity/chooseCity",
     "pages/bindPhoe/bindPhoe",
-    "pages/my/index/index",
     "pages/my/myinfo/index",
     "pages/my/changeName/index",
     "pages/my/changePhone/index",
@@ -42,7 +42,8 @@
     "pages/banner/banner",
     "pages/searchDetail/searchDetail",
     "pages/map/map",
-    "pages/answer/answer"
+    "pages/answer/answer",
+    "pages/adv/adv"
   ],
   "window": {
     "backgroundTextStyle": "dark",

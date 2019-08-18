@@ -319,102 +319,117 @@ Page({
       }
 
       console.log("初始化");
+      let baseArr = [{lng: "", name: "不限", leveltype: '', id: '', keyword: "", parentid: '', lat: ""}]
       util._get("configure/getAllArea?areaId=" + fuckId).then(res => {
         if (res.code == 1) {
           this.setData({
             quyuIndex: 0,
-            quyuList: res.data
+            quyuList: baseArr.concat(res.data)
           });
-          util
-            ._get("configure/getAllArea?areaId=" + res.data[0].id)
-            .then(res => {
-              if (res.code == 1) {
-                // for (let item of this.data.quyuRight) {
-                //   item.state = false;
-                // }
-                this.data.quyuList[0].list =arrs.concat(res.data)
-                this.setData({
-                  quyuIndex: 0,
-                  quyuList: this.data.quyuList,
-                  quId: this.data.quyuList[0].id
-                });
-              }
-            });
+          // util
+          //   ._get("configure/getAllArea?areaId=")
+          //   .then(res => {
+          //     if (res.code == 1) {
+          //       // for (let item of this.data.quyuRight) {
+          //       //   item.state = false;
+          //       // }
+          //       this.data.quyuList[0].list =arrs.concat(res.data)
+          //       this.setData({
+          //         quyuIndex: 0,
+          //         quyuList: this.data.quyuList,
+          //         quId: this.data.quyuList[0].id
+          //       });
+          //     }
+          //   });
         }
       });
 
       // index = e.currentTarget.dataset.index
     } else {
-      console.log("左边");
+      console.log("左边",e.currentTarget.dataset.index);
 
       let id = e.currentTarget.dataset.id;
       let index = e.currentTarget.dataset.index;
 
-      util._get("configure/getAllArea?areaId=" + id).then(res => {
-        if (res.code == 1) {
-          // for (let item of this.data.quyuRight) {
-          //   item.state = false;
-          // }
-          this.data.quyuList[index].list = arrs.concat(res.data)
-          this.setData({
-            quyuIndex: index,
-            quyuList: this.data.quyuList
-          });
-        }
-      });
-      console.log(this.data.quyuList[this.data.quyuIndex]);
+      if(index!=0) {
+        util._get("configure/getAllArea?areaId=" + id).then(res => {
+          if (res.code == 1) {
+            // for (let item of this.data.quyuRight) {
+            //   item.state = false;
+            // }
+            this.data.quyuList[index].list = arrs.concat(res.data)
+            this.setData({
+              quyuIndex: index,
+              quyuList: this.data.quyuList
+            });
+          }
+        });
+        console.log(this.data.quyuList[this.data.quyuIndex]); 
+      } else {
+        console.log(1);
+        
+        this.data.quyuList[0].list = []
+        this.setData({
+          quyuIndex: index,
+
+          quyuList:this.data.quyuList
+        })
+      }
     }
   },
   // 区域右边
   checkQuyuRight(e) {
+    // 
     let index = e.currentTarget.dataset.index;
     let quyuIndex = this.data.quyuIndex;
-    // let arr = [];
-    // this.data.quyuList[this.data.quyuIndex].list[state].state = !this.data
-    //   .quyuList[this.data.quyuIndex].list[state].state;
-    // for (let item of this.data.quyuList) {
-    //   for (let items of item.list) {
-    //     arr.push(items);
-    //   }
-    // }
-    // this.setData({
-    //   quyuList: this.data.quyuList,
-    //   quyuCheck: arr
-    // });
-    // console.log(this.data.quyuRight[index]);
-    // this.data.quyuCheck.push(this.data.quyuRight[index])
-    this.data.quyuList[quyuIndex].list[index].state = !this.data.quyuList[
-      quyuIndex
-    ].list[index].state;
-    // let arr = this.data.quyuList[quyuIndex].list.filter(
-    //   (item, index, arr) => {
-    //     if(item.state ) {
-    //       arr.push(item)
-    //     }
-    //   }
-    // );
-    this.setData({
-      quyuList:this.data.quyuList
-    })
-    let arrays = this.data.quyuList;
-    let arr = [];
-    for (let item of arrays) {
-      if (item.list) {
-        for (let items of item.list) {
-          if (items.state) {
-            arr.push(items);
+    if(!this.data.quyuList[quyuIndex].list[0].state) {
+      if(index!=0) {
+
+        this.data.quyuList[quyuIndex].list[index].state = !this.data.quyuList[
+          quyuIndex
+        ].list[index].state;
+        this.setData({
+          quyuList:this.data.quyuList
+        })
+        let arrays = this.data.quyuList;
+        let arr = [];
+        for (let item of arrays) {
+          if (item.list) {
+            for (let items of item.list) {
+              if (items.state) {
+                arr.push(items);
+              }
+            }
           }
         }
+        console.log(arr, "888888");
+    
+        // this.data.quyuCheck = this.data.quyuCheck.concat(arr)
+    
+        this.setData({
+          quyuCheck: arr
+        });
+        this.btnQuyus();
+      }else {
+        // this.data.quyuList[quyuIndex].list[index].state = !this.data.quyuList[
+        //   quyuIndex
+        // ].list[index].state;
+  
+        console.log(this.data.quyuList[quyuIndex],'????');
+        for(let item of this.data.quyuList[quyuIndex].list) {
+          item.state = false
+        }
+        this.data.quyuList[quyuIndex].list[0].state = true
+              this.setData({
+          quyuList:this.data.quyuList
+        })
+        let arr = [{
+          name:'不限',id:''  ,state:true    }]
+          this.setData({
+            quyuCheck:arr
+          })
       }
     }
-    console.log(arr, "888888");
-
-    // this.data.quyuCheck = this.data.quyuCheck.concat(arr)
-
-    this.setData({
-      quyuCheck: arr
-    });
-    this.btnQuyus();
   },
   // 区域删除
   del(e) {

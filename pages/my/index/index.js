@@ -8,12 +8,17 @@ Page({
    */
   data: {
     isProup: false,
-    info: {},
-    money:{},
-    code:''
+    info: {avatar:null},
+    money: {},
+    code: '',
+    head:"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1566146375809&di=aa7182817bd0e1d3d7fac1d30ee82a3c&imgtype=0&src=http%3A%2F%2Fe.hiphotos.baidu.com%2Fimage%2Fpic%2Fitem%2F4610b912c8fcc3cef70d70409845d688d53f20f7.jpg"
   },
 
-  pageTo({ currentTarget: { dataset } }) {
+  pageTo({
+    currentTarget: {
+      dataset
+    }
+  }) {
     // console.log(dataset);
 
 
@@ -22,7 +27,9 @@ Page({
         url: dataset.url
       });
     } else {
-      wx.navigateTo({ url: "../../login/login" });
+      wx.navigateTo({
+        url: "../../login/login"
+      });
     }
   },
   Invitation() {
@@ -31,49 +38,69 @@ Page({
     });
   },
   aboutUs() {
-    
-    if(wx.getStorageSync('sessionId')) {
-      wx.navigateTo({ url: "../aboutOurs/aboutOurs" });
+
+    if (wx.getStorageSync('sessionId')) {
+      wx.navigateTo({
+        url: "../aboutOurs/aboutOurs"
+      });
 
     } else {
-      wx.navigateTo({ url: "../../login/login" });
+      wx.navigateTo({
+        url: "../../login/login"
+      });
 
     }
   },
   feedback() {
-    
 
-    if(wx.getStorageSync('sessionId')) {
-      wx.navigateTo({ url: "../feedback/feedback" });
+
+    if (wx.getStorageSync('sessionId')) {
+      wx.navigateTo({
+        url: "../feedback/feedback"
+      });
 
     } else {
-      wx.navigateTo({ url: "../../login/login" });
+      wx.navigateTo({
+        url: "../../login/login"
+      });
 
     }
   },
   helpCenter() {
-    
 
-    if(wx.getStorageSync('sessionId')) {
-      wx.navigateTo({ url: "../help/help" });
+
+    if (wx.getStorageSync('sessionId')) {
+      wx.navigateTo({
+        url: "../help/help"
+      });
 
     } else {
-      wx.navigateTo({ url: "../../login/login" });
+      wx.navigateTo({
+        url: "../../login/login"
+      });
 
     }
   },
   Mycollected() {
     if (wx.getStorageSync("sessionId")) {
-      wx.navigateTo({ url: "../collection/collection" });
+      wx.navigateTo({
+        url: "../collection/collection"
+      });
     } else {
-      wx.navigateTo({ url: "../../login/login" });
+      wx.navigateTo({
+        url: "../../login/login"
+      });
     }
   },
   myTeam() {
     if (wx.getStorageSync("sessionId")) {
-      wx.navigateTo({ url: "../team/team" });
+      wx.navigateTo({
+        url: "../team/team"
+      });
     } else {
-      wx.navigateTo({ url: "../../login/login" });
+      wx.navigateTo({
+        url: "../../login/login"
+      });
     }
   },
   init() {
@@ -82,8 +109,8 @@ Page({
       .then(res => {
         if (res.code == 1) {
           // wx.setStorageSync('info', res.data)
-          console.log('用户信息',res.data);
-          
+          console.log('用户信息', res.data);
+
           this.setData({
             info: res.data
           });
@@ -117,9 +144,34 @@ Page({
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function(options) {
-    if(wx.getStorageSync('sessionId')) {
+  onLoad: function (options) {
 
+  },
+
+  /**
+   * 生命周期函数--监听页面初次渲染完成
+   */
+  onReady: function () {},
+
+  /**
+   * 生命周期函数--监听页面显示
+   */
+  onShow: function () {
+
+    if (wx.getStorageSync('sessionId')) {
+      this.setData({
+        imgUrl: app.globalData.imgUrl
+      })
+      if (wx.getStorageSync("sessionId")) {
+
+        this.init();
+        this.raiseMoney()
+        this.getCode()
+      } else {
+        this.setData({
+          info: wx.getStorageSync('InfoObj')
+        })
+      }
     } else {
       wx.showToast({
         title: '请先登录',
@@ -131,59 +183,37 @@ Page({
         })
       }, 1600);
     }
-  },
 
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function() {},
 
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function() {
-    this.setData({
-      imgUrl: app.globalData.imgUrl
-    })
-    if (wx.getStorageSync("sessionId")) {
-
-      this.init();
-      this.raiseMoney()
-      this.getCode()
-    } else {
-      this.setData({
-        info:wx.getStorageSync('InfoObj')
-      })
-    }
   },
 
   /**
    * 生命周期函数--监听页面隐藏
    */
-  onHide: function() {},
+  onHide: function () {},
 
   /**
    * 生命周期函数--监听页面卸载
    */
-  onUnload: function() {},
+  onUnload: function () {},
 
   /**
    * 页面相关事件处理函数--监听用户下拉动作
    */
-  onPullDownRefresh: function() {},
+  onPullDownRefresh: function () {},
 
   /**
    * 页面上拉触底事件的处理函数
    */
-  onReachBottom: function() {},
+  onReachBottom: function () {},
 
   /**
    * 用户点击右上角分享
    */
-  onShareAppMessage: function() {
+  onShareAppMessage: function () {
     return {
-      title:'邀请二维码',
-      imageUrl:this.data.imgUrl+this.data.code
+      title: '邀请二维码',
+      imageUrl: this.data.imgUrl + this.data.code
     }
   }
 });

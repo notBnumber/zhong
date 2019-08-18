@@ -188,16 +188,68 @@ Page({
     ]
   },
   hisSearch(e) {
-    
-    if (this.data.checkIndex == 0) {
+    let arr = []
+    // if (this.data.checkIndex == 0) {
       util
         ._get("newhome/getNewHomePage?keyword=" + e.currentTarget.dataset.item+'&cityId='+wx.getStorageSync('cityId'))
         .then(res => {
           this.setData({
-            resultList: res.data.list,
+            // resultList: res.data.list,
             isSearch:true
           });
-          this.searchList()
+          arr= arr.concat(res.data.list)
+          console.log(arr,'????????/');
+          util
+          ._get("secondhome/getSecondHome?keyword=" + e.currentTarget.dataset.item+'&cityId='+wx.getStorageSync('cityId'))
+          .then(res => {
+  
+            this.setData({
+              // resultList: res.data.list,
+              isSearch:true
+  
+            });
+            arr= arr.concat(res.data.list)
+            console.log(arr,'?二手');
+            
+            if(this.data.keyword!='') {
+              this.searchList()
+            }
+            util
+            ._get("rentinghome/getRentingHome?keyword=" + e.currentTarget.dataset.item+'&cityId='+wx.getStorageSync('cityId'))
+            .then(res => {
+    
+              this.setData({
+                // resultList: res.data.list.keyword,
+                isSearch:true
+    
+              });
+              arr= arr.concat(res.data.list)
+              console.log(arr,'?租房');
+    
+              if(this.data.keyword!='') {
+                this.searchList()
+              }
+    
+              this.setData({
+                resultList:arr
+              })
+              if(res.data.list.length == 0) {
+                wx.showToast({
+                  title: '暂无数据',
+                  icon: 'none'
+                })
+              }
+            });
+            if(res.data.list.length == 0) {
+              wx.showToast({
+                title: '暂无数据',
+                icon: 'none'
+              })
+            }
+          });
+          if(this.data.keyword!='') {
+            this.searchList()
+          }
           if(res.data.list.length == 0) {
             wx.showToast({
               title: '暂无数据',
@@ -205,47 +257,16 @@ Page({
             })
           }
         });
-    } else if (this.data.checkIndex == 1) {
-      util
-        ._get("secondhome/getSecondHome?keyword=" + e.currentTarget.dataset.item+'&cityId='+wx.getStorageSync('cityId'))
-        .then(res => {
+    // } else if (this.data.checkIndex == 1) {
 
-          this.setData({
-            resultList: res.data.list,
-            isSearch:true
+    // } else {
 
-          });
-          this.searchList()
-
-          if(res.data.list.length == 0) {
-            wx.showToast({
-              title: '暂无数据',
-              icon: 'none'
-            })
-          }
-        });
-    } else {
-      util
-        ._get("rentinghome/getRentingHome?keyword=" + e.currentTarget.dataset.item+'&cityId='+wx.getStorageSync('cityId'))
-        .then(res => {
-
-          this.setData({
-            resultList: res.data.list.keyword,
-            isSearch:true
-
-          });
-          this.searchList()
-
-          if(res.data.list.length == 0) {
-            wx.showToast({
-              title: '暂无数据',
-              icon: 'none'
-            })
-          }
-        });
-    }
+    // }
+   
   },
   searchList() {
+    console.log('缓存?');
+    
     this.data.lists.push(this.data.keyword)
     wx.setStorageSync('searchList', this.data.lists)
   },
@@ -262,7 +283,9 @@ Page({
           this.setData({
             resultList: res.data.list,
           });
-          this.searchList()
+          if(this.data.keyword!='') {
+            this.searchList()
+          }
           if(res.data.list.length == 0) {
             wx.showToast({
               title: '暂无数据',
@@ -279,7 +302,9 @@ Page({
             resultList: res.data.list,
 
           });
-          this.searchList()
+          if(this.data.keyword!='') {
+            this.searchList()
+          }
 
           if(res.data.list.length == 0) {
             wx.showToast({
@@ -297,7 +322,9 @@ Page({
             resultList: res.data.list.keyword,
 
           });
-          this.searchList()
+          if(this.data.keyword!='') {
+            this.searchList()
+          }
 
           if(res.data.list.length == 0) {
             wx.showToast({
@@ -357,6 +384,9 @@ Page({
   onLoad: function(options) {
     if(wx.getStorageSync('searchList').length!=0) {
        this.data.lists =  wx.getStorageSync('searchList')
+       this.data.lists = this.data.lists.filter(item=>{
+         return item!=''
+       })
     }
     this.setData({
       options: options,

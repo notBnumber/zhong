@@ -26,7 +26,7 @@
     <swiper autoplay="{{autoplay}}" interval="{{interval}}" bindchange='swiperChange' circular>
       <block wx:for="{{imgUrls}}" wx:key="{{index}}">
         <swiper-item>
-          <image src="{{imgUrl+item.image}}" mode='widthFix' class="slide-image" bindtap='banner' data-url='{{item.url}}'/>
+          <image wx:if="{{item.image}}" src="{{imgUrl+item.image}}" mode='aspectFit' class="slide-image" bindtap='banner' data-url='{{item.url}}'/>
         </swiper-item>
       </block>
     </swiper>
@@ -46,7 +46,7 @@
   <!-- tab栏 -->
   <view class="twoTab" hover-class="none" hover-stop-propagation="false">
     <view class="twoTabItem" hover-class="none" hover-stop-propagation="false" wx:for="{{twoTabList}}" wx:key="index" bindtap='toHouseDetail' data-index='{{index}}'>
-      <image class="twoTabItemImg" src="{{item.img}}" mode='widthFix'></image>
+      <image class="twoTabItemImg" src="{{item.img}}" mode='widthFix' wx:if="{{item.img}}"></image>
       <view class="twoTabItemName" hover-class="none" hover-stop-propagation="false">
         {{item.name}}
       </view>
@@ -80,7 +80,7 @@
     </view>
     <view class="hotContent" hover-class="none" hover-stop-propagation="false">
       <view class="hotContentItem" hover-class="none" hover-stop-propagation="false" wx:for="{{hotList}}" wx:key="{{index}}" bindtap='toDetail' data-type='{{item.type}}' data-id='{{item.id}}'>
-        <image class="hotContentItemImg" src="{{imgUrl+item.image}}"></image>
+        <image class="hotContentItemImg" src="{{imgUrl+item.image}}" wx:if="{{item.image}}"></image>
         <view class="name" hover-class="none" hover-stop-propagation="false">
           {{item.houseName}}
         </view>

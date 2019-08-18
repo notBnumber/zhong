@@ -296,7 +296,7 @@ Page({
     //   })
     // }
   },
-  onShow(options) {
+  onShow() {
     let arr = [222,333]
     var array = [
       {
@@ -348,7 +348,7 @@ Page({
 
     this.setData({
       num: 1,
-      tabIndex: app.globalData.indexParams,
+      tabIndex: 0,
       city: wx.getStorageSync("city"),
     });
     Promise.all([

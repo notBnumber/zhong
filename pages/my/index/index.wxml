@@ -1,9 +1,11 @@
 <view class="container">
-  <view class="my-details">
+  <view class="my-details" >
     <image class="img" src="../../../images/tb04.png"></image>
-    <view class="details" bindtap="pageTo" data-url="/pages/my/myinfo/index">
+    <view class="details" bindtap="pageTo" data-url="/pages/my/myinfo/index" wx:if='head'>
       <view class="left">
-        <image class="head" src="{{imgUrl+info.avatar}}" mode="aspectFill"></image>
+        <image class="head" src="{{imgUrl+info.avatar}}" mode="aspectFill" wx:if='info.avatar'></image>
+        <!-- <image class="head" src="{{head}}" mode="aspectFill" wx:elif='!info.avatar'></image> -->
+        
         <view class="name">
           <view>{{info.nick == null?'用户昵称':info.nick}} <test catchtap="Invitation">邀请</test></view>
           <view>邀请码：{{info.invitationCode==undefined?'':info.invitationCode}}</view>
@@ -67,7 +69,7 @@
   <view class="proup" wx:if="{{isProup}}">
     <view class="box">
       <view class="Exhibition">
-        <image src="{{imgUrl+code}}"></image>
+        <image src="{{imgUrl+code}}" wx:if='code'></image>
         <view class="white"></view>
         <view class="text">邀请码：{{info.invitationCode==undefined?'':info.invitationCode}}</view>
         <button plain class="btn" open-type="share">分享</button>
