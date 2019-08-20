@@ -94,11 +94,21 @@ Page({
   // 轮播图广告
   banner(e) {
     // e.currentTarget.dataset.url
-    console.log(e.currentTarget.dataset.url);
+    console.log(e.currentTarget.dataset.type);
 
-    wx.navigateTo({
-      url: "/pages/banner/banner?url=" + e.currentTarget.dataset.url
-    });
+    if(!e.currentTarget.dataset.type) {
+      wx.navigateTo({
+        url: "/pages/banner/banner?url=" + e.currentTarget.dataset.url
+      });
+    } else {
+      wx.navigateTo({
+        url:
+          "../detail/detail?id=" +
+          e.currentTarget.dataset.url +
+          "&type=" +
+          e.currentTarget.dataset.hometype
+      });
+    }
   },
   // 跳转推客
   tk() {

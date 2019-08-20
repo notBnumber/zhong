@@ -17,13 +17,13 @@ Page({
     show: false,
     typesList: [
       {
+        name: "新房"
+      },
+      {
         name: "二手房"
       },
       {
         name: "租房"
-      },
-      {
-        name: "新房"
       }
     ],
     stateList: [
@@ -251,6 +251,79 @@ Page({
   },
   // 区域左边
   checkQuyu(e, state) {
+    // console.log(e, state);
+    // let arrs = [{lng	:	'',
+		
+    // name	:	'不限',
+        
+    // leveltype	:	'',
+        
+    // id	:	'',
+        
+    // keyword	:	'',
+        
+    // parentid	:	'1',
+        
+    // lat	:	''
+    // }]
+    // // index = e.currentTarget.dataset.index
+
+    // let index = "";
+    // if (state != null) {
+    //   this.setData({
+    //     quyuCheck:[]
+    //   })
+    //   console.log("初始化");
+    //   util
+    //     ._get("configure/getAllArea?areaId=" + wx.getStorageSync("cityId"))
+    //     .then(res => {
+    //       if (res.code == 1) {
+    //         this.setData({
+    //           quyuIndex: 0,
+    //           quyuList: res.data
+    //         });
+    //         util
+    //           ._get("configure/getAllArea?areaId=" + res.data[0].id)
+    //           .then(res => {
+    //             if (res.code == 1) {
+    //               // for (let item of this.data.quyuRight) {
+    //               //   item.state = false;
+    //               // }
+    //               this.data.quyuList[0].list = arrs.concat(res.data)
+    //               this.setData({
+    //                 quyuIndex: 0,
+    //                 quyuList: this.data.quyuList,
+    //                 quId: this.data.quyuList[0].id
+    //                 // quyuIds:[],
+    //                 // quyuName:[],
+    //                 // quyuCheck:[]
+    //               });
+    //             }
+    //           });
+    //       }
+    //     });
+
+    //   // index = e.currentTarget.dataset.index
+    // } else {
+    //   console.log("左边");
+
+    //   let id = e.currentTarget.dataset.id;
+    //   let index = e.currentTarget.dataset.index;
+
+    //   util._get("configure/getAllArea?areaId=" + id).then(res => {
+    //     if (res.code == 1) {
+    //       // for (let item of this.data.quyuRight) {
+    //       //   item.state = false;
+    //       // }
+    //       this.data.quyuList[index].list = arrs.concat(res.data)
+    //       this.setData({
+    //         quyuIndex: index,
+    //         quyuList: this.data.quyuList
+    //       });
+    //     }
+    //   });
+    //   console.log(this.data.quyuList[this.data.quyuIndex]);
+    // }
     console.log(e, state);
     let arrs = [{lng	:	'',
 		
@@ -271,116 +344,229 @@ Page({
     let index = "";
     if (state != null) {
       this.setData({
-        quyuCheck:[]
-      })
+        quyuCheck: []
+      });
+      let fuckId = "";
+      if (
+        wx.getStorageSync("cityIds") != "" &&
+        wx.getStorageSync("citys") != ""
+      ) {
+        fuckId = wx.getStorageSync("cityIds");
+      } else {
+        fuckId = wx.getStorageSync("cityId");
+      }
+
       console.log("初始化");
-      util
-        ._get("configure/getAllArea?areaId=" + wx.getStorageSync("cityId"))
-        .then(res => {
-          if (res.code == 1) {
-            this.setData({
-              quyuIndex: 0,
-              quyuList: res.data
-            });
-            util
-              ._get("configure/getAllArea?areaId=" + res.data[0].id)
-              .then(res => {
-                if (res.code == 1) {
-                  // for (let item of this.data.quyuRight) {
-                  //   item.state = false;
-                  // }
-                  this.data.quyuList[0].list = arrs.concat(res.data)
-                  this.setData({
-                    quyuIndex: 0,
-                    quyuList: this.data.quyuList,
-                    quId: this.data.quyuList[0].id
-                    // quyuIds:[],
-                    // quyuName:[],
-                    // quyuCheck:[]
-                  });
-                }
-              });
-          }
-        });
+      let baseArr = [{lng: "", name: "不限", leveltype: '', id: '', keyword: "", parentid: '', lat: ""}]
+      util._get("configure/getAllArea?areaId=" + fuckId).then(res => {
+        if (res.code == 1) {
+          this.setData({
+            quyuIndex: 0,
+            quyuList: baseArr.concat(res.data)
+          });
+          // util
+          //   ._get("configure/getAllArea?areaId=")
+          //   .then(res => {
+          //     if (res.code == 1) {
+          //       // for (let item of this.data.quyuRight) {
+          //       //   item.state = false;
+          //       // }
+          //       this.data.quyuList[0].list =arrs.concat(res.data)
+          //       this.setData({
+          //         quyuIndex: 0,
+          //         quyuList: this.data.quyuList,
+          //         quId: this.data.quyuList[0].id
+          //       });
+          //     }
+          //   });
+        }
+      });
 
       // index = e.currentTarget.dataset.index
     } else {
-      console.log("左边");
+      console.log("左边",e.currentTarget.dataset.index);
 
       let id = e.currentTarget.dataset.id;
       let index = e.currentTarget.dataset.index;
 
-      util._get("configure/getAllArea?areaId=" + id).then(res => {
-        if (res.code == 1) {
-          // for (let item of this.data.quyuRight) {
-          //   item.state = false;
-          // }
-          this.data.quyuList[index].list = arrs.concat(res.data)
-          this.setData({
-            quyuIndex: index,
-            quyuList: this.data.quyuList
-          });
-        }
-      });
-      console.log(this.data.quyuList[this.data.quyuIndex]);
+      if(index!=0) {
+        util._get("configure/getAllArea?areaId=" + id).then(res => {
+          if (res.code == 1) {
+            // for (let item of this.data.quyuRight) {
+            //   item.state = false;
+            // }
+            this.data.quyuList[index].list = arrs.concat(res.data)
+            this.setData({
+              quyuIndex: index,
+              quyuList: this.data.quyuList
+            });
+          }
+        });
+        console.log(this.data.quyuList[this.data.quyuIndex]); 
+      } else {
+        console.log(1);
+        
+        this.data.quyuList[0].list = []
+        this.setData({
+          quyuIndex: index,
+
+          quyuList:this.data.quyuList
+        })
+      }
     }
   },
   // 区域右边
   checkQuyuRight(e) {
-    let index = e.currentTarget.dataset.index;
-    let quyuIndex = this.data.quyuIndex
-    // let arr = [];
-    // this.data.quyuList[this.data.quyuIndex].list[state].state = !this.data
-    //   .quyuList[this.data.quyuIndex].list[state].state;
-    // for (let item of this.data.quyuList) {
-    //   for (let items of item.list) {
-    //     arr.push(items);
-    //   }
-    // }
+    // let index = e.currentTarget.dataset.index;
+    // let quyuIndex = this.data.quyuIndex
+
+    // this.data.quyuList[quyuIndex].list[index].state = !this.data.quyuList[quyuIndex].list[index].state
+
     // this.setData({
-    //   quyuList: this.data.quyuList,
-    //   quyuCheck: arr
-    // });
-    // console.log(this.data.quyuRight[index]);
-    // this.data.quyuCheck.push(this.data.quyuRight[index])
-    this.data.quyuList[quyuIndex].list[index].state = !this.data.quyuList[quyuIndex].list[index].state
-    // let arr = this.data.quyuList[quyuIndex].list.filter(
-    //   (item, index, arr) => {
-    //     if(item.state ) {
-    //       arr.push(item)
+    //   quyuList:this.data.quyuList
+    // })
+    // console.log(this.data.quyuCheck,this.data.quyuList,'数组');
+    // // return
+    // let arrays = this.data.quyuList
+    // let arr=[]
+    // arr = arr.concat(arrays)
+    // for(let item of arrays) {
+    //   if (item.list) {
+    //     for(let items of item.list) {
+    //       if(items.state) {
+    //         arr.push(items)
+    //       }
     //     }
     //   }
-    // );
-    this.setData({
-      quyuList:this.data.quyuList
-    })
-    console.log(this.data.quyuCheck,this.data.quyuList,'数组');
-    // return
-    let arrays = this.data.quyuList
-    let arr=[]
-    arr = arr.concat(arrays)
-    for(let item of arrays) {
-      if (item.list) {
-        for(let items of item.list) {
-          if(items.state) {
-            arr.push(items)
+    // }
+    // console.log(arr,'888888');
+    
+    // // this.data.quyuCheck = this.data.quyuCheck.concat(arr)
+
+    // this.setData({
+    //   quyuCheck: arr
+    // });
+    // this.btnQuyus()
+    console.log(e.currentTarget.dataset.type);
+    
+    let index = e.currentTarget.dataset.index;
+    let quyuIndex = this.data.quyuIndex;
+    if(!this.data.quyuList[quyuIndex].list[0].state) {
+      if(index!=0) {
+
+        this.data.quyuList[quyuIndex].list[index].state = !this.data.quyuList[
+          quyuIndex
+        ].list[index].state;
+        this.setData({
+          quyuList:this.data.quyuList
+        })
+        let arrays = this.data.quyuList;
+        let arr = [];
+        for (let item of arrays) {
+          if (item.list) {
+            for (let items of item.list) {
+              if (items.state && items.name!='不限') {
+                arr.push(items);
+              }
+            }
           }
         }
-      }
-    }
-    console.log(arr,'888888');
+        console.log(arr, "888888");
     
-    // this.data.quyuCheck = this.data.quyuCheck.concat(arr)
+        // this.data.quyuCheck = this.data.quyuCheck.concat(arr)
+    
+        this.setData({
+          quyuCheck: this.data.quyuCheck.concat(arr)
+        });
+        return
+        // this.btnQuyu();
+      }else {
+        // this.data.quyuList[quyuIndex].list[index].state = !this.data.quyuList[
+        //   quyuIndex
+        // ].list[index].state;
+        this.data.quyuList[quyuIndex].list[index].type = quyuIndex
+        for(let item of this.data.quyuList[quyuIndex].list) {
+          item.state = false
+        }
+        this.data.quyuList[quyuIndex].list[0].state = true
+        this.data.quyuList[quyuIndex].state = true
 
-    this.setData({
-      quyuCheck: arr
-    });
-    this.btnQuyus()
+        this.setData({
+          quyuList:this.data.quyuList
+        })
+        console.log(this.data.quyuList[quyuIndex],'????');
+        
+        let arr = [{
+          name:this.data.quyuList[quyuIndex].name,id:''  ,state:true    ,type:this.data.quyuIndex}]
+          this.setData({
+            quyuCheck:this.data.quyuCheck.concat(arr)
+          })
+      }
+    } else {
+      if(index == 0) {
+        this.data.quyuList[quyuIndex].list[0].state  = !this.data.quyuList[quyuIndex].list[0].state
+      } 
+      // for(let i in this.data.quyuList) {
+      //   if(type == this.data.quyuList[i].type) {
+      //     this.data.quyuList.splice(i,1)
+      //   }
+      // }
+    let type = e.currentTarget.dataset.type;
+
+      console.log(type,'删除type');
+      
+      for(let i in this.data.quyuCheck) {
+        // if(item.list) {
+        //   for(let i in item.list) {
+        //     if(type == item.list[i].type) {
+        //       this.data.quyuCheck.splice(i,1)
+        //     }
+        //   }
+        // }
+        if(type == this.data.quyuCheck[i].type) {
+          this.data.quyuCheck.splice(i,1)
+        }
+      }
+      this.setData({
+        quyuList:this.data.quyuList,
+        quyuCheck:this.data.quyuCheck
+      })
+    }
   },
   // 区域删除
   del(e) {
-    let name = e.currentTarget.dataset.name;
+    // let name = e.currentTarget.dataset.name;
+    // let id = e.currentTarget.dataset.id;
+
+    // for (let item of this.data.quyuList) {
+    //   for (let y in item.list) {
+    //     console.log(item.list[y].id, "?????");
+
+    //     if (id == item.list[y].id) {
+    //       console.log(item.list[y]);
+
+    //       item.list[y].state = false;
+    //     }
+    //   }
+    // }
+    // this.data.quyuIds = this.data.quyuIds.filter((item, index, arr) => item.id != id)
+    // this.data.quyuName = this.data.quyuName.filter((item, index, arr) => item.name != name)
+
+    // console.log(this.data.quyuList);
+
+    // this.setData({
+    //   quyuCheck: this.data.quyuCheck,
+    //   quyuList: this.data.quyuList,
+    //   quyuIds:this.data.quyuIds,
+    //   quyuName:this.data.quyuName,
+
+    // });
+    let index = e.currentTarget.dataset.index;
     let id = e.currentTarget.dataset.id;
+    let type = e.currentTarget.dataset.type;
+    console.log(type,'typesssss');
+    
+
     // console.log(id);
     // this.data.quyuCheck[index].state = false;
     // this.data.quyuCheck = this.data.quyuCheck.filter(
@@ -398,17 +584,16 @@ Page({
         }
       }
     }
-    this.data.quyuIds = this.data.quyuIds.filter((item, index, arr) => item.id != id)
-    this.data.quyuName = this.data.quyuName.filter((item, index, arr) => item.name != name)
-
+    for(let i in this.data.quyuCheck) {
+      if(this.data.quyuCheck[i].type == type) {
+        this.data.quyuCheck.splice(i,1)
+      }
+    }
     console.log(this.data.quyuList);
 
     this.setData({
       quyuCheck: this.data.quyuCheck,
-      quyuList: this.data.quyuList,
-      quyuIds:this.data.quyuIds,
-      quyuName:this.data.quyuName,
-
+      quyuList: this.data.quyuList
     });
   },
   // 重置
@@ -430,7 +615,7 @@ Page({
     });
     this.checkQuyu(e, 2);
   },
-  btnQuyus() {
+  btnQuyu() {
     let arrs = [];
     let nameArr = []
     this.data.quyuCheck.filter((item, index, arr) => {
@@ -439,20 +624,25 @@ Page({
         nameArr.push(item.name)
       }
     });
+    arrs  = arrs.filter(item=>{
+      return item!=''
+    })
     console.log(this.data.quyuName);
     
     this.setData({
       quyuIds: arrs,
       quyuName:nameArr,
-      quyuInfo:nameArr
-    });
-  },
-  btnQuyu() {
-    
-    this.setData({
+      quyuInfo:nameArr,
       show: !this.data.show,
+
     });
   },
+  // btnQuyu() {
+    
+  //   this.setData({
+  //     show: !this.data.show,
+  //   });
+  // },
   submit() {
     let params = {
       sessionId:wx.getStorageSync('sessionId'),

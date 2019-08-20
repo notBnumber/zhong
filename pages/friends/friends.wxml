@@ -62,7 +62,7 @@
               <view class="right" hover-class="none" hover-stop-propagation="false">
                 <scroll-view class="" scroll-y style="height: 550rpx;">
                   <view style='display: flex;justify-content: space-between;flex-wrap: wrap;' hover-class="none" hover-stop-propagation="false">
-                    <view class="rightItem df {{item.state == true ?'active' :''}}" hover-class="none" hover-stop-propagation="false" wx:for="{{quyuList[quyuIndex].list}}" wx:key="{{index}}" data-id='{{item.id}}' data-index='{{index}}' bindtap='checkQuyuRight'>
+                    <view class="rightItem df {{item.state == true ?'active' :''}}" hover-class="none" hover-stop-propagation="false" wx:for="{{quyuList[quyuIndex].list}}" wx:key="{{index}}" data-id='{{item.id}}' data-index='{{index}}' data-type='{{item.type}}' bindtap='checkQuyuRight'>
                       {{item.name}}
                       <view class="{{item.state == true ?'yes' :''}} df" hover-class="none" hover-stop-propagation="false" wx:if="{{item.state == true}}">
                         √
@@ -78,7 +78,7 @@
                 <scroll-view class="" scroll-y style="height: 150rpx;">
                   <view style='display: flex;justify-content: space-between;flex-wrap: wrap;' hover-class="none" hover-stop-propagation="false">
                     <!-- <view class=" df " hover-class="none" hover-stop-propagation="false" wx:for="{{quyuList}}"> -->
-                      <view class="rightItem df" wx:for="{{quyuCheck}}" wx:for-item="items" wx:key="{{index}}" data-index='{{index}}' data-id='{{items.id}}' bindtap='del' wx:if="{{items.state}}"> 
+                      <view class="rightItem df" wx:for="{{quyuCheck}}" wx:for-item="items" wx:key="{{index}}" data-index='{{index}}' data-id='{{items.id}}' bindtap='del' wx:if="{{items.state}}" data-type='{{items.type}}'> 
                         {{items.name}}
                       <view class="{{items.state == true ?'yes' :''}} df" hover-class="none" hover-stop-propagation="false" wx:if="{{items.state == true}}">
                         ×

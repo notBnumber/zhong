@@ -379,7 +379,8 @@ Page({
   },
   // 区域右边
   checkQuyuRight(e) {
-    // 
+    console.log(e.currentTarget.dataset.type);
+    
     let index = e.currentTarget.dataset.index;
     let quyuIndex = this.data.quyuIndex;
     if(!this.data.quyuList[quyuIndex].list[0].state) {
@@ -396,7 +397,7 @@ Page({
         for (let item of arrays) {
           if (item.list) {
             for (let items of item.list) {
-              if (items.state) {
+              if (items.state && items.name!='不限') {
                 arr.push(items);
               }
             }
@@ -405,36 +406,85 @@ Page({
         console.log(arr, "888888");
     
         // this.data.quyuCheck = this.data.quyuCheck.concat(arr)
-    
+        
         this.setData({
-          quyuCheck: arr
+          quyuCheck: this.data.quyuCheck.concat(arr)
         });
-        this.btnQuyus();
+        // this.btnQuyu();
       }else {
         // this.data.quyuList[quyuIndex].list[index].state = !this.data.quyuList[
         //   quyuIndex
         // ].list[index].state;
-  
-        console.log(this.data.quyuList[quyuIndex],'????');
+        this.data.quyuList[quyuIndex].list[index].type = quyuIndex
         for(let item of this.data.quyuList[quyuIndex].list) {
           item.state = false
         }
         this.data.quyuList[quyuIndex].list[0].state = true
-              this.setData({
+        this.data.quyuList[quyuIndex].state = true
+
+        this.setData({
           quyuList:this.data.quyuList
         })
+        console.log(this.data.quyuList[quyuIndex],'????');
+        
         let arr = [{
-          name:'不限',id:''  ,state:true    }]
+          name:this.data.quyuList[quyuIndex].name,id:''  ,state:true    ,type:this.data.quyuIndex}]
+          console.log(arr);
+          
           this.setData({
-            quyuCheck:arr
+            quyuCheck:this.data.quyuCheck.concat(arr)
           })
       }
+    } else {
+      if(index == 0) {
+        this.data.quyuList[quyuIndex].list[0].state  = !this.data.quyuList[quyuIndex].list[0].state
+      } 
+      // for(let i in this.data.quyuList) {
+      //   if(type == this.data.quyuList[i].type) {
+      //     this.data.quyuList.splice(i,1)
+      //   }
+      // }
+    let type = e.currentTarget.dataset.type;
+
+      console.log(type,'删除type');
+      
+      for(let i in this.data.quyuCheck) {
+        // if(item.list) {
+        //   for(let i in item.list) {
+        //     if(type == item.list[i].type) {
+        //       this.data.quyuCheck.splice(i,1)
+        //     }
+        //   }
+        // }
+        if(type == this.data.quyuCheck[i].type) {
+          this.data.quyuCheck.splice(i,1)
+        }
+      }
+      this.setData({
+        quyuList:this.data.quyuList,
+        quyuCheck:this.data.quyuCheck
+      })
     }
+  },
+  unique(arr) {
+    let unique = {};
+    arr.forEach(function(item) {
+      unique[JSON.stringify(item)] = item; //键名不会重复
+    });
+    arr = Object.keys(unique).map(function(u) {
+      //Object.keys()返回对象的所有键值组成的数组，map方法是一个遍历方法，返回遍历结果组成的数组.将unique对象的键名还原成对象数组
+      return JSON.parse(u);
+    });
+    return arr;
   },
   // 区域删除
   del(e) {
     let index = e.currentTarget.dataset.index;
     let id = e.currentTarget.dataset.id;
+    let type = e.currentTarget.dataset.type;
+    console.log(type,'typesssss');
+    
+
     // console.log(id);
     // this.data.quyuCheck[index].state = false;
     // this.data.quyuCheck = this.data.quyuCheck.filter(
@@ -450,6 +500,11 @@ Page({
           item.list[y].state = false;
           // item.list[y].splice(y,1)
         }
+      }
+    }
+    for(let i in this.data.quyuCheck) {
+      if(this.data.quyuCheck[i].type == type) {
+        this.data.quyuCheck.splice(i,1)
       }
     }
     console.log(this.data.quyuList);
@@ -494,7 +549,7 @@ Page({
   //   });
   //   // this.screen()
   // },
-  btnQuyus() {
+  btnQuyu() {
     let arrs = [];
     let nameArr = [];
     this.data.quyuCheck.filter((item, index, arr) => {
@@ -504,18 +559,21 @@ Page({
       }
     });
     console.log(this.data.quyuName);
-
+    arrs  = arrs.filter(item=>{
+      return item!=''
+    })
     this.setData({
       quyuIds: arrs.toString(),
       quyuName: nameArr,
-      quyuInfo: nameArr.toString()
-    });
-  },
-  btnQuyu() {
-    this.setData({
+      quyuInfo: nameArr.toString(),
       show: !this.data.show
     });
   },
+  // btnQuyu() {
+  //   this.setData({
+  //     show: !this.data.show
+  //   });
+  // },
   chooseRelation(e) {
     this.setData({
       relation: e.detail.value

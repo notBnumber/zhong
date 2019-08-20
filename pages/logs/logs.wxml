@@ -31,13 +31,15 @@
       <image wx:if="{{item.type == 0}}" class="" src="../../images/tz01.png"></image>
       <image wx:if="{{item.type == 2}}" class="" src="../../images/qb01.png"></image>
       <view class="info" hover-class="none" hover-stop-propagation="false">
-        <view class="top" hover-class="none" hover-stop-propagation="false">{{item.title}}</view>
+        <view class="top" hover-class="none" hover-stop-propagation="false" wx:if="{{item.type == 0}}">平台通知</view>
+        <view class="top" hover-class="none" hover-stop-propagation="false" wx:if="{{item.type == 2}}">钱包通知</view>
+
         <view class="bottom" hover-class="none" hover-stop-propagation="false">
   <!-- <template is="wxParse" data="{{wxParseData:article_content.nodes}}" /> -->
 
   <!-- <template is="wxParse" data="{{wxParseData:item}}"/> -->
   <!-- <rich-text nodes="{{item.content}}"></rich-text> -->
-          {{ item.type==0?(item.subtitle?item.subtitle:''):item.content}}
+          {{ item.type==0?(item.title?item.title:''):item.content}}
         </view>
       </view>
       <view class="time" hover-class="none" hover-stop-propagation="false">{{item.createTime}}</view>
