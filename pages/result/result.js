@@ -189,6 +189,9 @@ Page({
   },
   hisSearch(e) {
     let arr = []
+    wx.setStorageSync('keyword', e.currentTarget.dataset.item)
+    // console.log(e.currentTarget.dataset.item);
+    
     // if (this.data.checkIndex == 0) {
       util
         ._get("newhome/getNewHomePage?keyword=" + e.currentTarget.dataset.item+'&cityId='+wx.getStorageSync('cityId'))
@@ -229,33 +232,31 @@ Page({
               if(this.data.keyword!='') {
                 this.searchList()
               }
-    
+              if(arr.length == 0 ) {
+              wx.showToast({
+                title: '暂无数据',
+                icon: 'none',
+                image: '',
+                duration: 1500,
+                mask: false,
+                success: (result)=>{
+                  
+                },
+                fail: ()=>{},
+                complete: ()=>{}
+              });
+              }
               this.setData({
                 resultList:arr
               })
-              if(res.data.list.length == 0) {
-                wx.showToast({
-                  title: '暂无数据',
-                  icon: 'none'
-                })
-              }
+ 
             });
-            if(res.data.list.length == 0) {
-              wx.showToast({
-                title: '暂无数据',
-                icon: 'none'
-              })
-            }
+
           });
           if(this.data.keyword!='') {
             this.searchList()
           }
-          if(res.data.list.length == 0) {
-            wx.showToast({
-              title: '暂无数据',
-              icon: 'none'
-            })
-          }
+
         });
     // } else if (this.data.checkIndex == 1) {
 
@@ -336,7 +337,7 @@ Page({
     }
   },
   yes() {
-    wx.setStorageSync('keyword', this.data.keyword)
+    // wx.setStorageSync('keyword', this.data.keyword)
     app.globalData.indexParams = this.data.checkIndex
     setTimeout(() => {
       wx.navigateTo({

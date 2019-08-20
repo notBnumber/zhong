@@ -62,7 +62,7 @@
               <view class="right" hover-class="none" hover-stop-propagation="false">
                 <scroll-view class="" scroll-y style="height: 550rpx;">
                   <view style='display: flex;justify-content: space-between;flex-wrap: wrap;' hover-class="none" hover-stop-propagation="false">
-                    <view class="rightItem df {{item.state == true ?'active' :''}}" hover-class="none" hover-stop-propagation="false" wx:for="{{quyuList[quyuIndex].list}}" wx:key="{{index}}" data-id='{{item.id}}' data-index='{{index}}' data-type='{{item.type}}' bindtap='checkQuyuRight'>
+                    <view class="rightItem df {{item.state == true ?'active' :''}}" hover-class="none" hover-stop-propagation="false" wx:for="{{quyuList[quyuIndex].list}}" wx:key="{{index}}" data-id='{{item.id}}' data-index='{{index}}' data-type='{{item.type}}' data-name='{{item.name}}'  data-id='{{item.id}}' bindtap='checkQuyuRight'>
                       {{item.name}}
                       <view class="{{item.state == true ?'yes' :''}} df" hover-class="none" hover-stop-propagation="false" wx:if="{{item.state == true}}">
                         √

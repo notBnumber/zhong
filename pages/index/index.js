@@ -666,10 +666,10 @@ Page({
   },
   onHide() {
     console.log("隐藏");
-    wx.setStorageSync("keyword", "");
+    // wx.setStorageSync("keyword", "");
   },
   onUnload() {
     console.log("隐藏");
-    wx.setStorageSync("keyword", "");
+    // wx.setStorageSync("keyword", "");
   }
 });

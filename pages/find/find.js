@@ -58,6 +58,8 @@ Page({
     specialName: null,
     quyuIds:[],
     quyuName:[],
+    idArr:[],
+    nameArr:[],
     quId: "",
     quyuIndex: 0,
     quyuIndexs: 0,
@@ -251,79 +253,6 @@ Page({
   },
   // 区域左边
   checkQuyu(e, state) {
-    // console.log(e, state);
-    // let arrs = [{lng	:	'',
-		
-    // name	:	'不限',
-        
-    // leveltype	:	'',
-        
-    // id	:	'',
-        
-    // keyword	:	'',
-        
-    // parentid	:	'1',
-        
-    // lat	:	''
-    // }]
-    // // index = e.currentTarget.dataset.index
-
-    // let index = "";
-    // if (state != null) {
-    //   this.setData({
-    //     quyuCheck:[]
-    //   })
-    //   console.log("初始化");
-    //   util
-    //     ._get("configure/getAllArea?areaId=" + wx.getStorageSync("cityId"))
-    //     .then(res => {
-    //       if (res.code == 1) {
-    //         this.setData({
-    //           quyuIndex: 0,
-    //           quyuList: res.data
-    //         });
-    //         util
-    //           ._get("configure/getAllArea?areaId=" + res.data[0].id)
-    //           .then(res => {
-    //             if (res.code == 1) {
-    //               // for (let item of this.data.quyuRight) {
-    //               //   item.state = false;
-    //               // }
-    //               this.data.quyuList[0].list = arrs.concat(res.data)
-    //               this.setData({
-    //                 quyuIndex: 0,
-    //                 quyuList: this.data.quyuList,
-    //                 quId: this.data.quyuList[0].id
-    //                 // quyuIds:[],
-    //                 // quyuName:[],
-    //                 // quyuCheck:[]
-    //               });
-    //             }
-    //           });
-    //       }
-    //     });
-
-    //   // index = e.currentTarget.dataset.index
-    // } else {
-    //   console.log("左边");
-
-    //   let id = e.currentTarget.dataset.id;
-    //   let index = e.currentTarget.dataset.index;
-
-    //   util._get("configure/getAllArea?areaId=" + id).then(res => {
-    //     if (res.code == 1) {
-    //       // for (let item of this.data.quyuRight) {
-    //       //   item.state = false;
-    //       // }
-    //       this.data.quyuList[index].list = arrs.concat(res.data)
-    //       this.setData({
-    //         quyuIndex: index,
-    //         quyuList: this.data.quyuList
-    //       });
-    //     }
-    //   });
-    //   console.log(this.data.quyuList[this.data.quyuIndex]);
-    // }
     console.log(e, state);
     let arrs = [{lng	:	'',
 		
@@ -355,11 +284,13 @@ Page({
       } else {
         fuckId = wx.getStorageSync("cityId");
       }
+      console.log("初始化",this.data.quyuList);
 
-      console.log("初始化");
-      let baseArr = [{lng: "", name: "不限", leveltype: '', id: '', keyword: "", parentid: '', lat: ""}]
       util._get("configure/getAllArea?areaId=" + fuckId).then(res => {
         if (res.code == 1) {
+          let baseArr = [{lng: "", name: "不限", leveltype: '', id: '', keyword: "", parentid: '', lat: ""}]
+          console.log(res.data);
+          
           this.setData({
             quyuIndex: 0,
             quyuList: baseArr.concat(res.data)
@@ -395,7 +326,21 @@ Page({
             // for (let item of this.data.quyuRight) {
             //   item.state = false;
             // }
+            arrs[0].id = id
+            console.log(arrs,id);
+            
             this.data.quyuList[index].list = arrs.concat(res.data)
+            for(let i in this.data.quyuCheck) {
+              if(this.data.quyuList[index].list) {
+                for(let y in this.data.quyuList[index].list) {
+                  if(this.data.quyuList[index].list[y].id == this.data.quyuCheck[i].id) {
+                    this.data.quyuList[index].list[y].state = true
+                    console.log(this.data.quyuList[index].list[y]);
+                    
+                  }
+                }
+              }
+            }
             this.setData({
               quyuIndex: index,
               quyuList: this.data.quyuList
@@ -417,89 +362,75 @@ Page({
   },
   // 区域右边
   checkQuyuRight(e) {
-    // let index = e.currentTarget.dataset.index;
-    // let quyuIndex = this.data.quyuIndex
-
-    // this.data.quyuList[quyuIndex].list[index].state = !this.data.quyuList[quyuIndex].list[index].state
-
-    // this.setData({
-    //   quyuList:this.data.quyuList
-    // })
-    // console.log(this.data.quyuCheck,this.data.quyuList,'数组');
-    // // return
-    // let arrays = this.data.quyuList
-    // let arr=[]
-    // arr = arr.concat(arrays)
-    // for(let item of arrays) {
-    //   if (item.list) {
-    //     for(let items of item.list) {
-    //       if(items.state) {
-    //         arr.push(items)
-    //       }
-    //     }
-    //   }
-    // }
-    // console.log(arr,'888888');
-    
-    // // this.data.quyuCheck = this.data.quyuCheck.concat(arr)
-
-    // this.setData({
-    //   quyuCheck: arr
-    // });
-    // this.btnQuyus()
     console.log(e.currentTarget.dataset.type);
     
     let index = e.currentTarget.dataset.index;
+    let id = e.currentTarget.dataset.id;
+    let name = e.currentTarget.dataset.name;
+    let idArr = this.data.idArr;
+    let nameArr = this.data.nameArr;
+
     let quyuIndex = this.data.quyuIndex;
+    for(let i in this.data.quyuCheck) {
+      if(this.data.quyuCheck[i].id == id) {
+        this.data.quyuList[quyuIndex].list[index].state = true
+      }
+    }
+    // 非不限
     if(!this.data.quyuList[quyuIndex].list[0].state) {
       if(index!=0) {
-
-        this.data.quyuList[quyuIndex].list[index].state = !this.data.quyuList[
-          quyuIndex
-        ].list[index].state;
+          // 非不限
+        this.data.quyuList[quyuIndex].list[index].state = !this.data.quyuList[quyuIndex].list[index].state;
         this.setData({
           quyuList:this.data.quyuList
         })
-        let arrays = this.data.quyuList;
-        let arr = [];
-        for (let item of arrays) {
-          if (item.list) {
-            for (let items of item.list) {
-              if (items.state && items.name!='不限') {
-                arr.push(items);
-              }
+        if(idArr.some(item=>item == id)) {
+          let str = idArr.indexOf(id)
+          // this.data.quyuCheck.splice(index,1)  //剔除
+          for(let i in this.data.quyuCheck) {
+            if(this.data.quyuCheck[i].name == name&& this.data.quyuCheck[i].id == id) {
+              this.data.quyuCheck.splice(i,1)
             }
           }
+          idArr.splice(str,1)
+          nameArr.splice(str,1)
+        } else {
+          this.data.quyuCheck.push({name:name,id:id,state:true}) //加
+          idArr.push(id)
+          nameArr.push({name:name,id:id,state:true})
         }
-        console.log(arr, "888888");
-    
-        // this.data.quyuCheck = this.data.quyuCheck.concat(arr)
-    
-        this.setData({
-          quyuCheck: this.data.quyuCheck.concat(arr)
-        });
-        return
-        // this.btnQuyu();
+          this.setData({
+            quyuCheck:this.data.quyuCheck,
+            idArr: idArr,
+            nameArr: nameArr
+          })
       }else {
+        // 右边不限选项
         // this.data.quyuList[quyuIndex].list[index].state = !this.data.quyuList[
         //   quyuIndex
         // ].list[index].state;
-        this.data.quyuList[quyuIndex].list[index].type = quyuIndex
-        for(let item of this.data.quyuList[quyuIndex].list) {
-          item.state = false
-        }
+
+
+
+        // this.data.quyuList[quyuIndex].list[index].type = quyuIndex
+        // for(let item of this.data.quyuList[quyuIndex].list) {
+        //   item.state = false
+        // }
         this.data.quyuList[quyuIndex].list[0].state = true
         this.data.quyuList[quyuIndex].state = true
 
         this.setData({
           quyuList:this.data.quyuList
         })
-        console.log(this.data.quyuList[quyuIndex],'????');
         
-        let arr = [{
-          name:this.data.quyuList[quyuIndex].name,id:''  ,state:true    ,type:this.data.quyuIndex}]
+        // let arr = []
+        //   console.log(arr);
+          let obj = {
+            name:this.data.quyuList[quyuIndex].name,id:this.data.quyuList[quyuIndex].id ,state:true    ,type:this.data.quyuIndex}
+            console.log(obj,'不限选项');
+            this.data.quyuCheck.push(obj)
           this.setData({
-            quyuCheck:this.data.quyuCheck.concat(arr)
+            quyuCheck:this.data.quyuCheck
           })
       }
     } else {
@@ -523,7 +454,7 @@ Page({
         //     }
         //   }
         // }
-        if(type == this.data.quyuCheck[i].type) {
+        if(id == this.data.quyuCheck[i].id) {
           this.data.quyuCheck.splice(i,1)
         }
       }
@@ -535,58 +466,21 @@ Page({
   },
   // 区域删除
   del(e) {
-    // let name = e.currentTarget.dataset.name;
-    // let id = e.currentTarget.dataset.id;
-
-    // for (let item of this.data.quyuList) {
-    //   for (let y in item.list) {
-    //     console.log(item.list[y].id, "?????");
-
-    //     if (id == item.list[y].id) {
-    //       console.log(item.list[y]);
-
-    //       item.list[y].state = false;
-    //     }
-    //   }
-    // }
-    // this.data.quyuIds = this.data.quyuIds.filter((item, index, arr) => item.id != id)
-    // this.data.quyuName = this.data.quyuName.filter((item, index, arr) => item.name != name)
-
-    // console.log(this.data.quyuList);
-
-    // this.setData({
-    //   quyuCheck: this.data.quyuCheck,
-    //   quyuList: this.data.quyuList,
-    //   quyuIds:this.data.quyuIds,
-    //   quyuName:this.data.quyuName,
-
-    // });
-    let index = e.currentTarget.dataset.index;
     let id = e.currentTarget.dataset.id;
-    let type = e.currentTarget.dataset.type;
-    console.log(type,'typesssss');
-    
 
-    // console.log(id);
-    // this.data.quyuCheck[index].state = false;
-    // this.data.quyuCheck = this.data.quyuCheck.filter(
-    //   (item, index, arr) => item.state
-    // );
-    for (let item of this.data.quyuList) {
-      for (let y in item.list) {
-        console.log(item.list[y].id, "?????");
-
-        if (id == item.list[y].id) {
-          console.log(item.list[y]);
-
-          item.list[y].state = false;
-          // item.list[y].splice(y,1)
+    for(let item of this.data.quyuList) {
+      if(item.list) {
+        for(let i in item.list) {
+          if(id == item.list[i].id) {
+            item.list[i].state = false
+          }
         }
       }
-    }
-    for(let i in this.data.quyuCheck) {
-      if(this.data.quyuCheck[i].type == type) {
+    } 
+    for(let i in this.data.quyuCheck ){
+      if(this.data.quyuCheck[i].id == id) {
         this.data.quyuCheck.splice(i,1)
+        
       }
     }
     console.log(this.data.quyuList);
