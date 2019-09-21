@@ -161,13 +161,13 @@ Page({
     //   })
     //   return
     // }
-    // if(this.data.relationship == '') {
-    //   wx.showToast({
-    //     title: '请输入与被推荐人关系',
-    //     icon: 'none'
-    //   })
-    //   return
-    // }
+    if(this.data.relationship == '') {
+      wx.showToast({
+        title: '请输入与被推荐人关系',
+        icon: 'none'
+      })
+      return
+    }
     let price = ''
     if(this.data.typesIndex == 0) {
       price = this.data.price

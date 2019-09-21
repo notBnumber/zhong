@@ -630,14 +630,14 @@ Page({
       return false;
     }
 
-    // if(this.data.relation == '') {
-    //   wx.showToast({
-    //     title: '请输入与被推荐人关系',
-    //     icon: 'none'
-    //   })
-    //   return
+    if(this.data.relation == '') {
+      wx.showToast({
+        title: '请输入与被推荐人关系',
+        icon: 'none'
+      })
+      return
 
-    // }
+    }
     let params = {
       sessionId: wx.getStorageSync("sessionId"),
       recommendedPerson: this.data.name,

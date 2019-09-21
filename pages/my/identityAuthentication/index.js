@@ -29,6 +29,7 @@ Page({
           if (res.code == 1) {
             let timer = setInterval(function name(params) {
               if (that.data.num < 1) {
+                clearInterval(timer)
                 that.setData({
                   msg: "发送验证码",
                   num: 60

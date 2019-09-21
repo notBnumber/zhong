@@ -42,7 +42,7 @@ const http = ({ url = '', param = {}, ...other ,state} = {}) => {
             icon: 'loading'
           })
 
-          if(res.desc == '被挤号下线') {
+          if(res.data.desc == '被挤号下线') {
             wx.reLaunch({
               url: '/pages/login/login',
               success: (result)=>{

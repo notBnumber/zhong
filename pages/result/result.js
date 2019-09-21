@@ -288,6 +288,9 @@ Page({
             this.searchList()
           }
           if(res.data.list.length == 0) {
+            this.setData({
+              resultList:[]
+            })
             wx.showToast({
               title: '暂无数据',
               icon: 'none'
@@ -308,6 +311,9 @@ Page({
           }
 
           if(res.data.list.length == 0) {
+            this.setData({
+              resultList:[]
+            })
             wx.showToast({
               title: '暂无数据',
               icon: 'none'
@@ -320,7 +326,7 @@ Page({
         .then(res => {
 
           this.setData({
-            resultList: res.data.list.keyword,
+            resultList: res.data.list,
 
           });
           if(this.data.keyword!='') {
@@ -328,6 +334,9 @@ Page({
           }
 
           if(res.data.list.length == 0) {
+            this.setData({
+              resultList:[]
+            })
             wx.showToast({
               title: '暂无数据',
               icon: 'none'
@@ -336,12 +345,13 @@ Page({
         });
     }
   },
-  yes() {
+  yes(e) {
     // wx.setStorageSync('keyword', this.data.keyword)
+
     app.globalData.indexParams = this.data.checkIndex
     setTimeout(() => {
       wx.navigateTo({
-        url: '/pages/searchDetail/searchDetail?index='+this.data.checkIndex,
+        url: '/pages/searchDetail/searchDetail?index='+this.data.checkIndex+'&name='+e.currentTarget.dataset.name,
         success: (result)=>{
           
         },

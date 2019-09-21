@@ -6,6 +6,7 @@ Page({
    * 页面的初始数据
    */
   data: {
+    options:'',
     checkNum: null,
     checkPrice: '',
     checkMianji: '',
@@ -226,7 +227,7 @@ Page({
         areaId: this.data.checkMianji,
         useId: this.data.specialIds,
         characteristicId: this.data.specialIdsOther,
-        keyword:wx.getStorageSync('keyword')
+        keyword:this.data.options.name
       };
       util._post("newhome/getNewHomePage", params).then(res => {
         if (res.code == 1) {
@@ -266,7 +267,7 @@ Page({
         useId: this.data.specialIds,
         characteristicId: this.data.specialIdsOther,
         room:this.data.checkFangxing,
-        keyword:wx.getStorageSync('keyword')
+        keyword:this.data.options.name
 
       };
       util._post("secondhome/getSecondHome", params).then(res => {
@@ -307,7 +308,7 @@ Page({
         useId: this.data.specialIds,
         characteristicId: this.data.specialIdsOther,
         room:this.data.checkFangxing,
-        keyword:wx.getStorageSync('keyword')
+        keyword:this.data.options.name
 
       };
       util._post("rentinghome/getRentingHome", params).then(res => {
@@ -637,14 +638,45 @@ Page({
   },
   btnQuyu() {
     let arrs = [];
-    this.data.quyuCheck.filter((item, index, arr) => {
+    this.data.quyuCheck.filter((item) => {
       // if (item.state) {
         arrs.push(item.id);
       // }
     });
-
+    let quId = []
+    for(let item of this.data.quyuCheck) {
+      for(let items of this.data.quyuList) {
+        if(items.id == item.id) {
+          quId.push(item.id)
+        }
+      }
+    }
+    if(arrs.length!=0  && quId.length!=0) {
+      for(let i in arrs) {
+        for(let y in quId) {
+          if(quId[y].id == arrs[i].id) {
+            arrs.splice(i,1)
+          }
+        }
+      }
+    }
+    // let bigArr  = []
+    // this.data.quyuList.filter((item, index, arr) => {
+    //   if (item.state) {
+    //     bigArr.push(item.id);
+    //   }
+    // });
+    
+    // // if(arrs.length!=0) {
+    //   bigArr = bigArr.concat(arrs)
+    // // } 
+    // bigArr = bigArr.filter(item=>{
+    //   return item!=''
+    // })
+    // console.log(bigArr,'//////////');
     this.setData({
       quyuIds: arrs.toString(),
+      quId:quId.toString(),
       show: !this.data.show
     });
     this.screen()
@@ -859,7 +891,8 @@ Page({
     console.log(options);
     // this.data.tabList.splice(2, 0, { name: "房型" });
     this.setData({
-      optionState: options.index
+      optionState: options.index,
+      options:options
     });
 
     if (options.index == 0) {
@@ -891,7 +924,7 @@ Page({
     if (this.data.optionState == 0) {
       Promise.all([
         util._get("newhome/getNewHomeImage"),
-        util._get("newhome/getNewHomePage?keyword="+wx.getStorageSync('keyword')),
+        util._get("newhome/getNewHomePage?keyword="+this.data.options.name+'&cityId='+wx.getStorageSync('cityId')),
         util._get("configure/getbudget?type=0"),
         util._get("configure/getArea?type=0")
       ])
@@ -919,7 +952,7 @@ Page({
     } else if (this.data.optionState == 1) {
       Promise.all([
         util._get("secondhome/getSecondHomeImage"),
-        util._get("secondhome/getSecondHome?keyword="+wx.getStorageSync('keyword')),
+        util._get("secondhome/getSecondHome?keyword="+this.data.options.name+'&cityId='+wx.getStorageSync('cityId')),
         util._get("configure/getbudget?type=1"),
         util._get("configure/getArea?type=1"),
         util._get("configure/getRoomType")
@@ -949,7 +982,7 @@ Page({
     } else {
       Promise.all([
         util._get("rentinghome/getRentingHomeImage"),
-        util._get("rentinghome/getRentingHome?keyword="+wx.getStorageSync('keyword')),
+        util._get("rentinghome/getRentingHome?keyword="+this.data.options.name+'&cityId='+wx.getStorageSync('cityId')),
         util._get("configure/getbudget?type=2"),
         util._get("configure/getArea?type=2"),
         util._get("configure/getRoomType")

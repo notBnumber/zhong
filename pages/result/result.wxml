@@ -39,7 +39,7 @@
     </view>
   </view>
   <view class="contents" hover-class="none" hover-stop-propagation="false" wx:if="{{isSearch}}">
-    <view class="items" hover-class="none" hover-stop-propagation="false" wx:for="{{resultList}}" bindtap='yes'>
+    <view class="items" hover-class="none" hover-stop-propagation="false" wx:for="{{resultList}}" data-name="{{item.houseName}}" bindtap='yes'>
       {{item.houseName}}
     </view>
   </view>

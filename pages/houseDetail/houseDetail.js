@@ -605,11 +605,28 @@ Page({
   },
   btnQuyu() {
     let arrs = [];
-    this.data.quyuCheck.filter((item, index, arr) => {
+    this.data.quyuCheck.filter((item) => {
       // if (item.state) {
         arrs.push(item.id);
       // }
     });
+    let quId = []
+    for(let item of this.data.quyuCheck) {
+      for(let items of this.data.quyuList) {
+        if(items.id == item.id) {
+          quId.push(item.id)
+        }
+      }
+    }
+    if(arrs.length!=0  && quId.length!=0) {
+      for(let i in arrs) {
+        for(let y in quId) {
+          if(quId[y].id == arrs[i].id) {
+            arrs.splice(i,1)
+          }
+        }
+      }
+    }
     // let bigArr  = []
     // this.data.quyuList.filter((item, index, arr) => {
     //   if (item.state) {
@@ -626,6 +643,7 @@ Page({
     // console.log(bigArr,'//////////');
     this.setData({
       quyuIds: arrs.toString(),
+      quId:quId.toString(),
       show: !this.data.show
     });
     this.screen()
@@ -861,7 +879,7 @@ Page({
     if (this.data.optionState == 0) {
       Promise.all([
         util._get("newhome/getNewHomeImage"),
-        util._get("newhome/getNewHomePage?keyword="+wx.getStorageSync('keyword')+'&cityId='+wx.getStorageSync('cityId')),
+        util._get("newhome/getNewHomePage?keyword="+'&cityId='+wx.getStorageSync('cityId')),
         util._get("configure/getbudget?type=0"),
         util._get("configure/getArea?type=0")
       ])
@@ -901,7 +919,7 @@ Page({
     } else if (this.data.optionState == 1) {
       Promise.all([
         util._get("secondhome/getSecondHomeImage"),
-        util._get("secondhome/getSecondHome?keyword="+wx.getStorageSync('keyword')+'&cityId='+wx.getStorageSync('cityId')),
+        util._get("secondhome/getSecondHome?keyword="+'&cityId='+wx.getStorageSync('cityId')),
         util._get("configure/getbudget?type=1"),
         util._get("configure/getArea?type=1"),
         util._get("configure/getRoomType")
@@ -946,7 +964,7 @@ Page({
     } else {
       Promise.all([
         util._get("rentinghome/getRentingHomeImage"),
-        util._get("rentinghome/getRentingHome?keyword="+wx.getStorageSync('keyword')+'&cityId='+wx.getStorageSync('cityId')),
+        util._get("rentinghome/getRentingHome?keyword="+'&cityId='+wx.getStorageSync('cityId')),
         util._get("configure/getbudget?type=2"),
         util._get("configure/getArea?type=2"),
         util._get("configure/getRoomType")
